@@ -21,21 +21,23 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .loginPage("/member/login"))
-                .formLogin((formLogin) ->formLogin
+                .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login"))
                 .logout((logout) -> logout
-                        .logoutUrl("/member/logout")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true))
         ;
         return http.build();
     }
+
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

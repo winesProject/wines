@@ -14,6 +14,7 @@
     <title>Hello, sbb!</title>
 </head>
 <body>
+<div th:replace="~{sidbar :: sidebarFragment}"></div>
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
 <th:block layout:fragment="content"></th:block>
 </body>

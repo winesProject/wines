@@ -14,4 +14,5 @@ public class ArticleController {
     public String list(){
         return "article_list";
     }
+
 }

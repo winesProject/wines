@@ -14,4 +14,8 @@ public class MemeberController {
     public String login(){
         return "login_form";
     }
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup_form";
+    }
 }

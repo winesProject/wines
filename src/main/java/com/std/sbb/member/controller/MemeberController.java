@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 @Controller
 public class MemeberController {
-
     @GetMapping("/login")
     public String login(){
         return "login_form";
@@ -17,5 +16,9 @@ public class MemeberController {
     @GetMapping("/signup")
     public String signup() {
         return "signup_form";
+    }
+    @GetMapping("/detail")
+    public String detail(){
+        return "my_detail";
     }
 }

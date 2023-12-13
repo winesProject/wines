@@ -24,4 +24,9 @@ public class ArticleController {
     public String detail(){
         return "article_detail";
     }
+
+    @GetMapping("/start")
+    public String open(){
+        return "open_site";
+    }
 }

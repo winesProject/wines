@@ -1,0 +1,59 @@
+<html layout:decorate="~{layout}" class="relative top-40">
+<div layout:fragment="content" class="container w-100 my-3 mx-auto">
+    <div class="mx-auto">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark" for="file_input">Upload file</label>
+        <input class="block w-1/2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-700 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+               aria-describedby="file_input_help" id="file_input" type="file">
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-700" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
+            800x400px).</p>
+    </div>
+    <div class="mb-6 my-4">
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">이름</label>
+        <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6 my-4">
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">나라</label>
+        <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6 my-4">
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">가격</label>
+        <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6 my-4">
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">종류</label>
+        <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6 my-4">
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">품종</label>
+        <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6 my-4">
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">맛</label>
+        <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6 my-4">
+        <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">추천 음식</label>
+        <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <span>평점</span>
+    <div class="mx-5 flex flex-row-reverse justify-end text-4xl">
+        <label for="score"></label>
+        <input type="radio" class="peer hidden" id="value5" value="5" name="score" />
+        <label for="value5"
+               class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+        <input type="radio" class="peer hidden" id="value4" value="4" name="score" />
+        <label for="value4"
+               class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+        <input type="radio" class="peer hidden" id="value3" value="3" name="score" />
+        <label for="value3"
+               class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+        <input type="radio" class="peer hidden" id="value2" value="2" name="score" />
+        <label for="value2"
+               class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+        <input type="radio" class="peer hidden" id="value1" value="1" name="score" />
+        <label for="value1"
+               class="cursor-pointer peer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+    </div>
+    <button type="button" class="text-white mt-8 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">게시글 등록</button>
+</div>
+</html>

@@ -1,6 +1,6 @@
-package com.std.sbb.member.repository;
+package com.std.sbb.domain.member.repository;
 
-import com.std.sbb.member.entity.Member;
+import com.std.sbb.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

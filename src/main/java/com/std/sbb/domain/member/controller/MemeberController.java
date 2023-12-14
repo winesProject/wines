@@ -1,4 +1,4 @@
-package com.std.sbb.member.controller;
+package com.std.sbb.domain.member.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

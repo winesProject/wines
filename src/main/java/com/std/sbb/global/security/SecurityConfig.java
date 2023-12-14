@@ -1,4 +1,4 @@
-package com.std.sbb.base.security;
+package com.std.sbb.global.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

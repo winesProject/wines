@@ -1,7 +1,7 @@
-package com.std.sbb.base.security;
+package com.std.sbb.global.security;
 
-import com.std.sbb.member.entity.Member;
-import com.std.sbb.member.service.MemberService;
+import com.std.sbb.domain.member.entity.Member;
+import com.std.sbb.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

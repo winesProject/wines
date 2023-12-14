@@ -1,7 +1,7 @@
-package com.std.sbb.member.service;
+package com.std.sbb.domain.member.service;
 
-import com.std.sbb.member.entity.Member;
-import com.std.sbb.member.repository.MemberRepository;
+import com.std.sbb.domain.member.entity.Member;
+import com.std.sbb.domain.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

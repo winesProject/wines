@@ -1,7 +1,7 @@
-package com.std.sbb.base.rq;
+package com.std.sbb.global.rq;
 
-import com.std.sbb.member.entity.Member;
-import com.std.sbb.member.service.MemberService;
+import com.std.sbb.domain.member.entity.Member;
+import com.std.sbb.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

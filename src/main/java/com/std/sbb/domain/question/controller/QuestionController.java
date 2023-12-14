@@ -1,4 +1,4 @@
-package com.std.sbb.question.controller;
+package com.std.sbb.domain.question.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

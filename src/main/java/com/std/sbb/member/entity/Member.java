@@ -30,10 +30,8 @@ public class Member {
     public List<? extends GrantedAuthority> getGrantedAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        // 모든 멤버는 member 권한을 가진다.
         grantedAuthorities.add(new SimpleGrantedAuthority("member"));
 
-        // username이 admin인 회원은 추가로 admin 권한도 가진다.
         if (isAdmin()) {
             grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
         }

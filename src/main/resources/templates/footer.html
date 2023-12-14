@@ -1,47 +1,28 @@
 <footer th:fragment="footerFragment" class="bg-white">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-4 lg:py-4">
         <div class="md:flex md:justify-between">
-            <div class="mb-6 md:mb-0">
-                <img src="../images/teamname.png" class="me-3 h-28" alt="FlowBite Logo"/>
-            </div>
-            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-                <div>
-                    <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                        <li class="mb-4">
-                            <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
-                        </li>
-                        <li>
-                            <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-dark">Follow us</h2>
-                    <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                        <li class="mb-4">
-                            <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
-                        </li>
-                        <li>
-                            <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-dark">Legal</h2>
-                    <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                        <li class="mb-4">
-                            <a href="#" class="hover:underline">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:underline">Terms &amp; Conditions</a>
-                        </li>
-                    </ul>
-                </div>
+            <ul>
+                <li class="mt-4 md:mb-0 font-black text-yellow-900 text-3xl">
+                    <a href="#">무엇을 도와드릴까요?</a>
+                </li>
+            </ul>
+            <div class="mt-3 text-lg">
+                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                    <li class="ml-14">
+                        <a th:href="@{https://github.com/winesProject/wines}" class="hover:underline">회사 소개</a>
+                    </li>
+                    <li class="ml-14 mt-2">
+                        <a href="#" class="hover:font-bold">이용 약관</a>
+                    </li>
+                    <li class="mt-2">
+                        <a href="#" class="hover:font-bold">개인정보처리방침</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"/>
         <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 대전광역시 서구 대덕대로 179, 5층 전화번호:042-741-8383
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 대전 서구 대덕대로 179 굿모닝어학원빌딩 9층 sbs아카데미컴퓨터아트학원 대전점
           </span>
             <div class="flex mt-4 sm:justify-center sm:mt-0">
                 <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">

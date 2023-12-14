@@ -29,4 +29,9 @@ public class ArticleController {
     public String open(){
         return "open_site";
     }
+
+    @GetMapping("/search")
+    public String search() {
+        return "idPasswordSearch_form";
+    }
 }

@@ -1,4 +1,4 @@
-package com.std.sbb.member.entity;
+package com.std.sbb.domain.member.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

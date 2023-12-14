@@ -1,6 +1,6 @@
-package com.std.sbb.base.initDate;
+package com.std.sbb.global.initDate;
 
-import com.std.sbb.member.service.MemberService;
+import com.std.sbb.domain.member.service.MemberService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

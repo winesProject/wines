@@ -12,17 +12,17 @@ public class WineArticleController {
 
     @GetMapping("/list")
     public String list(){
-        return "article_list";
+        return "wineArticle_list";
     }
 
     @GetMapping("/create")
     public String articleCreate(){
-        return "article_form";
+        return "wineArticle_form";
     }
 
     @GetMapping("/detail")
     public String detail(){
-        return "article_detail";
+        return "wineArticle_detail";
     }
 
     @GetMapping("/start")

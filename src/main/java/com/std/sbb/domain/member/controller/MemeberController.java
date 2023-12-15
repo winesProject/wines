@@ -19,6 +19,6 @@ public class MemeberController {
     }
     @GetMapping("/detail")
     public String detail(){
-        return "my_detail";
+        return "member_detail";
     }
 }

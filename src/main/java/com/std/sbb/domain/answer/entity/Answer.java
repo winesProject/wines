@@ -5,12 +5,12 @@ import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
+@Data
 public class Answer extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;

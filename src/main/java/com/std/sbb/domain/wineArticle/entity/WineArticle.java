@@ -4,14 +4,14 @@ import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Setter
 @Getter
+@Data
 public class WineArticle extends BaseEntity {
     @Column(length = 100)
     private String subject;

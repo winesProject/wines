@@ -5,6 +5,7 @@ import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.select.entity.Select;
+import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,13 +24,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
-@Setter
+@Data
 @EntityListeners(AuditingEntityListener.class)
-public class Member{
+public class Member extends BaseEntity {
     @EqualsAndHashCode.Include
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(unique = true)
     private String username;
 

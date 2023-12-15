@@ -3,13 +3,16 @@ package com.std.sbb.domain.questionArticle.entity;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
+@Data
 public class QuestionArticle extends BaseEntity {
     @Column(length = 200)
     private String article;

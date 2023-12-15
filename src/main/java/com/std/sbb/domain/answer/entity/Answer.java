@@ -1,12 +1,12 @@
-package com.std.sbb.domain.answer.answer;
+package com.std.sbb.domain.answer.entity;
 
 import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -14,6 +14,6 @@ import java.time.LocalDateTime;
 public class Answer extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
-    @OneToOne(mappedBy = "answer", cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Question question;
 }

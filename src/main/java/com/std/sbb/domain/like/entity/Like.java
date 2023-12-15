@@ -13,8 +13,8 @@ public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "like", cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Review review;
-    @OneToMany(mappedBy = "like", cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Member member;
 }

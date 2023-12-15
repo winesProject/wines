@@ -2,9 +2,9 @@ package com.std.sbb.domain.member.entity;
 
 import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.question.entity.Question;
+import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.select.entity.Select;
-import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -69,12 +69,14 @@ public class Member{
     public boolean isAdmin() {
         return "admin".equals(username);
     }
-    @ManyToOne
-    private Select select;
-    @ManyToOne
-    private Like like;
-    @ManyToOne
-    private Review review;
-    @ManyToOne
-    private Question question;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Select> select;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Like> like;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Review> review;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Question> question;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<QuestionArticle> questionArticles;
 }

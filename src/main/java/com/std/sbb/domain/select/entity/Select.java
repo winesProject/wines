@@ -13,7 +13,7 @@ public class Select {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+    @ManyToOne
     private Member member;
     @OneToOne
     private Wine wine;

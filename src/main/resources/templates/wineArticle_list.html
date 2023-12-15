@@ -42,7 +42,7 @@
                        class="block p-2.5 w-full z-20 text-base text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                        placeholder="원하는 와인을 검색해보세요!" required>
                 <button type="submit"
-                        class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-red-700 rounded-e-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-red-700 rounded-e-lg border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -57,20 +57,19 @@
         <ul class="flex flex-wrap -mb-px text-2xl font-medium text-center" id="default-tab"
             data-tabs-toggle="#default-tab-content" role="tablist">
             <li class="me-2" role="presentation">
-                <a class="inline-block text-gray-900 hover:text-gray-800 p-4 border-b-2 rounded-t-lg font-bold" id="my-detail"
+                <a class="inline-block text-gray-900 border-black hover:text-gray-800 p-4 border-b-2 rounded-t-lg font-bold"
+                   id="my-detail"
                    data-tabs-target="#detail"
                    role="tab" aria-controls="detail" aria-selected="false">전체 와인
                 </a>
             </li>
         </ul>
     </div>
-<!--    <div class="mt-16">-->
-<!--        <p class="text-center text-2xl">전체 와인</p>-->
-<!--        <hr class="border-gray-900 dark:border-gray-800 border-1 w-9/12 mx-auto"/>-->
-<!--    </div>-->
-    <a th:href="@{/article/create}" type="button"
-       class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">게시글
-        등록</a>
+    <div class="flex justify-end">
+        <a th:href="@{/article/create}" type="button"
+           class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">게시글
+            등록</a>
+    </div>
     <!--  검색 기능 끝  -->
     <div class="flex justify-center">
         <div class="w-3/4">
@@ -111,7 +110,7 @@
                         </div>
                         <div class="text-end">
                             <button type="button"
-                                    class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-large rounded-lg text-sm px-4 my-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                                    class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-2xl px-4 my-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
                                 ♡
                             </button>
                         </div>
@@ -156,7 +155,7 @@
                         </div>
                         <div class="text-end">
                             <button type="button"
-                                    class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-large rounded-lg text-sm px-4 my-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                                    class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-2xl px-4 my-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
                                 ♡
                             </button>
                         </div>
@@ -201,7 +200,7 @@
                         </div>
                         <div class="text-end">
                             <button type="button"
-                                    class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-large rounded-lg text-sm px-4 my-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                                    class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-2xl px-4 my-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
                                 ♡
                             </button>
                         </div>

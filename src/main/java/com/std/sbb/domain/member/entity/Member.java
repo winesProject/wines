@@ -1,9 +1,15 @@
 package com.std.sbb.domain.member.entity;
 
+import com.std.sbb.domain.like.entity.Like;
+import com.std.sbb.domain.question.entity.Question;
+import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
+import com.std.sbb.domain.review.entity.Review;
+import com.std.sbb.domain.select.entity.Select;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -17,13 +23,14 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Member {
+@Setter
+@EntityListeners(AuditingEntityListener.class)
+public class Member{
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -62,4 +69,14 @@ public class Member {
     public boolean isAdmin() {
         return "admin".equals(username);
     }
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Select> select;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Like> like;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Review> review;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Question> question;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<QuestionArticle> questionArticles;
 }

@@ -4,11 +4,12 @@ import com.std.sbb.domain.select.entity.Select;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.wineArticle.entity.WineArticle;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,7 +28,7 @@ public class Wine extends BaseEntity {
     private String image;
     @OneToOne(mappedBy = "wine", cascade = CascadeType.REMOVE)
     private Select select;
-    @OneToOne(mappedBy = "wine", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "wine")
     private Taste taste;
     @OneToOne(mappedBy = "wine", cascade = CascadeType.REMOVE)
     private WineArticle wineArticle;

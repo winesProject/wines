@@ -1,14 +1,14 @@
 package com.std.sbb.domain.question.entity;
 
-import com.std.sbb.domain.answer.answer.Answer;
+import com.std.sbb.domain.answer.entity.Answer;
+import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,8 +19,10 @@ public class Question extends BaseEntity {
     private String article;
     @Column(columnDefinition = "TEXT")
     private String content;
-    @OneToOne(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "question")
     private QuestionArticle questionArticle;
-    @OneToOne
-    private Answer answer;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answer;
+    @ManyToOne
+    private Member member;
 }

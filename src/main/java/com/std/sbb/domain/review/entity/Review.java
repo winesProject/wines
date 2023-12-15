@@ -18,9 +18,9 @@ public class Review extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
     private Integer score;
-    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Member member;
-    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
+    @ManyToOne
     private WineArticle wineArticle;
     @ManyToOne
     private Like like;

@@ -15,7 +15,7 @@ public class QuestionArticle extends BaseEntity {
     private String article;
     @Column(columnDefinition = "TEXT")
     private String content;
-    @OneToMany
+    @ManyToOne
     private Member member;
     @OneToOne
     private Question question;

@@ -2,17 +2,16 @@ package com.std.sbb.domain.like.entity;
 
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.review.entity.Review;
+import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
-public class Like {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Data
+public class Like extends BaseEntity {
+
     @ManyToOne
     private Review review;
     @ManyToOne

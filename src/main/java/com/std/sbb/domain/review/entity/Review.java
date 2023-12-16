@@ -4,11 +4,11 @@ import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.wineArticle.entity.WineArticle;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,6 +24,6 @@ public class Review extends BaseEntity {
     private Member member;
     @ManyToOne
     private WineArticle wineArticle;
-    @ManyToOne
-    private Like like;
+    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
+    private List<Like> like;
 }

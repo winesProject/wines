@@ -5,7 +5,7 @@
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark" for="image">Upload
                 file</label>
             <input class="block w-1/2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                   aria-describedby="file_input_help" name="image" id="image" th:field="*{image}" type="file">
+                   aria-describedby="file_input_help" name="image" id="image" th:field="*{image}" type="file" accept="image/jpeg, image/png, image/gif">
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-700" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
                 800x400px).</p>
         </div>
@@ -34,8 +34,13 @@
             <input type="text" id="kind" th:field="*{kind}"
                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5">
         </div>
-        <label for="taste" class="block mb-2 text-sm font-medium text-gray-900">맛</label>
-        <div class="flex my-4">
+        <div class="mb-6 my-4">
+            <label for="food" class="block mb-2 text-sm font-medium text-gray-900">추천 음식</label>
+            <input type="text" id="food" th:field="*{food}"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5">
+        </div>
+        <label for="food" class="block mb-2 text-sm font-medium text-gray-900">맛</label>
+        <div class="flex items-center my-4" th:field="*{taste}">
             <span class="flex items-center">당도</span>
             <div th:replace="~{taste :: tasteFragment(tasteId='sweet', fieldName='sweet')}"></div>
             <span class="flex items-center">산도</span>
@@ -44,12 +49,11 @@
             <div th:replace="~{taste :: tasteFragment(tasteId='body', fieldName='body')}"></div>
             <span class="flex items-center">타닌</span>
             <div th:replace="~{taste :: tasteFragment(tasteId='tannin', fieldName='tannin')}"></div>
+            <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ml-20">게시글 등록</button>
         </div>
-        <div class="mb-6 my-4">
-            <label for="food" class="block mb-2 text-sm font-medium text-gray-900">추천 음식</label>
-            <input type="text" id="food"
-                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5">
-        </div>
+    </form>
+</div>
+</html>
 <!--        <span>평점</span>-->
 <!--        <div class="mx-5 flex flex-row-reverse justify-end text-4xl">-->
 <!--            <label for="score"></label>-->
@@ -69,7 +73,3 @@
 <!--            <label for="value1"-->
 <!--                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>-->
 <!--        </div>-->
-        <input type="submit" value="게시글 등록" class="text-white mt-8 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
-    </form>
-</div>
-</html>

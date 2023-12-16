@@ -70,7 +70,7 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Select> select;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Like> like;
+    private List<Like> likes;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Review> review;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)

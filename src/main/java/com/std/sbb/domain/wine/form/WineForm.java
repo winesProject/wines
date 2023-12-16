@@ -3,6 +3,7 @@ package com.std.sbb.domain.wine.form;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +25,7 @@ public class WineForm extends BaseEntity {
 
     private String food;
 
-    @NotEmpty(message = "필수")
+    @NotNull(message = "Please provide an image")
     private MultipartFile image;
 
     private Taste taste;

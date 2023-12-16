@@ -2,8 +2,10 @@ package com.std.sbb.domain.taste.entity;
 
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.Getter;
 
@@ -11,13 +13,17 @@ import lombok.Getter;
 @Getter
 @Data
 public class Taste extends BaseEntity {
-    @Size(min = 1, max = 5)
+    @Min(value = 1)
+    @Max(value = 5)
     private Integer sweet;
-    @Size(min = 1, max = 5)
+    @Min(value = 1)
+    @Max(value = 5)
     private Integer body;
-    @Size(min = 1, max = 5)
+    @Min(value = 1)
+    @Max(value = 5)
     private Integer acidity;
-    @Size(min = 1, max = 5)
+    @Min(value = 1)
+    @Max(value = 5)
     private Integer tannin;
     @OneToOne
     private Wine wine;

@@ -13,10 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @RequiredArgsConstructor
 @Controller
@@ -40,21 +36,13 @@ public class WineArticleController {
 
     @PostMapping("/create")
     public String wineCreate(@Valid WineForm wineForm, BindingResult bindingResult,
-                             @Valid TasteForm tasteForm, BindingResult tasteBindingResult,
-                             @RequestParam("image") MultipartFile imageFile) {
+                             @Valid TasteForm tasteForm, BindingResult tasteBindingResult) {
         if (bindingResult.hasErrors() || tasteBindingResult.hasErrors()) {
-            return "wineArticle_form";
-        }
-        byte[] imageBytes;
-        try {
-            imageBytes = imageFile.getBytes();
-        } catch (IOException e) {
-            e.printStackTrace();
             return "wineArticle_form";
         }
 
         Taste taste = tasteService.create(tasteForm.getSweet(), tasteForm.getBody(), tasteForm.getAcidity(), tasteForm.getTannin());
-        this.wineService.create(wineForm.getWineName(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), imageBytes, taste);
+        this.wineService.create(wineForm.getWineName(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), wineForm.getImage(), taste);
 
         return "redirect:/";
     }

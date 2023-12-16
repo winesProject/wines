@@ -1,5 +1,6 @@
 package com.std.sbb.domain.wineArticle.controller;
 
+import com.std.sbb.domain.wine.form.WineForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class WineArticleController {
     }
 
     @GetMapping("/create")
-    public String articleCreate(){
+    public String articleCreate(WineForm wineForm){
         return "wineArticle_form";
     }
 

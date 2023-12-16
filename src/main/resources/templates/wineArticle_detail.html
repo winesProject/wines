@@ -14,13 +14,13 @@
                 있습니다.</h5>
             <div class="flex mt-20">
                 <span class="flex items-center">당도</span>
-                <div th:replace="~{taste :: tasteFragment}"></div>
+                <div th:replace="~{taste :: tasteFragment(tasteId='sweet')}"></div>
                 <span class="flex items-center">산도</span>
-                <div th:replace="~{taste :: tasteFragment}"></div>
+                <div th:replace="~{taste :: tasteFragment(tasteId='acidic')}"></div>
                 <span class="flex items-center">바디</span>
-                <div th:replace="~{taste :: tasteFragment}"></div>
+                <div th:replace="~{taste :: tasteFragment(tasteId='body')}"></div>
                 <span class="flex items-center">타닌</span>
-                <div th:replace="~{taste :: tasteFragment}"></div>
+                <div th:replace="~{taste :: tasteFragment(tasteId='tannin')}"></div>
             </div>
             <div class="flex mt-20 ">
                 <ul class="text-2xl mr-14 font-black">

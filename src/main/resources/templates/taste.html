@@ -1,18 +1,31 @@
-<div th:fragment="tasteFragment" class="mx-5 flex flex-row-reverse justify-end text-4xl">
-    <label for="score"></label>
-    <input type="radio" class="peer hidden" id="value5" value="5" name="score" />
-    <label for="value5"
-           class="cursor-pointer text-gray-400 peer-hover:text-pink-600 peer-checked:text-pink-600">●</label>
-    <input type="radio" class="peer hidden" id="value4" value="4" name="score" />
-    <label for="value4"
-           class="cursor-pointer text-gray-400 peer-hover:text-pink-500 peer-checked:text-pink-500">●</label>
-    <input type="radio" class="peer hidden" id="value3" value="3" name="score" />
-    <label for="value3"
-           class="cursor-pointer text-gray-400 peer-hover:text-pink-400 peer-checked:text-pink-400">●</label>
-    <input type="radio" class="peer hidden" id="value2" value="2" name="score" />
-    <label for="value2"
-           class="cursor-pointer text-gray-400 peer-hover:text-pink-300 peer-checked:text-pink-300">●</label>
-    <input type="radio" class="peer hidden" id="value1" value="1" name="score" />
-    <label for="value1"
-           class="cursor-pointer peer text-gray-400 peer-hover:text-pink-200 peer-checked:text-pink-200">●</label>
+<div th:fragment="tasteFragment(tasteId, fieldName)">
+    <form th:action="@{/article/create}" th:object="${tasteForm}" method="post">
+        <div class="mx-5 flex flex-row-reverse justify-end text-4xl">
+            <label th:for="${'score-' + tasteId}"></label>
+            <input type="radio" class="peer hidden" th:id="${'value5-' + tasteId}" th:value="5"
+                   th:name="${fieldName}" th:checked="${tasteForm != null && tasteForm[fieldName] == 5}"/>
+            <label th:for="${'value5-' + tasteId}"
+                   class="cursor-pointer text-gray-400 peer-hover:text-pink-600 peer-checked:text-pink-600">●</label>
+
+            <input type="radio" class="peer hidden" th:id="${'value4-' + tasteId}" th:value="4"
+                   th:name="${fieldName}" th:checked="${tasteForm != null && tasteForm[fieldName] == 4}"/>
+            <label th:for="${'value4-' + tasteId}"
+                   class="cursor-pointer text-gray-400 peer-hover:text-pink-500 peer-checked:text-pink-500">●</label>
+
+            <input type="radio" class="peer hidden" th:id="${'value3-' + tasteId}" th:value="3"
+                   th:name="${fieldName}" th:checked="${tasteForm != null && tasteForm[fieldName] == 3}"/>
+            <label th:for="${'value3-' + tasteId}"
+                   class="cursor-pointer text-gray-400 peer-hover:text-pink-400 peer-checked:text-pink-400">●</label>
+
+            <input type="radio" class="peer hidden" th:id="${'value2-' + tasteId}" th:value="2"
+                   th:name="${fieldName}" th:checked="${tasteForm != null && tasteForm[fieldName] == 2}"/>
+            <label th:for="${'value2-' + tasteId}"
+                   class="cursor-pointer text-gray-400 peer-hover:text-pink-300 peer-checked:text-pink-300">●</label>
+
+            <input type="radio" class="peer hidden" th:id="${'value1-' + tasteId}" th:value="1"
+                   th:name="${fieldName}" th:checked="${tasteForm != null && tasteForm[fieldName] == 1}"/>
+            <label th:for="${'value1-' + tasteId}"
+                   class="cursor-pointer peer text-gray-400 peer-hover:text-pink-200 peer-checked:text-pink-200">●</label>
+        </div>
+    </form>
 </div>

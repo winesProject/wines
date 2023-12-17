@@ -27,8 +27,12 @@ import java.util.List;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 public class Member extends BaseEntity {
+
+    public void updatePassword(String password){
+        this.password = password;
+    }
+
     @EqualsAndHashCode.Include
-    @Column(unique = true)
     private String username;
 
     private String password;

@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class WineForm extends BaseEntity {
     @NotEmpty(message = "와인은 필수")
     private String wineName;
+    @NotEmpty(message = "영어 와인 이름은 필수")
+    private String wineNameE;
     @NotEmpty(message = "나라는 필수")
     private String country;
     @NotEmpty(message = "종류는 필수")

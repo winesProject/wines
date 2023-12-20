@@ -73,20 +73,19 @@
     <!--  검색 기능 끝  -->
     <div class="flex justify-center">
         <div class="w-3/4">
-            <div class="mt-8 border-4 p-4">
+            <div class="mt-8 border-4 p-4" th:each="wine : ${wineList}">
                 <div role="status"
                      class="space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                     <div class="flex items-center justify-center w-full h-48 rounded sm:w-96">
-                        <img class=" h-48 max-w-lg rounded-lg" src="../images/꼬뜨 드 뵈프.png" alt="image description">
+                        <img class=" h-48 max-w-lg rounded-lg" th:src="${wine.image}" alt="image description">
                     </div>
                     <div class="w-full">
-                        <a th:href="@{/article/detail}"
+                        <a th:href="@{|/article/detail/${wine.id}|}"
                            class="block w-auto">
-                            <h1 class="text-3xl mt-8 font-extrabold dark:text-dark">GCF, 꼬뜨 드 뵈프</h1>
-                            <h3 class="text-2xl font-weight my-1 tracking-tight dark:text-gray-500">GCF, Cotes de
-                                Boeuf</h3>
+                            <h1 class="text-3xl mt-8 font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
+                            <h3 class="text-2xl font-weight my-1 tracking-tight dark:text-gray-500" th:text="${wine.wineNameE}"></h3>
                         </a>
-                        <a th:href="@{/article/detail}" class="w-1/2 my-2 py-2 pb-24">내용</a>
+                        <a th:href="@{/article/detail}" class="w-1/2 my-2 py-2 pb-24" th:text="${wine.country}"></a>
                         <div class="flex py-4">
                             <span class="text-white bg-gradient-to-r from-red-400 via-red-400 to-red-600 font-medium rounded-lg text-sm px-5 py-1.5 text-center">레드</span>
                             <div class="mx-5 flex flex-row-reverse justify-end text-2xl">

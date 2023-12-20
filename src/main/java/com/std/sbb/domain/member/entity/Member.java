@@ -4,7 +4,7 @@ import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.domain.review.entity.Review;
-import com.std.sbb.domain.select.entity.Select;
+import com.std.sbb.domain.favorites.entity.Favorites;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -72,7 +72,7 @@ public class Member extends BaseEntity {
         return "admin".equals(username);
     }
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Select> select;
+    private List<Favorites> favorites;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Like> likes;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)

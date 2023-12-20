@@ -18,9 +18,10 @@ public class WineService {
     private final WineRepository wineRepository;
     private final GenFileService genFileService;
 
-    public void create(String wineName, String country, String list, Integer price, String kind, String food, MultipartFile image, Taste taste) {
+    public void create(String wineName, String wineNameE,String country, String list, Integer price, String kind, String food, MultipartFile image, Taste taste) {
         Wine wine = Wine.builder()
                 .wineName(wineName)
+                .wineNameE(wineNameE)
                 .country(country)
                 .list(list)
                 .price(price)
@@ -42,6 +43,14 @@ public class WineService {
     }
     public List<Wine> getList() {
         return this.wineRepository.findAll();
+    }
+    public Wine getWine(Long id) {
+        Optional<Wine> wineOptional = this.wineRepository.findById(id);
+        if (wineOptional.isPresent()) {
+            return wineOptional.get();
+        } else {
+            throw new RuntimeException("와인의 정보가 존재하지 않습니다");
+        }
     }
 
 }

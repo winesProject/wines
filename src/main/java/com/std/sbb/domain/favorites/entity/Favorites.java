@@ -1,16 +1,19 @@
-package com.std.sbb.domain.select.entity;
+package com.std.sbb.domain.favorites.entity;
 
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Data
-public class Select extends BaseEntity {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Favorites extends BaseEntity {
 
     @ManyToOne
     private Member member;

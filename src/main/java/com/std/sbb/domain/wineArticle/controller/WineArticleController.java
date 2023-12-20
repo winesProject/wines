@@ -3,7 +3,6 @@ package com.std.sbb.domain.wineArticle.controller;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.taste.form.TasteForm;
 import com.std.sbb.domain.taste.service.TasteService;
-import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.form.WineForm;
 import com.std.sbb.domain.wine.service.WineService;
 import jakarta.validation.Valid;
@@ -14,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller

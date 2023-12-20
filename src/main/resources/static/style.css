@@ -8,3 +8,6 @@ html > body {
     font-family: "JSDongkang-Regular";
     text-underline-position: under;
 }
+input[type=password]{
+    font-family:"굴림";
+}

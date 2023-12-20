@@ -3,9 +3,15 @@
     <div class="flex">
         <img class="h-auto max-w-lg rounded-lg" th:src="${wine.image}" alt="image description">
         <div class="inline-block ml-12 mt-3">
-            <span class="text-white bg-gradient-to-r from-red-400 via-red-400 to-red-600 font-medium rounded-lg text-sm px-5 py-1.5 text-center" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-red-400 via-red-400 to-red-600 font-medium rounded-lg text-sm px-5 py-1.5 text-center"
+                  th:text="${wine.list}"></span>
             <span class="ml-2" th:text="${wine.country}"></span>
-            <span class="ml-4" th:text="${wine.kind}"></span>
+            <div class="inline-block ml-12">
+                <a th:href="@{|/article/modify/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')" onclick="return confirm(`정말로 수정 하시겠습니까?`)"
+                   class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2">수정</a>
+                <a th:href="@{|/article/delete/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')" onclick="return confirm(`정말로 삭제 하시겠습니까?`)"
+                   class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2">삭제</a>
+            </div>
             <h1 class="text-5xl mt-8 font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
             <h3 class="text-3xl font-weight my-1 tracking-tight dark:text-gray-500" th:text="${wine.wineNameE}"></h3>
             <br>
@@ -188,10 +194,10 @@
                         class="inline-flex items-center py-2.5 px-4 text-base font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                     리뷰 등록
                 </button>
-                </div>
             </div>
         </div>
-    </form>
-    <!--  리뷰 등록 끝  -->
+</div>
+</form>
+<!--  리뷰 등록 끝  -->
 </div>
 </html>

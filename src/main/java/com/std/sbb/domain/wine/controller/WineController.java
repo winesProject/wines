@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -67,6 +68,36 @@ public class WineController {
     @GetMapping("/search")
     public String search() {
         return "idPasswordSearch_form";
+    }
+
+    @GetMapping("/modify/{id}")
+    public String wineModify(WineForm wineForm, @PathVariable("id") Long id, Principal principal) {
+
+        Wine wine = this.wineService.getWine(id);
+        wineForm.setWineName(wineForm.getWineName());
+        wineForm.setWineNameE(wineForm.getWineNameE());
+        wineForm.setKind(wineForm.getKind());
+        wineForm.setFood(wineForm.getFood());
+        wineForm.setCountry(wineForm.getCountry());
+        wineForm.setList(wineForm.getList());
+        wineForm.setPrice(wineForm.getPrice());
+
+        return "wineArticle_form";
+    }
+    @PostMapping("/modify/{id}")
+    public String wineModify(@Valid WineForm wineForm, BindingResult bindingResult, @PathVariable("id") Long id, Principal principal) {
+
+        Wine wine = this.wineService.getWine(id);
+        this.wineService.modify(wine, wineForm.getWineName(), wineForm.getWineNameE(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), null, wineForm.getTaste());
+
+        return String.format("redirect:/Article/detail/%s", id);
+    }
+    @GetMapping("/delete/{id}")
+    public String wineDelete(Principal principal, @PathVariable("id") Long id) {
+        Wine wine = this.wineService.getWine(id);
+
+        this.wineService.delete(wine);
+        return "redirect:/";
     }
 }
 

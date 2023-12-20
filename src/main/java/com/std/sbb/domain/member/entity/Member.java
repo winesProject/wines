@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,7 +31,6 @@ public class Member extends BaseEntity {
         this.password = password;
     }
 
-    @EqualsAndHashCode.Include
     private String username;
 
     private String password;
@@ -64,7 +62,6 @@ public class Member extends BaseEntity {
         if (isAdmin()) {
             grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
         }
-
         return grantedAuthorities;
     }
 

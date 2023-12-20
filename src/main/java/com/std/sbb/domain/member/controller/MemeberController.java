@@ -2,8 +2,6 @@ package com.std.sbb.domain.member.controller;
 
 import com.std.sbb.domain.member.form.MemberForm;
 import com.std.sbb.domain.member.service.MemberService;
-import com.std.sbb.global.email.entity.MailVo;
-import com.std.sbb.global.email.service.MailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @RequestMapping("/member")

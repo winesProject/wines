@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class WineService {
@@ -15,15 +19,18 @@ public class WineService {
     private final GenFileService genFileService;
 
     public void create(String wineName, String country, String list, Integer price, String kind, String food, MultipartFile image, Taste taste) {
+        Wine wine = Wine.builder()
+                .wineName(wineName)
+                .country(country)
+                .list(list)
+                .price(price)
+                .kind(kind)
+                .food(food)
+                .taste(taste)
+                .createDate(LocalDateTime.now())
+                .build();
+        this.wineRepository.save(wine);
 
-        Wine wine = new Wine();
-        wine.setWineName(wineName);
-        wine.setCountry(country);
-        wine.setList(list);
-        wine.setPrice(price);
-        wine.setKind(kind);
-        wine.setFood(food);
-        wine.setTaste(taste);
 
 
         if (image != null && !image.isEmpty()){
@@ -33,4 +40,8 @@ public class WineService {
             System.out.println("이미 동일한 와인 이름이 존재합니다: " + wineName);
         }
     }
+    public List<Wine> getList() {
+        return this.wineRepository.findAll();
+    }
+
 }

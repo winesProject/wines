@@ -8,12 +8,15 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
+@ToString
 public class Wine extends BaseEntity {
     @Column(unique = true)
     private String wineName;

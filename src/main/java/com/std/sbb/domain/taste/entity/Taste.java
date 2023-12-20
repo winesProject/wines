@@ -6,12 +6,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Taste extends BaseEntity {
     @Min(value = 1)
     @Max(value = 5)
@@ -25,6 +28,6 @@ public class Taste extends BaseEntity {
     @Min(value = 1)
     @Max(value = 5)
     private Integer tannin;
-    @OneToOne
+    @OneToOne(mappedBy = "taste")
     private Wine wine;
 }

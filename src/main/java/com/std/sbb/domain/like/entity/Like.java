@@ -4,11 +4,15 @@ import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Data
 public class Like extends BaseEntity {
 

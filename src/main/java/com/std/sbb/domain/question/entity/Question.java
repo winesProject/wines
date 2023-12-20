@@ -5,14 +5,18 @@ import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @Getter
-@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Question extends BaseEntity {
     private String username;
     @Column(length = 200)

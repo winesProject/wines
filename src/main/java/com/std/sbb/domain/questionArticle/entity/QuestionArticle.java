@@ -7,12 +7,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class QuestionArticle extends BaseEntity {
     @Column(length = 200)
     private String article;

@@ -2,17 +2,20 @@ package com.std.sbb.domain.review.entity;
 
 import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.member.entity.Member;
-import com.std.sbb.domain.wineArticle.entity.WineArticle;
+import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @Getter
-@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Review extends BaseEntity {
     private String username;
     @Column(length = 200)
@@ -23,7 +26,7 @@ public class Review extends BaseEntity {
     @ManyToOne
     private Member member;
     @ManyToOne
-    private WineArticle wineArticle;
+    private Wine wine;
     @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<Like> like;
 }

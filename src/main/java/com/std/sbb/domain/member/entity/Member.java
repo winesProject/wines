@@ -44,7 +44,7 @@ public class Member extends BaseEntity {
 
     private String birthDate;
 
-    private Boolean gender;
+    private String gender;
 
     @CreatedDate
     private LocalDateTime createDate;

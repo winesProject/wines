@@ -2,7 +2,6 @@ package com.std.sbb.domain.question.entity;
 
 import com.std.sbb.domain.answer.entity.Answer;
 import com.std.sbb.domain.member.entity.Member;
-import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

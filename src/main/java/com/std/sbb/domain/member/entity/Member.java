@@ -3,7 +3,7 @@ package com.std.sbb.domain.member.entity;
 import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.domain.review.entity.Review;
-import com.std.sbb.domain.select.entity.Select;
+import com.std.sbb.domain.favorites.entity.Favorites;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -31,7 +30,6 @@ public class Member extends BaseEntity {
         this.password = password;
     }
 
-    @EqualsAndHashCode.Include
     private String username;
 
     private String password;
@@ -63,7 +61,6 @@ public class Member extends BaseEntity {
         if (isAdmin()) {
             grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
         }
-
         return grantedAuthorities;
     }
 
@@ -71,7 +68,7 @@ public class Member extends BaseEntity {
         return "admin".equals(username);
     }
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Select> select;
+    private List<Favorites> favorites;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Like> likes;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)

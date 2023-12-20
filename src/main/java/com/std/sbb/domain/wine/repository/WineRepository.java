@@ -4,6 +4,7 @@ import com.std.sbb.domain.wine.entity.Wine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.Optional;
+
 public interface WineRepository extends JpaRepository<Wine, Long> {
 }

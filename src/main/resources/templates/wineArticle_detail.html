@@ -1,15 +1,15 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
     <div class="flex">
-        <img class=" h-auto max-w-lg rounded-lg" src="../images/꼬뜨 드 뵈프.png" alt="image description">
+        <img class="h-auto max-w-lg rounded-lg" th:src="${wine.image}" alt="image description">
         <div class="inline-block ml-12 mt-3">
-            <span class="text-white bg-gradient-to-r from-red-400 via-red-400 to-red-600 font-medium rounded-lg text-sm px-5 py-1.5 text-center">레드</span>
-            <span class="ml-2">프랑스</span>
-            <span class="ml-4">마르셀란</span>
-            <h1 class="text-5xl mt-8 font-extrabold dark:text-dark">GCF, 꼬뜨 드 뵈프</h1>
-            <h3 class="text-3xl font-weight my-1 tracking-tight dark:text-gray-500">GCF, Cotes de Boeuf</h3>
+            <span class="text-white bg-gradient-to-r from-red-400 via-red-400 to-red-600 font-medium rounded-lg text-sm px-5 py-1.5 text-center" th:text="${wine.list}"></span>
+            <span class="ml-2" th:text="${wine.country}"></span>
+            <span class="ml-4" th:text="${wine.kind}"></span>
+            <h1 class="text-5xl mt-8 font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
+            <h3 class="text-3xl font-weight my-1 tracking-tight dark:text-gray-500" th:text="${wine.wineNameE}"></h3>
             <br>
-            <h3 class="text-3xl font-weight tracking-tight dark:text-gray-500">44,000원</h3>
+            <h3 class="text-3xl font-weight tracking-tight dark:text-gray-500" th:text="${wine.price} + '원'"></h3>
             <h5 class="text-1xl font-weight my-2 tracking-tight dark:text-gray-400">※ 수입사가 제공한 가격으로 판매처별로 가격이 다를 수
                 있습니다.</h5>
             <div class="flex mt-20">
@@ -28,7 +28,7 @@
                         <th class="text-start font-black">국가</th>
                     </li>
                     <li>
-                        <th class="text-start font-black">주요품종</th>
+                        <th class="text-start font-black">품종</th>
                     </li>
                     <li>
                         <th class="text-start font-black">추천 음식</th>
@@ -36,13 +36,13 @@
                 </ul>
                 <ul class="text-2xl">
                     <li>
-                        <td class="dark:text-gray-500">프랑스</td>
+                        <td class="dark:text-gray-500" th:text="${wine.country}"></td>
                     </li>
                     <li>
-                        <td class="dark:text-gray-500">프노테낙 블랑, 뮈스까</td>
+                        <td class="dark:text-gray-500" th:text="${wine.kind}"></td>
                     </li>
                     <li>
-                        <td class="dark:text-gray-500">안심 찹 스테이크</td>
+                        <td class="dark:text-gray-500" th:text="${wine.food}"></td>
                     </li>
                 </ul>
             </div>

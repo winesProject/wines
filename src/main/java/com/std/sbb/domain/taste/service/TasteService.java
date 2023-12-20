@@ -11,12 +11,13 @@ public class TasteService {
 
     private final TasteRepository tasteRepository;
 
-    public Taste create(Integer sweet, Integer body, Integer acidity, Integer tannin){
-        Taste taste = new Taste();
-        taste.setSweet(sweet);
-        taste.setBody(body);
-        taste.setAcidity(acidity);
-        taste.setTannin(tannin);
+    public Taste create(Integer sweet, Integer body, Integer acidity, Integer tannin) {
+        Taste taste = Taste.builder()
+                .sweet(sweet)
+                .body(body)
+                .acidity(acidity)
+                .tannin(tannin)
+                .build();
         this.tasteRepository.save(taste);
         return taste;
     }

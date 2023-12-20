@@ -2,7 +2,6 @@ package com.std.sbb.domain.member.entity;
 
 import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.question.entity.Question;
-import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.favorites.entity.Favorites;
 import com.std.sbb.global.jpa.BaseEntity;
@@ -45,7 +44,7 @@ public class Member extends BaseEntity {
 
     private String birthDate;
 
-    private String gender;
+    private Boolean gender;
 
     @CreatedDate
     private LocalDateTime createDate;
@@ -76,6 +75,4 @@ public class Member extends BaseEntity {
     private List<Review> review;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Question> question;
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<QuestionArticle> questionArticles;
 }

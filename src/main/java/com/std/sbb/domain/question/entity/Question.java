@@ -5,28 +5,32 @@ import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.questionArticle.entity.QuestionArticle;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @Getter
+@Data
 @SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
 public class Question extends BaseEntity {
     private String username;
+
     @Column(length = 200)
     private String article;
+
     @Column(columnDefinition = "TEXT")
     private String content;
-    @OneToOne(mappedBy = "question")
-    private QuestionArticle questionArticle;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answer;
+
     @ManyToOne
     private Member member;
 }

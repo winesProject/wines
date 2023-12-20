@@ -16,8 +16,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Member join(String nickname, String password, String username, String phoneNumber , String email , String gender , String birthDate , String profileImgUrl) {
-
+    public Member join(String nickname, String password, String username, String phoneNumber , String email , Boolean gender , String birthDate , String profileImgUrl) {
         Member member = Member
                 .builder()
                 .nickname(nickname)
@@ -29,7 +28,6 @@ public class MemberService {
                 .birthDate(birthDate)
                 .profileImgUrl(profileImgUrl)
                 .build();
-
         return memberRepository.save(member);
     }
     /** 이메일이 존재하는지 확인 **/

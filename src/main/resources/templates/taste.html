@@ -1,4 +1,4 @@
-<div th:fragment="tasteFragment(tasteId, fieldName)">
+<div th:fragment="tasteFragment(tasteId)">
     <div class="mx-5 flex flex-row-reverse justify-end text-4xl">
         <label th:for="${'score-' + tasteId}"></label>
         <input type="radio" class="peer hidden" th:id="${'value5-' + tasteId}" th:value="5"

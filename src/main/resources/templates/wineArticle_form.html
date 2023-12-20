@@ -1,11 +1,13 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
-    <form th:action="@{/article/create}" th:object="${wineForm}" method="post" enctype="multipart/form-data" >
+    <form th:action="@{/article/create}" th:object="${wineForm}" method="post" enctype="multipart/form-data">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <div class="mx-auto">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark" for="image">Upload
                 file</label>
             <input class="block w-1/2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                   aria-describedby="file_input_help" name="image" id="image" th:field="*{image}" type="file" accept="image/jpeg, image/png, image/gif">
+                   aria-describedby="file_input_help" name="image" id="image" th:field="*{image}" type="file"
+                   accept="image/jpeg, image/png, image/gif">
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-700" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
                 800x400px).</p>
         </div>
@@ -49,27 +51,29 @@
             <div th:replace="~{taste :: tasteFragment(tasteId='body', fieldName='body')}"></div>
             <span class="flex items-center">타닌</span>
             <div th:replace="~{taste :: tasteFragment(tasteId='tannin', fieldName='tannin')}"></div>
-            <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ml-20">게시글 등록</button>
+            <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ml-20">
+                게시글 등록
+            </button>
+        </div>
+        <span>평점</span>
+        <div class="mx-5 flex flex-row-reverse justify-end text-4xl">
+            <label for="score"></label>
+            <input type="radio" class="peer hidden" id="value5" value="5" name="score"/>
+            <label for="value5"
+                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+            <input type="radio" class="peer hidden" id="value4" value="4" name="score"/>
+            <label for="value4"
+                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+            <input type="radio" class="peer hidden" id="value3" value="3" name="score"/>
+            <label for="value3"
+                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+            <input type="radio" class="peer hidden" id="value2" value="2" name="score"/>
+            <label for="value2"
+                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+            <input type="radio" class="peer hidden" id="value1" value="1" name="score"/>
+            <label for="value1"
+                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
         </div>
     </form>
 </div>
 </html>
-<!--        <span>평점</span>-->
-<!--        <div class="mx-5 flex flex-row-reverse justify-end text-4xl">-->
-<!--            <label for="score"></label>-->
-<!--            <input type="radio" class="peer hidden" id="value5" value="5" name="score"/>-->
-<!--            <label for="value5"-->
-<!--                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>-->
-<!--            <input type="radio" class="peer hidden" id="value4" value="4" name="score"/>-->
-<!--            <label for="value4"-->
-<!--                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>-->
-<!--            <input type="radio" class="peer hidden" id="value3" value="3" name="score"/>-->
-<!--            <label for="value3"-->
-<!--                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>-->
-<!--            <input type="radio" class="peer hidden" id="value2" value="2" name="score"/>-->
-<!--            <label for="value2"-->
-<!--                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>-->
-<!--            <input type="radio" class="peer hidden" id="value1" value="1" name="score"/>-->
-<!--            <label for="value1"-->
-<!--                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>-->
-<!--        </div>-->

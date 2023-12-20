@@ -19,18 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MemeberController {
     private final MailService mailService;
-
     private final MemberService memberService;
     /** 이메일이 DB에 존재하는지 확인 **/
     @GetMapping("/checkEmail")
     public boolean checkEmail(@RequestParam("memberEmail") String memberEmail){
 
-
         return memberService.checkEmail(memberEmail);
     }
     @PostMapping("/sendPwd")
     public String sendPwdEmail(@RequestParam("memberEmail") String memberEmail) {
-
 
         /** 임시 비밀번호 생성 **/
         String tmpPassword = memberService.getTmpPassword();
@@ -64,7 +61,7 @@ public class MemeberController {
                 memberForm.getUsername(),
                 memberForm.getPhoneNumber(),
                 memberForm.getEmail(),
-                memberForm.getGender(),
+                Boolean.valueOf(memberForm.getGender()),
                 memberForm.getBirthDate(),
                 null
         );

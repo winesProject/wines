@@ -19,12 +19,14 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .loginPage("/member/login"))
                 .formLogin((formLogin) -> formLogin
-                        .loginPage("/member/login"))
+                        .loginPage("/member/login")
+                        .defaultSuccessUrl("/"))
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")

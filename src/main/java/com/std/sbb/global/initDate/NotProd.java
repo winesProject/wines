@@ -28,10 +28,10 @@ public class NotProd {
     @Bean
     public ApplicationRunner init(MemberService memberService) {
         return args -> {
-            memberService.join("admin", "1234", "admin", null , null, null, "admin@test.com", null);
+            memberService.join("admin", "1234", "admin", null , "admin@test.com", null, null , null);
 
             IntStream.rangeClosed(1, 3).forEach(i -> {
-                memberService.join("user" + i, "1234", "nickname" + i, null , null, null , "user" + i + "@test.com", "");
+                memberService.join("user" + i, "1234", "nickname" + i, null , "user" + i + "@test.com", null , null , "");
             });
 
             memberService.whenSocialLogin(

@@ -10,7 +10,7 @@
             <a th:href="@{/member/login}" class="text-gray-900 focus:outline-none hover:text-red-800 font-black rounded-lg text-sm px-3 py-1 me-2 mb-2 mr-5">로그인</a>
         </div>
         <div sec:authorize="isAuthenticated()" class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse mb-20">
-            <a th:href="@{/member/detail}" class="text-gray-900 focus:outline-none hover:text-red-800 font-black rounded-lg text-sm px-3 py-1 me-2 mb-2 mr-1">내정보</a>
+            <a th:href="@{/member/detail}" class="text-gray-900 focus:outline-none hover:text-red-800 font-black rounded-lg text-sm px-3 py-1 mb-2">내정보</a>
             <a th:href="@{/member/logout}" class="text-gray-900 focus:outline-none hover:text-red-800 font-black rounded-lg text-sm px-3 py-1 me-2 mb-2 mr-5">로그아웃</a>
         </div>
     </div>

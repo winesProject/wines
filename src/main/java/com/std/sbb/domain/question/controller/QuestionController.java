@@ -28,11 +28,11 @@ public class QuestionController {
         return "question_list";
     }
 
-    @GetMapping("/list/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
         Question question = this.questionservice.getId(id);
         model.addAttribute("question",question);
-        return "question_list";
+        return "question_detail";
     }
     @GetMapping("/create")
     public String questionCreate (QuestionForm questionForm) {

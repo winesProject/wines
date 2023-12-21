@@ -7,9 +7,11 @@
                   th:text="${wine.list}"></span>
             <span class="ml-2" th:text="${wine.country}"></span>
             <div class="inline-block ml-12">
-                <a th:href="@{|/article/modify/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')" onclick="return confirm(`정말로 수정 하시겠습니까?`)"
+                <a th:href="@{|/article/modify/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')"
+                   onclick="return confirm(`정말로 수정 하시겠습니까?`)"
                    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2">수정</a>
-                <a th:href="@{|/article/delete/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')" onclick="return confirm(`정말로 삭제 하시겠습니까?`)"
+                <a th:href="@{|/article/delete/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')"
+                   onclick="return confirm(`정말로 삭제 하시겠습니까?`)"
                    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2">삭제</a>
             </div>
             <h1 class="text-5xl mt-8 font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
@@ -166,7 +168,7 @@
                 PC Desktop
             </td>
         </tr>
-        </tbody>
+        </thead>
     </table>
     <!--  리뷰 목록 끝  -->
     <div class="mb-2 mt-8 border-b border-gray-200 dark:border-gray-700 flex justify-center">
@@ -196,8 +198,8 @@
                 </button>
             </div>
         </div>
+    </form>
 </div>
-</form>
 <!--  리뷰 등록 끝  -->
 </div>
 </html>

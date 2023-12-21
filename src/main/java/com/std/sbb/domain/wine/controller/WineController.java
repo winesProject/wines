@@ -103,9 +103,10 @@ public class WineController {
     }
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/toggleHeart/{id}")
+    @ResponseBody
     public String toggleHeart(Principal principal, @PathVariable("id") Long id) {
         this.memberService.toggleHeart(id, principal.getName());
-        return "redirect:/";
+        return "123";
     }
 
     @PostMapping("/csrf/ajax")

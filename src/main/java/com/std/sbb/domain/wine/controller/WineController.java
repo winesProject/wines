@@ -1,20 +1,20 @@
 package com.std.sbb.domain.wine.controller;
 
+import com.std.sbb.domain.member.service.MemberService;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.taste.form.TasteForm;
 import com.std.sbb.domain.taste.service.TasteService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.form.WineForm;
 import com.std.sbb.domain.wine.service.WineService;
+import com.std.sbb.global.security.CsrfVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,6 +25,8 @@ import java.util.List;
 public class WineController {
 
     private final WineService wineService;
+
+    private final MemberService memberService;
 
     private final TasteService tasteService;
     @GetMapping("/list")
@@ -98,6 +100,19 @@ public class WineController {
 
         this.wineService.delete(wine);
         return "redirect:/";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/toggleHeart/{id}")
+    public String toggleHeart(Principal principal, @PathVariable("id") Long id) {
+        this.memberService.toggleHeart(id, principal.getName());
+        return "redirect:/";
+    }
+
+    @PostMapping("/csrf/ajax")
+    @ResponseBody
+    public CsrfVO csrfAJAXSubmit(@RequestBody CsrfVO csrfVO) {
+
+        return csrfVO;
     }
 }
 

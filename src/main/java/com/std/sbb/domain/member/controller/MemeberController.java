@@ -59,7 +59,6 @@ public class MemeberController {
         }
 
         emailService.send(memberForm.getEmail(), "서비스 가입을 환영합니다!", "회원가입 환영 메일");
-
         return "redirect:/";
     }
 
@@ -67,4 +66,5 @@ public class MemeberController {
     public String detail() {
         return "member_detail";
     }
+
 }

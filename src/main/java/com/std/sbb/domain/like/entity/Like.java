@@ -16,8 +16,10 @@ import lombok.experimental.SuperBuilder;
 @Data
 public class Like extends BaseEntity {
 
+
     @ManyToOne
     private Review review;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Member member;
 }

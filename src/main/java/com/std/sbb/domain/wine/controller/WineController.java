@@ -5,18 +5,15 @@ import com.std.sbb.domain.taste.form.TasteForm;
 import com.std.sbb.domain.taste.service.TasteService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.form.WineForm;
+import com.std.sbb.domain.wine.searchType.SearchType;
 import com.std.sbb.domain.wine.service.WineService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -27,9 +24,10 @@ public class WineController {
 
     private final TasteService tasteService;
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Wine> wineList = this.wineService.getList();
-        model.addAttribute("wineList", wineList);
+    public String list(Model model, @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Wine> paging = this.wineService.getList(searchType, kw, page);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("paging", paging);
         return "wineArticle_list";
     }
 

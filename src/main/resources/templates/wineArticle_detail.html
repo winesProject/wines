@@ -3,9 +3,12 @@
     <div class="flex">
         <img class="h-auto max-w-lg rounded-lg" th:src="${wine.image}" alt="image description">
         <div class="inline-block ml-12 mt-3">
-            <span class="text-white bg-gradient-to-r from-red-400 via-red-400 to-red-600 font-medium rounded-lg text-sm px-5 py-1.5 text-center" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '레드'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '화이트'" th:text="${wine.list}"></span>
+            <span class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '스파클링'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '로제'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '주정강화'" th:text="${wine.list}"></span>
             <span class="ml-2" th:text="${wine.country}"></span>
-            <span class="ml-4" th:text="${wine.kind}"></span>
             <h1 class="text-5xl mt-8 font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
             <h3 class="text-3xl font-weight my-1 tracking-tight dark:text-gray-500" th:text="${wine.wineNameE}"></h3>
             <br>
@@ -188,10 +191,10 @@
                         class="inline-flex items-center py-2.5 px-4 text-base font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                     리뷰 등록
                 </button>
-                </div>
             </div>
         </div>
-    </form>
-    <!--  리뷰 등록 끝  -->
+</div>
+</form>
+<!--  리뷰 등록 끝  -->
 </div>
 </html>

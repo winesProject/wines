@@ -86,12 +86,12 @@ public class MemberService {
         return join(username, "", nickname, null, null, null, null, profileImgUrl); // 최초 로그인 시 딱 한번 실행
     }
     public Optional<Member> findByUsername(String username) {
-        return memberRepository.findBynickname(username);
+        return memberRepository.findByUsername(username);
     }
 
     public Member getMember(String username) {
-        Optional<Member> member = this.memberRepository.findBynickname(username);
-        if (member.isPresent() && username.equals("admin")) {
+        Optional<Member> member = this.memberRepository.findByUsername(username);
+        if (member.isPresent()) {
             return member.get();
         } else {
             throw new RuntimeException("존재하지 않습니다");

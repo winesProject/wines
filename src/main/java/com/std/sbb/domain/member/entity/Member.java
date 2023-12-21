@@ -53,6 +53,7 @@ public class Member extends BaseEntity {
 
     private String profileImgUrl;
 
+
     public List<? extends GrantedAuthority> getGrantedAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 

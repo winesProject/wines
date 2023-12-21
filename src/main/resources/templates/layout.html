@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <!--  css  -->
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<!--  csrf 토큰  -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Wine's</title>
 </head>
 <body class="bg-gray-100">

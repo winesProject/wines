@@ -1,5 +1,6 @@
 package com.std.sbb.domain.member.controller;
 
+import com.std.sbb.domain.email.service.EmailService;
 import com.std.sbb.domain.member.form.MemberForm;
 import com.std.sbb.domain.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -18,18 +19,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemeberController {
 
     private final MemberService memberService;
+    private final EmailService emailService;
+
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login_form";
     }
+
     @GetMapping("/signup")
     public String signup(Model model, MemberForm memberForm) {
         model.addAttribute("memberForm", new MemberForm());
         return "signup_form";
     }
+
     @PostMapping("/signup")
-    public String signup(@Valid MemberForm memberForm, BindingResult bindingResult){
-        if (!memberForm.getPassword1().equals(memberForm.getPassword2())){
+    public String signup(@Valid MemberForm memberForm, BindingResult bindingResult) {
+        if (!memberForm.getPassword1().equals(memberForm.getPassword2())) {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
 
@@ -43,20 +48,23 @@ public class MemeberController {
                     memberForm.getGender(),
                     memberForm.getBirthDate(),
                     null);
-        } catch(DataIntegrityViolationException e) {
-        e.printStackTrace();
-        bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
-        return "signup_form";
-    }catch(Exception e) {
-        e.printStackTrace();
-        bindingResult.reject("signupFailed", e.getMessage());
-        return "signup_form";
-    }
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+            return "signup_form";
+        } catch (Exception e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", e.getMessage());
+            return "signup_form";
+        }
 
+        emailService.send(memberForm.getEmail(), "서비스 가입을 환영합니다!", "회원가입 환영 메일");
         return "redirect:/";
     }
+
     @GetMapping("/detail")
-    public String detail(){
+    public String detail() {
         return "member_detail";
     }
+
 }

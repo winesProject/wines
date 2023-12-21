@@ -69,6 +69,7 @@ public class WineService {
         }
     }
 
+
     private Specification<Wine> _search(SearchType searchType, String kw) {
         return new Specification<>() {
             private static final long serialVersionUID = 1L;
@@ -102,4 +103,24 @@ public class WineService {
             }
         };
     }
+
+    public void modify(Wine wine, String wineName, String wineNameE,String country, String list, Integer price, String kind, String food, MultipartFile image, Taste taste){
+        Wine
+                .builder()
+                .wineName(wineName)
+                .wineNameE(wineNameE)
+                .country(country)
+                .list(list)
+                .price(price)
+                .kind(kind)
+                .food(food)
+                .taste(taste)
+                .build();
+        this.wineRepository.save(wine);
+    }
+    public void delete(Wine wine) {
+        this.wineRepository.delete(wine);
+    }
+
+
 }

@@ -4,10 +4,7 @@ import com.std.sbb.domain.answer.entity.Answer;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -18,6 +15,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Question extends BaseEntity {
     private String username;
 
@@ -28,7 +26,7 @@ public class Question extends BaseEntity {
     private String content;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private List<Answer> answer;
+    private List<Answer> answerList;
 
     @ManyToOne
     private Member member;

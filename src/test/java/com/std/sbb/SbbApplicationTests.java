@@ -1,5 +1,6 @@
 package com.std.sbb;
 
+import com.std.sbb.domain.question.service.QuestionService;
 import com.std.sbb.domain.taste.service.TasteService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
@@ -16,6 +17,8 @@ class SbbApplicationTests {
     private WineRepository wineRepository;
     @Autowired
     private TasteService tasteService;
+    @Autowired
+    private QuestionService questionService;
     @Test
     @DisplayName("와인 데이터")
     void test01() {
@@ -151,5 +154,14 @@ class SbbApplicationTests {
                 .taste(tasteService.create(1,3,4,3))
                 .build();
         this.wineRepository.save(w);
+    }
+
+    @Test
+    void testJpa() {
+        for (int i = 1; i <= 100; i++) {
+            String subject = String.format("테스트 데이터입니다:[%03d]", i);
+            String content = "내용무";
+            this.questionService.create(subject, content, null);
+        }
     }
 }

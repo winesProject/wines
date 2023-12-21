@@ -3,54 +3,63 @@
     <!--  검색 기능  -->
     <form class="relative">
         <div class="flex justify-center">
-            <label for="search-dropdown" class="mb-2 text-base font-medium text-gray-900 sr-only dark:text-white">Your
-                Email</label>
-            <button id="dropdown-button" data-dropdown-toggle="dropdown"
-                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-base font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                    type="button"> 검색 항목
-                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                     viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="m1 1 4 4 4-4"/>
-                </svg>
-            </button>
-            <div id="dropdown"
-                 class="top-1/2 hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-4 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                    <li>
-                        <button type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                            제목
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                            내용
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button"
-                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                            제목 + 내용
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="relative w-1/2">
-                <input type="search" id="search-dropdown"
-                       class="block p-2.5 w-full z-20 text-base text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                       placeholder="원하는 와인을 검색해보세요!" required>
-                <button type="submit"
-                        class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-red-700 rounded-e-lg border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                    <span class="sr-only">Search</span>
-                </button>
-            </div>
+            <form id="searchForm">
+                <select id="searchType" name="searchType">
+                    <option value="TITLE">제목</option>
+                    <option value="CONTENT">내용</option>
+                    <option value="TITLEANDCONTENT">제목 + 내용</option>
+                </select>
+                <input type="search" id="searchInput" name="kw" placeholder="검색어를 입력하세요">
+                <button type="submit">검색</button>
+            </form>
+<!--            <label for="search-dropdown" class="mb-2 text-base font-medium text-gray-900 sr-only dark:text-white">Your-->
+<!--                Email</label>-->
+<!--            <button id="dropdown-button" data-dropdown-toggle="dropdown"-->
+<!--                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-base font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"-->
+<!--                    type="button"> 검색 항목-->
+<!--                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"-->
+<!--                     viewBox="0 0 10 6">-->
+<!--                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+<!--                          d="m1 1 4 4 4-4"/>-->
+<!--                </svg>-->
+<!--            </button>-->
+<!--            <div id="dropdown"-->
+<!--                 class="top-1/2 hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">-->
+<!--                <ul class="py-4 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">-->
+<!--                    <li>-->
+<!--                        <button type="button"-->
+<!--                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-->
+<!--                            제목-->
+<!--                        </button>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <button type="button"-->
+<!--                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-->
+<!--                            내용-->
+<!--                        </button>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <button type="button"-->
+<!--                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-->
+<!--                            제목 + 내용-->
+<!--                        </button>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="relative w-1/2">-->
+<!--                <input type="search" id="search-dropdown"-->
+<!--                       class="block p-2.5 w-full z-20 text-base text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"-->
+<!--                       placeholder="원하는 와인을 검색해보세요!" required>-->
+<!--                <button type="submit"-->
+<!--                        class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-red-700 rounded-e-lg border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">-->
+<!--                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"-->
+<!--                         viewBox="0 0 20 20">-->
+<!--                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+<!--                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>-->
+<!--                    </svg>-->
+<!--                    <span class="sr-only">Search</span>-->
+<!--                </button>-->
+<!--            </div>-->
         </div>
     </form>
     <div class="mt-16 mb-4 border-b border-gray-200 dark:border-gray-700 flex justify-center my-8">
@@ -73,7 +82,7 @@
     <!--  검색 기능 끝  -->
     <div class="flex justify-center">
         <div class="w-3/4">
-            <div class="mt-8 border-4 p-4" th:each="wine : ${wineList}">
+            <div class="mt-8 border-4 p-4" th:each="wine : ${paging}">
                 <div role="status"
                      class="space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                     <div class="flex items-center justify-center w-full h-48 rounded sm:w-96">
@@ -88,7 +97,11 @@
                         </a>
                         <a th:href="@{/article/detail}" class="w-1/2 my-2 py-2 pb-24" th:text="${wine.country}"></a>
                         <div class="flex py-4">
-                            <span class="text-white bg-gradient-to-r from-red-400 via-red-400 to-red-600 font-medium rounded-lg text-sm px-5 py-1.5 text-center">레드</span>
+                            <span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '레드'" th:text="${wine.list}"></span>
+                            <span class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '화이트'" th:text="${wine.list}"></span>
+                            <span class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '스파클링'" th:text="${wine.list}"></span>
+                            <span class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '로제'" th:text="${wine.list}"></span>
+                            <span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '주정강화'" th:text="${wine.list}"></span>
                             <div class="mx-5 flex flex-row-reverse justify-end text-2xl">
                                 <label for="score"></label>
                                 <input type="radio" class="peer hidden" id="value5" value="5" name="score"/>
@@ -121,40 +134,53 @@
         </div>
     </div>
     <!--  페이징  -->
-    <nav aria-label="Page navigation example">
-        <ul class="flex -space-x-px text-base h-10 justify-center my-12">
-            <li>
-                <a href="#"
-                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">이전</a>
+    <nav th:if="${!paging.isEmpty()}" th:with="kwBase = '?kw=' + ${param.kw != null ? param.kw : ''}">
+        <ul class="pagination flex -space-x-px text-base h-10 justify-center my-12">
+            <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a th:unless="${!paging.hasPrevious()}"
+                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                   th:href="@{|${kwBase}&page=${paging.number - 1}&searchType=${searchType}|}">이전</a>
             </li>
-            <li>
-                <a href="#"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:text="${page + 1}"
+                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                   th:href="@{|${kwBase}&page=${page}&searchType=${searchType}|}"></a>
             </li>
-            <li>
-                <a href="#"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-            </li>
-            <li>
-                <a href="#" aria-current="page"
-                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-            </li>
-            <li>
-                <a href="#"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-            </li>
-            <li>
-                <a href="#"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-            </li>
-            <li>
-                <a href="#"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">다음</a>
+            <li th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a th:unless="${!paging.hasNext()}"
+                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                   th:href="@{|${kwBase}&page=${paging.number + 1}&searchType=${searchType}|}">다음</a>
             </li>
         </ul>
     </nav>
+    <form th:action="@{/article/list}" method="get" id="searchForm1">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
+        <input type="hidden" id="page" name="page" th:value="${paging.number}">
+        <input type="hidden" name="searchType" value="${searchType}">
+    </form>
 </div>
 </html>
+
+<script>
+    const form = document.getElementById('searchForm');
+    form.addEventListener('button', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const searchType = formData.get('searchType');
+        const kw = formData.get('kw');
+
+        fetch(`/search?searchType=${searchType}&kw=${kw}`)
+            .then(response => {
+            })
+            .catch(error => {
+            });
+    });
+</script>
+
 <!--찜 목록-->
 <script>
     function toggleHeart(button) {
@@ -199,3 +225,4 @@
     }
 </script>
 <!--찜 목록 끝-->
+

@@ -110,7 +110,6 @@ public class MemberService {
             } else {
                 wine.getMember().add(member);
             }
-
             wineRepository.save(wine);
         }
     }

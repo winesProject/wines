@@ -2,6 +2,8 @@ package com.std.sbb.domain.member.service;
 
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.member.repository.MemberRepository;
+import com.std.sbb.domain.wine.entity.Wine;
+import com.std.sbb.domain.wine.repository.WineRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +17,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final WineRepository wineRepository;
 
     public Member join(String nickname, String password, String username, String phoneNumber, String email, String gender, String birthDate, String profileImgUrl) {
         Member member = Member
@@ -82,17 +85,33 @@ public class MemberService {
         // 소셜 로그인를 통한 가입시 비번은 없다.
         return join(username, "", nickname, null, null, null, null, profileImgUrl); // 최초 로그인 시 딱 한번 실행
     }
-
     public Optional<Member> findByUsername(String username) {
         return memberRepository.findBynickname(username);
     }
 
     public Member getMember(String username) {
         Optional<Member> member = this.memberRepository.findBynickname(username);
-        if (member.isPresent() && username.equals("admin")){
+        if (member.isPresent() && username.equals("admin")) {
             return member.get();
-        }else {
+        } else {
             throw new RuntimeException("존재하지 않습니다");
+        }
+    }
+    public void toggleHeart(Long id, String username) {
+        Optional<Member> memberOptional = findByUsername(username);
+        Optional<Wine> wineOptional = wineRepository.findById(id);
+
+        if (memberOptional.isPresent() && wineOptional.isPresent()) {
+            Member member = memberOptional.get();
+            Wine wine = wineOptional.get();
+
+            if (wine.getMember().contains(member)) {
+                wine.getMember().remove(member);
+            } else {
+                wine.getMember().add(member);
+            }
+
+            wineRepository.save(wine);
         }
     }
 }

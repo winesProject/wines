@@ -6,6 +6,7 @@ import com.std.sbb.domain.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 @Controller
-public class MemeberController {
+public class MemberController {
 
     private final MemberService memberService;
     private final EmailService emailService;
 
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
     public String login() {
         return "login_form";
@@ -40,9 +42,9 @@ public class MemeberController {
 
         try {
             this.memberService.join(
-                    memberForm.getNickname(),
-                    memberForm.getPassword1(),
                     memberForm.getUsername(),
+                    memberForm.getPassword1(),
+                    memberForm.getName(),
                     memberForm.getPhoneNumber(),
                     memberForm.getEmail(),
                     memberForm.getGender(),

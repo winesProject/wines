@@ -19,12 +19,12 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final WineRepository wineRepository;
 
-    public Member join(String nickname, String password, String username, String phoneNumber, String email, String gender, String birthDate, String profileImgUrl) {
+    public Member join(String username, String password, String name, String phoneNumber, String email, String gender, String birthDate, String profileImgUrl) {
         Member member = Member
                 .builder()
-                .nickname(nickname)
-                .password(passwordEncoder.encode(password))
                 .username(username)
+                .password(passwordEncoder.encode(password))
+                .name(name)
                 .phoneNumber(phoneNumber)
                 .email(email)
                 .gender(gender)
@@ -77,13 +77,13 @@ public class MemberService {
     }
 
     @Transactional
-    public Member whenSocialLogin(String providerTypeCode, String username, String nickname, String profileImgUrl) {
+    public Member whenSocialLogin(String providerTypeCode, String name, String username, String profileImgUrl) {
         Optional<Member> opMember = findByUsername(username);
 
         if (opMember.isPresent()) return opMember.get();
 
         // 소셜 로그인를 통한 가입시 비번은 없다.
-        return join(username, "", nickname, null, null, null, null, profileImgUrl); // 최초 로그인 시 딱 한번 실행
+        return join(name, "", username, null, null, null, null, profileImgUrl); // 최초 로그인 시 딱 한번 실행
     }
     public Optional<Member> findByUsername(String username) {
         return memberRepository.findByUsername(username);

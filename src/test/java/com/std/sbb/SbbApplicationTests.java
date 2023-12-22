@@ -164,4 +164,10 @@ class SbbApplicationTests {
             this.questionService.create(subject, content, null);
         }
     }
+//    @Autowired
+//    private EmailService emailService;
+//    @Test
+//    void testJpa1(){
+//        this.emailService.send("gusrudchl12@gmail.com", "회원가입이 완료되었습니다.", "축하드립니다.");
+//    }
 }

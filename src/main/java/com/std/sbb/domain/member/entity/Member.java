@@ -30,12 +30,12 @@ public class Member extends BaseEntity {
         this.password = password;
     }
 
-    private String username;
+    private String name;
 
     private String password;
 
     @Column(unique = true)
-    private String nickname;
+    private String username;
 
     @Column(unique = true)
     private String email;

@@ -110,7 +110,6 @@ public class WineController {
         this.memberService.toggleHeart(id, principal.getName());
         return "123";
     }
-
     @PostMapping("/csrf/ajax")
     @ResponseBody
     public CsrfVO csrfAJAXSubmit(@RequestBody CsrfVO csrfVO) {

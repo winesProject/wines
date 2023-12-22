@@ -6,13 +6,13 @@
     <form th:action="@{/member/login}" method="post" class="max-w-sm mx-auto my-16">
         <div class="mb-5">
             <div class="flex justify-between">
-                <label for="nickname" class="block mb-2 text-base font-medium text-gray-900 dark:text-dark">아이디</label>
+                <label for="username" class="block mb-2 text-base font-medium text-gray-900 dark:text-dark">아이디</label>
                 <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                     계정이 없으신가요? <a th:href="@{/member/signup}" class="text-blue-700 hover:underline dark:text-blue-500">회원가입
                     하러가기</a>
                 </div>
             </div>
-            <input type="username" id="nickname"
+            <input type="text" id="username"
                    name="username"
                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                    required>

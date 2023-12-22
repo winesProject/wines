@@ -2,16 +2,20 @@ package com.std.sbb.domain.wine.form;
 
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class WineForm extends BaseEntity {
     @NotEmpty(message = "와인은 필수")
     private String wineName;

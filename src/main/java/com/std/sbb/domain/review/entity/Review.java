@@ -18,15 +18,21 @@ import java.util.List;
 @ToString
 public class Review extends BaseEntity {
     private String username;
+
     @Column(length = 200)
     private String subject;
+
     @Column(columnDefinition = "TEXT")
     private String content;
+
     private Integer score;
+
     @ManyToOne
     private Member member;
+
     @ManyToOne
     private Wine wine;
+
     @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<Like> like;
 }

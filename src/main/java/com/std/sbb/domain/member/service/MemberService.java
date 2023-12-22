@@ -101,7 +101,6 @@ public class MemberService {
         Optional<Member> memberOptional = findByUsername(username);
         Optional<Wine> wineOptional = wineRepository.findById(id);
 
-        if (memberOptional.isPresent() && wineOptional.isPresent()) {
             Member member = memberOptional.get();
             Wine wine = wineOptional.get();
 
@@ -115,7 +114,5 @@ public class MemberService {
             wineRepository.save(wine);
 
             return !isLiked;
-        }
-        return false;
     }
 }

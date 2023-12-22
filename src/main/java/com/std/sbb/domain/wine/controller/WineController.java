@@ -109,13 +109,14 @@ public class WineController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/toggleHeart/{id}")
     @ResponseBody
-    public ResponseEntity<Map<String, Boolean>> toggleHeart(Principal principal, @PathVariable("id") Long id) {
+    public ResponseEntity<Map<String, Boolean>> toggleHeart(Model model, Principal principal, @PathVariable("id") Long id) {
         boolean isLiked = this.memberService.toggleHeart(id, principal.getName());
         Map<String, Boolean> response = new HashMap<>();
         response.put("isLiked", isLiked);
 
         return ResponseEntity.ok(response);
     }
+
     @PostMapping("/csrf/ajax")
     @ResponseBody
     public CsrfVO csrfAJAXSubmit(@RequestBody CsrfVO csrfVO) {

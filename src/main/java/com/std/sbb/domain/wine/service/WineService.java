@@ -29,7 +29,7 @@ public class WineService {
     private final WineRepository wineRepository;
     private final GenFileService genFileService;
 
-    public void create(String wineName, String wineNameE, String country, String list, Integer price, String kind, String food, MultipartFile image, Taste taste) {
+    public void create(String wineName, String wineNameE, String country, String list, Integer price, String kind, String food, Integer score,MultipartFile image, Taste taste) {
         Wine wine = Wine.builder()
                 .wineName(wineName)
                 .wineNameE(wineNameE)
@@ -38,6 +38,7 @@ public class WineService {
                 .price(price)
                 .kind(kind)
                 .food(food)
+                .score(score)
                 .taste(taste)
                 .createDate(LocalDateTime.now())
                 .build();

@@ -34,6 +34,7 @@ public class Wine extends BaseEntity {
     private String kind;
     private String food;
     private String image;
+    private Integer score;
 
     private Boolean favorites;
 

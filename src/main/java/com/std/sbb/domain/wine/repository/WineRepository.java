@@ -7,7 +7,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WineRepository extends JpaRepository<Wine, Long> {
-
     Page<Wine> findAll(Specification<Wine> spec, Pageable pageable);
 
 }

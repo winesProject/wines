@@ -9,13 +9,13 @@ import lombok.Getter;
 @Data
 public class MemberForm extends BaseEntity {
     @Size(min = 3, max = 10)
-    private String nickname;
+    private String username;
 
     private String password1;
 
     private String password2;
 
-    private String username;
+    private String name;
 
     private String phoneNumber;
 

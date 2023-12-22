@@ -165,6 +165,7 @@
 </html>
 
 <script>
+    // 검색기능
     const form = document.getElementById('searchForm');
     form.addEventListener('button', function(event) {
         event.preventDefault();
@@ -179,14 +180,12 @@
             .catch(error => {
             });
     });
-</script>
-
-<!--찜 목록-->
-<script>
+    // 검색기능 끝
     function toggleHeart(button) {
+
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
-        var name = $("#userName").val();
+        var name = $("#username").val();
         var heartIcon = button.querySelector("#heartIcon");
         var wineId = button.getAttribute("data-wine-id");
 
@@ -217,11 +216,6 @@
                 console.log('error:'+error);
             }
         });
-
-
-        // $.post("/article/toggleHeart/" + wineId, function (response) {
-        //
-        // });
     }
 </script>
 <!--찜 목록 끝-->

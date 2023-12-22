@@ -55,7 +55,7 @@ public class WineController {
             return "wineArticle_form";
         }
         Taste taste = tasteService.create(tasteForm.getSweet(), tasteForm.getBody(), tasteForm.getAcidity(), tasteForm.getTannin());
-        this.wineService.create(wineForm.getWineName(), wineForm.getWineNameE(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), wineForm.getImage(), taste);
+        this.wineService.create(wineForm.getWineName(), wineForm.getWineNameE(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), wineForm.getScore(), wineForm.getImage(), taste);
 
         return "redirect:/";
     }
@@ -63,7 +63,9 @@ public class WineController {
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id){
         Wine wine = this.wineService.getWine(id);
+        Taste taste = this.tasteService.getTaste(id);
         model.addAttribute("wine", wine);
+        model.addAttribute("taste", taste);
         return "wineArticle_detail";
     }
 

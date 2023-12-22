@@ -12,6 +12,7 @@ import com.std.sbb.global.security.CsrfVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -106,10 +109,14 @@ public class WineController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/toggleHeart/{id}")
     @ResponseBody
-    public String toggleHeart(Principal principal, @PathVariable("id") Long id) {
-        this.memberService.toggleHeart(id, principal.getName());
-        return "123";
+    public ResponseEntity<Map<String, Boolean>> toggleHeart(Model model, Principal principal, @PathVariable("id") Long id) {
+        boolean isLiked = this.memberService.toggleHeart(id, principal.getName());
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isLiked", isLiked);
+
+        return ResponseEntity.ok(response);
     }
+
     @PostMapping("/csrf/ajax")
     @ResponseBody
     public CsrfVO csrfAJAXSubmit(@RequestBody CsrfVO csrfVO) {

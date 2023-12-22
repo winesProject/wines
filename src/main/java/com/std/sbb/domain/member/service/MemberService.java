@@ -97,7 +97,7 @@ public class MemberService {
             throw new RuntimeException("존재하지 않습니다");
         }
     }
-    public void toggleHeart(Long id, String username) {
+    public boolean toggleHeart(Long id, String username) {
         Optional<Member> memberOptional = findByUsername(username);
         Optional<Wine> wineOptional = wineRepository.findById(id);
 
@@ -105,12 +105,17 @@ public class MemberService {
             Member member = memberOptional.get();
             Wine wine = wineOptional.get();
 
-            if (wine.getMember().contains(member)) {
+            boolean isLiked = wine.getMember().contains(member);
+
+            if (isLiked) {
                 wine.getMember().remove(member);
             } else {
                 wine.getMember().add(member);
             }
             wineRepository.save(wine);
+
+            return !isLiked;
         }
+        return false;
     }
 }

@@ -5,6 +5,8 @@ import com.std.sbb.domain.taste.repository.TasteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class TasteService {
@@ -20,5 +22,13 @@ public class TasteService {
                 .build();
         this.tasteRepository.save(taste);
         return taste;
+    }
+    public Taste getTaste(Long id) {
+        Optional<Taste> ot = this.tasteRepository.findById(id);
+        if (ot.isPresent()) {
+            return ot.get();
+        } else {
+            throw new RuntimeException("맛이 존재하지 않습니다");
+        }
     }
 }

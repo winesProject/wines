@@ -4,7 +4,7 @@ import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
 import com.std.sbb.domain.wine.searchType.SearchType;
-import com.std.sbb.global.genfile.service.GenFileService;
+import com.std.sbb.global.imagesfile.entity.Board;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,9 +26,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WineService {
     private final WineRepository wineRepository;
-    private final GenFileService genFileService;
 
-    public void create(String wineName, String wineNameE, String country, String list, Integer price, String kind, String food, MultipartFile image, Taste taste) {
+    public void create(String wineName, String wineNameE, String country, String list, Integer price, String kind, String food, Integer score, Board board, Taste taste) {
         Wine wine = Wine.builder()
                 .wineName(wineName)
                 .wineNameE(wineNameE)
@@ -38,18 +36,13 @@ public class WineService {
                 .price(price)
                 .kind(kind)
                 .food(food)
+                .score(score)
+                .board(board)
                 .taste(taste)
                 .createDate(LocalDateTime.now())
                 .build();
         this.wineRepository.save(wine);
 
-
-        if (image != null && !image.isEmpty()) {
-            Wine savedWine = this.wineRepository.save(wine);
-            genFileService.save(savedWine.getWineName(), savedWine.getId(), "common", "image", 0, image);
-        } else {
-            System.out.println("이미 동일한 와인 이름이 존재합니다: " + wineName);
-        }
     }
 
     public Page<Wine> getList(SearchType searchType, String kw, int page) {
@@ -104,7 +97,7 @@ public class WineService {
         };
     }
 
-    public void modify(Wine wine, String wineName, String wineNameE,String country, String list, Integer price, String kind, String food, MultipartFile image, Taste taste){
+    public void modify(Wine wine, String wineName, String wineNameE,String country, String list, Integer price, String kind, String food, Board board, Taste taste){
         Wine
                 .builder()
                 .wineName(wineName)
@@ -114,6 +107,7 @@ public class WineService {
                 .price(price)
                 .kind(kind)
                 .food(food)
+                .board(board)
                 .taste(taste)
                 .build();
         this.wineRepository.save(wine);

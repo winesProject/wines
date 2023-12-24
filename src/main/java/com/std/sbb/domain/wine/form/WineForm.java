@@ -2,8 +2,8 @@ package com.std.sbb.domain.wine.form;
 
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.global.imagesfile.entity.Board;
-import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,14 +22,13 @@ public class WineForm{
 
     private Integer price;
 
+    @NotNull(message = "평점을 작성해주세요")
     private Integer score;
 
     @NotEmpty(message = "품종은 필수")
     private String kind;
 
     private String food;
-    @NotNull(message = "평점을 작성해주세요")
-    private Integer score;
 
     private MultipartFile image;
 

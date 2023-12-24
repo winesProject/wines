@@ -10,8 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Data
-public class WineForm extends BaseEntity {
-    @NotEmpty(message = "와인은 필수")
+public class WineForm{
+    @NotEmpty(message = "와인 이름은 필수")
     private String wineName;
     @NotEmpty(message = "영어 와인 이름은 필수")
     private String wineNameE;
@@ -28,6 +28,8 @@ public class WineForm extends BaseEntity {
     private String kind;
 
     private String food;
+    @NotNull(message = "평점을 작성해주세요")
+    private Integer score;
 
     private MultipartFile image;
 

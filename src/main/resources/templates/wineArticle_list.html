@@ -1,5 +1,6 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
+    <link rel="stylesheet" href="style.css">
     <!--  검색 기능  -->
     <form class="relative">
         <div class="flex justify-center">
@@ -110,21 +111,23 @@
                                   th:if="${wine.list} == '주정강화'" th:text="${wine.list}"></span>
                             <div class="mx-5 flex flex-row-reverse justify-end text-2xl">
                                 <label for="score"></label>
-                                <input type="radio" class="peer hidden" id="value5" value="5" name="score"/>
-                                <label for="value5"
-                                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-                                <input type="radio" class="peer hidden" id="value4" value="4" name="score"/>
-                                <label for="value4"
-                                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-                                <input type="radio" class="peer hidden" id="value3" value="3" name="score"/>
-                                <label for="value3"
-                                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-                                <input type="radio" class="peer hidden" id="value2" value="2" name="score"/>
-                                <label for="value2"
-                                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-                                <input type="radio" class="peer hidden" id="value1" value="1" name="score"/>
-                                <label for="value1"
-                                       class="cursor-pointer peer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                        </svg>
+                                        <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                        </svg>
+                                        <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                        </svg>
+                                        <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                        </svg>
+                                        <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                        </svg>
+                                    </div>
                             </div>
                         </div>
                         <div class="text-end">

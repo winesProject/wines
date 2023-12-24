@@ -36,6 +36,7 @@ public class Wine extends BaseEntity {
     private Integer score;
     private String food;
     private String image;
+    private Integer score;
 
     @OneToOne
     private Board board;

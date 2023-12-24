@@ -47,38 +47,40 @@
             <input type="text" id="food" th:field="*{food}"
                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5">
         </div>
-        <label for="food" class="block mb-2 text-sm font-medium text-gray-900">맛</label>
+        <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900">평점</label>
+            <div class="flex items-center flex-row-reverse justify-end text-4xl">
+                <label for="score"></label>
+                <input type="radio" class="peer hidden" id="value5" value="5" name="score"/>
+                <label for="value5"
+                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                <input type="radio" class="peer hidden" id="value4" value="4" name="score"/>
+                <label for="value4"
+                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                <input type="radio" class="peer hidden" id="value3" value="3" name="score"/>
+                <label for="value3"
+                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                <input type="radio" class="peer hidden" id="value2" value="2" name="score"/>
+                <label for="value2"
+                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                <input type="radio" class="peer hidden" id="value1" value="1" name="score"/>
+                <label for="value1"
+                       class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+            </div>
+        </div>
+        <label for="food" class="block mb-2 my-2 text-sm font-medium text-gray-900">맛</label>
         <div class="flex items-center my-4" th:field="*{taste}">
             <span class="flex items-center">당도</span>
-            <div th:replace="~{taste :: tasteFragment(tasteId='sweet', fieldName='sweet')}"></div>
+            <div th:replace="~{taste1 :: tasteFragment(tasteId='sweet', fieldName='sweet')}"></div>
             <span class="flex items-center">산도</span>
-            <div th:replace="~{taste :: tasteFragment(tasteId='acidity', fieldName='acidity')}"></div>
+            <div th:replace="~{taste1 :: tasteFragment(tasteId='acidity', fieldName='acidity')}"></div>
             <span class="flex items-center">바디</span>
-            <div th:replace="~{taste :: tasteFragment(tasteId='body', fieldName='body')}"></div>
+            <div th:replace="~{taste1 :: tasteFragment(tasteId='body', fieldName='body')}"></div>
             <span class="flex items-center">타닌</span>
-            <div th:replace="~{taste :: tasteFragment(tasteId='tannin', fieldName='tannin')}"></div>
+            <div th:replace="~{taste1 :: tasteFragment(tasteId='tannin', fieldName='tannin')}"></div>
             <button class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ml-20">
                 게시글 등록
             </button>
-        </div>
-        <span>평점</span>
-        <div class="mx-5 flex flex-row-reverse justify-end text-4xl">
-            <label for="score"></label>
-            <input type="radio" class="peer hidden" id="value5" value="5" name="score"/>
-            <label for="value5"
-                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-            <input type="radio" class="peer hidden" id="value4" value="4" name="score"/>
-            <label for="value4"
-                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-            <input type="radio" class="peer hidden" id="value3" value="3" name="score"/>
-            <label for="value3"
-                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-            <input type="radio" class="peer hidden" id="value2" value="2" name="score"/>
-            <label for="value2"
-                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
-            <input type="radio" class="peer hidden" id="value1" value="1" name="score"/>
-            <label for="value1"
-                   class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
         </div>
     </form>
 </div>

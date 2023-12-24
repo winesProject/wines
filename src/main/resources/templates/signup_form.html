@@ -45,16 +45,24 @@
                        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-xxxx-xxxx" required>
             </div>
         </div>
+        <!--    이메일    -->
         <div class="relative mb-5">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900">이메일
             </label>
-            <input type="email" id="email" th:field="*{email}"
-                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            <input type="email" id="email" name="email" th:field="*{email}"
+                   class="absolute shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                    required>
-            <button th:href="@{/member/sendPwd}" type="submit" class="text-white absolute end-1.5 bottom-0.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+            <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()" class="relative left-full text-white top-0.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
                 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
                 인증 요청
             </button>
+            <div id="email_number" name="email_number" class="mt-8">
+                <input type="text" name="number" id="number" placeholder="인증번호 입력"
+                       class="absolute shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" class="relative left-full text-white top-0.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">이메일 인증
+                </button>
+            </div>
         </div>
         <!--      성별 선택      -->
         <div class="relative">
@@ -64,7 +72,8 @@
                 <ul class="p-1 text-lg text-gray-700 flex justify-around">
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                            <input id="default-radio-4" type="radio" value="true" name="default-radio" th:field="*{gender}"
+                            <input id="default-radio-4" type="radio" value="true" name="default-radio"
+                                   th:field="*{gender}"
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                             <label th:for="default-radio-4"
                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">남성</label>
@@ -72,7 +81,8 @@
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                            <input checked id="default-radio-5" type="radio" value="false" name="default-radio" th:field="*{gender}"
+                            <input checked id="default-radio-5" type="radio" value="false" name="default-radio"
+                                   th:field="*{gender}"
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                             <label th:for="default-radio-5"
                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">여성</label>
@@ -98,7 +108,7 @@
         <!--    달력 입력 끝    -->
         <div class="flex items-start mt-5">
             <div class="flex items-center h-5">
-                <input id="terms" type="checkbox" value=""
+                <input id="terms" type="checkbox"
                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                        required>
             </div>
@@ -131,3 +141,41 @@
     </form>
 </div>
 </html>
+<!--email 인증-->
+<script type="text/javascript">
+    function sendNumber() {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+
+        // 서버로 전송할 데이터 설정
+        var data = { "email": $("#email").val() };
+
+        $("#email_number").css("display", "block");
+        $.ajax({
+            type: 'POST',
+            url: "/email",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            data: data, // JSON.stringify(data) 대신 일반 객체로 전송
+            success: function (data) {
+                alert("인증번호 발송");
+                $("#number").attr("data-confirm", data);
+            },
+            error: function (xhr, status, error) {
+                console.log('error:' + error);
+            }
+        });
+    }
+    function confirmNumber() {
+        var number1 = $("#number").val();
+        var number2 = $("#number").data("confirm");
+
+        if (number1 == number2) {
+            alert("인증되었습니다.");
+        } else {
+            alert("번호가 다릅니다.");
+        }
+    }
+</script>
+<!--email 인증 끝-->

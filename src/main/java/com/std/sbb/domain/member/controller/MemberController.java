@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 @Controller
 public class MemberController {
-
     private final MemberService memberService;
     private final EmailService emailService;
-
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
     public String login() {

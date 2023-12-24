@@ -85,7 +85,7 @@ public class FileHandler {
     private Board createBoardObject(MultipartFile multipartFile, String path, String new_file_name) {
         return Board.builder()
                 .originalFileName(multipartFile.getOriginalFilename())
-                .storedFileName(path + "/" + new_file_name)
+                .storedFileName(new_file_name)
                 .fileSize(multipartFile.getSize())
                 .createDate(LocalDateTime.now())
                 .build();

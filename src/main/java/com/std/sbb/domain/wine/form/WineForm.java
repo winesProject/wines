@@ -1,13 +1,11 @@
 package com.std.sbb.domain.wine.form;
 
 import com.std.sbb.domain.taste.entity.Taste;
+import com.std.sbb.global.imagesfile.entity.Board;
 import com.std.sbb.global.jpa.BaseEntity;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
@@ -24,6 +22,8 @@ public class WineForm{
 
     private Integer price;
 
+    private Integer score;
+
     @NotEmpty(message = "품종은 필수")
     private String kind;
 
@@ -31,8 +31,9 @@ public class WineForm{
     @NotNull(message = "평점을 작성해주세요")
     private Integer score;
 
-    @NotNull(message = "Please provide an image")
     private MultipartFile image;
+
+    private Board board;
 
     private Taste taste;
 }

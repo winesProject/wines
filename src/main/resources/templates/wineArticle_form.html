@@ -1,13 +1,17 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
-    <form th:object="${wineForm}" method="post" enctype="multipart/form-data">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<!--    <form name="form" method="post"  enctype="multipart/form-data">-->
+<!--       -->
+<!--        <input type="submit" id="submit" value="전송"/>-->
+<!--    </form>-->
+    <form th:object="${wineForm}" method="post" enctype="multipart/form-data" action="http://localhost:8080/article/create">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <div class="mx-auto">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark" for="image">Upload
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark" for="files">Upload
                 file</label>
             <input class="block w-1/2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                   aria-describedby="file_input_help" name="image" id="image" th:field="*{image}" type="file"
+                   aria-describedby="file_input_help" name="files" id="files" type="file"
                    accept="image/jpeg, image/png, image/gif">
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-700" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
                 800x400px).</p>
@@ -85,3 +89,28 @@
     </form>
 </div>
 </html>
+<!-- 사진 업로드 및 게시글 등록 동시에 하기 위한 스크립트 -->
+<!--<script>-->
+<!--    function submitForms() {-->
+<!--        // 두 폼의 데이터를 합치기-->
+<!--        var formData = new FormData();-->
+<!--        var fileInput = document.getElementById('files');-->
+<!--        var textForm = document.getElementById('secondForm'); // 두 번째 폼의 ID 사용-->
+<!--        var file = fileInput.files[0];-->
+<!--        formData.append('files', file);-->
+<!--        // 다른 필드들도 추가-->
+
+<!--        // 합쳐진 데이터를 서버로 전송-->
+<!--        var xhr = new XMLHttpRequest();-->
+<!--        xhr.open('POST', 'http://localhost:8080/article/create', true);-->
+<!--        xhr.onload = function () {-->
+<!--            if (xhr.status === 200) {-->
+<!--                // 성공적으로 전송된 경우의 처리-->
+<!--            } else {-->
+<!--                // 전송 실패 시의 처리-->
+<!--            }-->
+<!--        };-->
+<!--        xhr.send(formData);-->
+<!--    }-->
+<!--</script>-->
+<!-- 사진 업로드 및 게시글 등록 동시에 하기 위한 스크립트 끝 -->

@@ -1,9 +1,5 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
-<!--    <form name="form" method="post"  enctype="multipart/form-data">-->
-<!--       -->
-<!--        <input type="submit" id="submit" value="전송"/>-->
-<!--    </form>-->
     <form th:object="${wineForm}" method="post" enctype="multipart/form-data" action="http://localhost:8080/article/create">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>

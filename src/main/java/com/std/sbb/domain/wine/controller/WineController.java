@@ -93,11 +93,6 @@ public class WineController {
         return "open_site";
     }
 
-    @GetMapping("/search")
-    public String search() {
-        return "idPasswordSearch_form";
-    }
-
     @GetMapping("/modify/{id}")
     public String wineModify(WineForm wineForm, @PathVariable("id") Long id, Principal principal) {
 

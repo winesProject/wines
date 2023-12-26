@@ -307,7 +307,7 @@
                     <div role="status"
                          class="space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                         <div class="flex items-center justify-center w-full h-48 rounded sm:w-96">
-                            <img class=" h-48 max-w-lg rounded-lg" th:src="${wine.image}" alt="image description">
+                            <img class=" h-48 max-w-lg rounded-lg" th:src="@{/images/{filename}(filename=${wine.board.storedFileName})}" alt="image description">
                         </div>
                         <div class="w-full">
                             <a th:href="@{|/article/detail/${wine.id}|}"
@@ -402,8 +402,8 @@
                                         th:data-wine-id="${wine.id}"
                                         class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-2xl px-4 my-4 py-2.5 me-2 mb-2">
                                     <div id="heartIcon">
-                                        <p th:inline="text" th:if="${isLiked}">♥</p>
-                                        <p th:inline="text" th:unless="${isLiked}">♡</p>
+                                        <p th:inline="text" th:if="${wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername())}">♥</p>
+                                        <p th:inline="text" th:unless="${wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername())}">♡</p>
                                     </div>
                                 </button>
                             </div>

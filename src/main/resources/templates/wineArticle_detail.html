@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
     <div class="flex">
-        <img class="h-auto max-w-lg rounded-lg" th:src="${wine.image}" alt="image description">
+        <img class="h-auto max-w-lg rounded-lg" th:src="@{/images/{filename}(filename=${wine.board.storedFileName})}" alt="image description">
         <div class="inline-block ml-12 mt-3">
             <span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                   th:if="${wine.list} == '레드'" th:text="${wine.list}"></span>

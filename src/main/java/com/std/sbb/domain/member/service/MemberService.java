@@ -86,10 +86,6 @@ public class MemberService {
 
     public Member getMember(String username) {
         Optional<Member> member = this.memberRepository.findByUsername(username);
-        if (member.isPresent()) {
-
-        }
-
         return member.get();
     }
     public boolean toggleHeart(Long id, String username) {
@@ -109,5 +105,10 @@ public class MemberService {
             wineRepository.save(wine);
 
             return !isLiked;
+    }
+
+    public String getUsernameByNameAndEmail(String name, String email) {
+        Member member = memberRepository.findByNameAndEmail(name, email);
+        return (member != null) ? member.getUsername() : null;
     }
 }

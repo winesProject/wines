@@ -4,22 +4,19 @@ import com.std.sbb.domain.email.service.EmailService;
 import com.std.sbb.domain.member.form.MemberForm;
 import com.std.sbb.domain.member.service.MemberService;
 import com.std.sbb.domain.wine.entity.Wine;
-import com.std.sbb.domain.wine.searchType.SearchType;
 import com.std.sbb.domain.wine.service.WineService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.*;
 
 
 @RequiredArgsConstructor
@@ -78,5 +75,22 @@ public class MemberController {
         paging.sort(Comparator.comparing(Wine::getCreateDate).reversed());
         model.addAttribute("paging", paging);
         return "member_detail";
+    }
+
+    @GetMapping("/search")
+    public String findusername(MemberForm memberForm){
+        return "idSearch_form";
+    }
+
+    @PostMapping("/search")
+    @ResponseBody
+    public ResponseEntity<String> getUsername(@Valid MemberForm memberForm) {
+        String username = memberService.getUsernameByNameAndEmail(memberForm.getName(), memberForm.getEmail());
+        return ResponseEntity.ok(username);
+    }
+
+    @GetMapping("/passwordSearch")
+    public String findPassword(){
+        return "passwordSearch_form";
     }
 }

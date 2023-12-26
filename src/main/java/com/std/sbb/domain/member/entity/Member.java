@@ -1,6 +1,5 @@
 package com.std.sbb.domain.member.entity;
 
-import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.favorites.entity.Favorites;
@@ -70,8 +69,6 @@ public class Member extends BaseEntity {
     }
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Favorites> favorites;
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Like> likes;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Review> review;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)

@@ -2,11 +2,11 @@ package com.std.sbb.domain.taste.form;
 
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Getter
+@Setter
 public class TasteForm{
     @NotNull(message = "Please provide a value for sweet")
     private Integer sweet;

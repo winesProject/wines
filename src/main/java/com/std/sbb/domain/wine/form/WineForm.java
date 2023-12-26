@@ -1,17 +1,16 @@
 package com.std.sbb.domain.wine.form;
 
 import com.std.sbb.domain.taste.entity.Taste;
-import com.std.sbb.global.imagesfile.entity.Board;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
-@Data
-public class WineForm{
-    @NotEmpty(message = "와인 이름은 필수")
+@Setter
+public class WineForm extends BaseEntity {
+    @NotEmpty(message = "와인은 필수")
     private String wineName;
     @NotEmpty(message = "영어 와인 이름은 필수")
     private String wineNameE;

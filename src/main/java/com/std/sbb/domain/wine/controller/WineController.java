@@ -1,6 +1,7 @@
 package com.std.sbb.domain.wine.controller;
 
 import com.std.sbb.domain.member.service.MemberService;
+import com.std.sbb.domain.review.form.ReviewForm;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.taste.form.TasteForm;
 import com.std.sbb.domain.taste.service.TasteService;
@@ -75,7 +76,7 @@ public class WineController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id) {
+    public String detail(Model model, @PathVariable("id") Long id, ReviewForm reviewForm){
         Wine wine = this.wineService.getWine(id);
         Taste taste = this.tasteService.getTaste(id);
         model.addAttribute("wine", wine);

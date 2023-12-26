@@ -3,6 +3,7 @@ package com.std.sbb.domain.wine.entity;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.taste.entity.Taste;
+import com.std.sbb.global.imagesfile.entity.Board;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,8 +33,12 @@ public class Wine extends BaseEntity {
     private Integer price;
     @Column(length = 200)
     private String kind;
+    private Integer score;
     private String food;
     private String image;
+
+    @OneToOne
+    private Board board;
 
     private Boolean favorites;
 

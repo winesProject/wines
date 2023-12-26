@@ -7,13 +7,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TasteForm extends BaseEntity {
+public class TasteForm{
     @NotNull(message = "Please provide a value for sweet")
     private Integer sweet;
-    @NotNull(message = "Please provide a value for sweet")
+    @NotNull(message = "Please provide a value for body")
     private Integer body;
-    @NotNull(message = "Please provide a value for sweet")
+    @NotNull(message = "Please provide a value for acidity")
     private Integer acidity;
-    @NotNull(message = "Please provide a value for sweet")
+    @NotNull(message = "Please provide a value for tannin")
     private Integer tannin;
 }

@@ -34,9 +34,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    /**
-     * 이메일이 존재하는지 확인
-     **/
+
     public boolean checkEmail(String memberEmail) {
 
         /* 이메일이 존재하면 true, 이메일이 없으면 false  */
@@ -60,9 +58,6 @@ public class MemberService {
         return pwd;
     }
 
-    /**
-     * 임시 비밀번호로 업데이트
-     **/
     public void updatePassword(String tmpPassword, String memberEmail) {
 
         String encryptPassword = passwordEncoder.encode(tmpPassword);
@@ -97,20 +92,22 @@ public class MemberService {
 
         return member.get();
     }
-    public void toggleHeart(Long id, String username) {
+    public boolean toggleHeart(Long id, String username) {
         Optional<Member> memberOptional = findByUsername(username);
         Optional<Wine> wineOptional = wineRepository.findById(id);
 
-        if (memberOptional.isPresent() && wineOptional.isPresent()) {
             Member member = memberOptional.get();
             Wine wine = wineOptional.get();
 
-            if (wine.getMember().contains(member)) {
+            boolean isLiked = wine.getMember().contains(member);
+
+            if (isLiked) {
                 wine.getMember().remove(member);
             } else {
                 wine.getMember().add(member);
             }
             wineRepository.save(wine);
-        }
+
+            return !isLiked;
     }
 }

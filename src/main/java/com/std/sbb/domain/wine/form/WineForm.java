@@ -1,7 +1,6 @@
 package com.std.sbb.domain.wine.form;
 
 import com.std.sbb.domain.taste.entity.Taste;
-import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -22,13 +21,17 @@ public class WineForm extends BaseEntity {
 
     private Integer price;
 
+    @NotNull(message = "평점을 작성해주세요")
+    private Integer score;
+
     @NotEmpty(message = "품종은 필수")
     private String kind;
 
     private String food;
 
-    @NotNull(message = "Please provide an image")
     private MultipartFile image;
+
+    private Board board;
 
     private Taste taste;
 }

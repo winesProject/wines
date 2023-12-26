@@ -92,10 +92,10 @@ public class MemberService {
     public Member getMember(String username) {
         Optional<Member> member = this.memberRepository.findByUsername(username);
         if (member.isPresent()) {
-            return member.get();
-        } else {
-            throw new RuntimeException("존재하지 않습니다");
+
         }
+
+        return member.get();
     }
     public void toggleHeart(Long id, String username) {
         Optional<Member> memberOptional = findByUsername(username);

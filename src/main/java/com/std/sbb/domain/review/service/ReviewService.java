@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,17 +17,27 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
 
     public List<Review> getList() {
-       return this.reviewRepository.findAll();
+        return this.reviewRepository.findAll();
     }
 
-    public void create(Wine wine, String content, Integer score, Member member) {
+    public void create(Wine wine, String content, Integer score) {
         Review review = Review
                 .builder()
                 .wine(wine)
                 .content(content)
                 .score(score)
-                .member(member)
                 .createDate(LocalDateTime.now())
                 .build();
+        this.reviewRepository.save(review);
+    }
+
+    public Review getReview(Long id) {
+        Optional<Review> review = this.reviewRepository.findById(id);
+        return review.get();
+    }
+
+    public void like(Review review, Member member) {
+        review.getLike().add(member);
+        this.reviewRepository.save(review);
     }
 }

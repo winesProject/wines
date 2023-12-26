@@ -37,7 +37,7 @@ public class Wine extends BaseEntity {
 
     private Boolean favorites;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Taste taste;
 
     @OneToMany(mappedBy = "wine", cascade = CascadeType.REMOVE)

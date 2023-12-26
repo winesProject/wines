@@ -139,18 +139,16 @@
     }
 </script>
 <!--이메일 인증 및 비밀번호 찾기 끝-->
-
+<!--별점 클릭 후 유지-->
 <script th:inline="javascript">
+
     document.addEventListener('DOMContentLoaded', function () {
         var dateInput = document.querySelector('[datepicker]');
         flatpickr(dateInput, {
             dateFormat: 'm/d/Y',
         });
     });
-</script>
 
-<!--별점 클릭 후 유지-->
-<script th:inline="javascript">
     $(document).ready(function () {
         // 페이지 로드 시 저장된 클릭 상태를 가져와 설정
         $('[name^="score-"]').each(function () {

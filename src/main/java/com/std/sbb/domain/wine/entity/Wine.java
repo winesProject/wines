@@ -3,6 +3,7 @@ package com.std.sbb.domain.wine.entity;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.taste.entity.Taste;
+import com.std.sbb.global.imagesfile.entity.Board;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,13 +33,16 @@ public class Wine extends BaseEntity {
     private Integer price;
     @Column(length = 200)
     private String kind;
+    private Integer score;
     private String food;
     private String image;
-    private Integer score;
+
+    @OneToOne
+    private Board board;
 
     private Boolean favorites;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Taste taste;
 
     @OneToMany(mappedBy = "wine", cascade = CascadeType.REMOVE)
@@ -46,4 +50,13 @@ public class Wine extends BaseEntity {
 
     @ManyToMany
     Set<Member> member;
+
+    public boolean checkedHeartClickMember(String userName) {
+        for (Member m : member) {
+            if (userName.equals(m.getUsername())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

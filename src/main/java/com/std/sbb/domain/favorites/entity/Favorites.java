@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class Favorites extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
     @OneToOne
     private Wine wine;

@@ -1,21 +1,25 @@
 package com.std.sbb.domain.review.entity;
 
-import com.std.sbb.domain.like.entity.Like;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Getter
-@SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
+@SuperBuilder
+@Getter
+@Data
+@EntityListeners(AuditingEntityListener.class)
 public class Review extends BaseEntity {
     private String username;
     @Column(length = 200)
@@ -23,10 +27,10 @@ public class Review extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
     private Integer score;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Wine wine;
-    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
-    private List<Like> like;
+    @ManyToMany
+    Set<Member> like;
 }

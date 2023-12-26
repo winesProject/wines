@@ -1,6 +1,7 @@
 package com.std.sbb.domain.wine.controller;
 
 import com.std.sbb.domain.member.service.MemberService;
+import com.std.sbb.domain.review.form.ReviewForm;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.taste.form.TasteForm;
 import com.std.sbb.domain.taste.service.TasteService;
@@ -8,6 +9,8 @@ import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.form.WineForm;
 import com.std.sbb.domain.wine.searchType.SearchType;
 import com.std.sbb.domain.wine.service.WineService;
+import com.std.sbb.global.imagesfile.entity.Board;
+import com.std.sbb.global.imagesfile.service.BoardService;
 import com.std.sbb.global.security.CsrfVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,24 +20,32 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/article")
 public class WineController {
+    private final BoardService boardService;
 
     private final WineService wineService;
 
     private final MemberService memberService;
 
     private final TasteService tasteService;
+
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+    public String list(Model model,
+                       @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Wine> paging = this.wineService.getList(searchType, kw, page);
         model.addAttribute("searchType", searchType);
         model.addAttribute("paging", paging);
@@ -43,26 +54,33 @@ public class WineController {
     }
 
     @GetMapping("/create")
-    public String articleCreate(Model model){
+    public String articleCreate(Model model) {
         model.addAttribute("wineForm", new WineForm());
         model.addAttribute("tasteForm", new TasteForm());
         return "wineArticle_form";
     }
 
     @PostMapping("/create")
-    public String wineCreate(@Valid WineForm wineForm, BindingResult bindingResult,
-                             @Valid TasteForm tasteForm, BindingResult tasteBindingResult) {
+    public String wineCreate(@Validated @RequestParam("files") List<MultipartFile> files,
+                             @Valid WineForm wineForm, BindingResult bindingResult,
+                             @Valid TasteForm tasteForm, BindingResult tasteBindingResult) throws Exception {
         if (bindingResult.hasErrors() || tasteBindingResult.hasErrors()) {
             return "wineArticle_form";
         }
         Taste taste = tasteService.create(tasteForm.getSweet(), tasteForm.getBody(), tasteForm.getAcidity(), tasteForm.getTannin());
-        this.wineService.create(wineForm.getWineName(), wineForm.getWineNameE(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), wineForm.getScore(), wineForm.getImage(), taste);
+//        이미지
+        List<Board> boards = boardService.addBoard(files);
 
+        for (Board board : boards) {
+            this.wineService.create(wineForm.getWineName(), wineForm.getWineNameE(), wineForm.getCountry(),
+                    wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(),
+                    wineForm.getScore(), board, taste);
+        }
         return "redirect:/";
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id){
+    public String detail(Model model, @PathVariable("id") Long id, ReviewForm reviewForm){
         Wine wine = this.wineService.getWine(id);
         Taste taste = this.tasteService.getTaste(id);
         model.addAttribute("wine", wine);
@@ -71,7 +89,7 @@ public class WineController {
     }
 
     @GetMapping("/start")
-    public String open(){
+    public String open() {
         return "open_site";
     }
 
@@ -94,6 +112,7 @@ public class WineController {
 
         return "wineArticle_form";
     }
+
     @PostMapping("/modify/{id}")
     public String wineModify(@Valid WineForm wineForm, BindingResult bindingResult, @PathVariable("id") Long id, Principal principal) {
 
@@ -102,6 +121,7 @@ public class WineController {
 
         return String.format("redirect:/Article/detail/%s", id);
     }
+
     @GetMapping("/delete/{id}")
     public String wineDelete(Principal principal, @PathVariable("id") Long id) {
         Wine wine = this.wineService.getWine(id);
@@ -109,6 +129,7 @@ public class WineController {
         this.wineService.delete(wine);
         return "redirect:/";
     }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/toggleHeart/{id}")
     @ResponseBody

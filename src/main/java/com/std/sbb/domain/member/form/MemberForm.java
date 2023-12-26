@@ -2,11 +2,11 @@ package com.std.sbb.domain.member.form;
 
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@Data
+@Setter
 public class MemberForm extends BaseEntity {
     @Size(min = 3, max = 10)
     private String username;

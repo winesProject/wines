@@ -34,9 +34,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    /**
-     * 이메일이 존재하는지 확인
-     **/
+
     public boolean checkEmail(String memberEmail) {
 
         /* 이메일이 존재하면 true, 이메일이 없으면 false  */
@@ -60,9 +58,6 @@ public class MemberService {
         return pwd;
     }
 
-    /**
-     * 임시 비밀번호로 업데이트
-     **/
     public void updatePassword(String tmpPassword, String memberEmail) {
 
         String encryptPassword = passwordEncoder.encode(tmpPassword);
@@ -92,10 +87,10 @@ public class MemberService {
     public Member getMember(String username) {
         Optional<Member> member = this.memberRepository.findByUsername(username);
         if (member.isPresent()) {
-            return member.get();
-        } else {
-            throw new RuntimeException("존재하지 않습니다");
+
         }
+
+        return member.get();
     }
     public boolean toggleHeart(Long id, String username) {
         Optional<Member> memberOptional = findByUsername(username);

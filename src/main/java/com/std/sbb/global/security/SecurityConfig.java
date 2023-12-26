@@ -19,6 +19,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/email/**").permitAll()
                         .anyRequest().authenticated())
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .loginPage("/member/login")
@@ -30,7 +32,6 @@ public class SecurityConfig {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true))
-
         ;
         return http.build();
     }

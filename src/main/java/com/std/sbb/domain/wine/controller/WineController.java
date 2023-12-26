@@ -38,6 +38,7 @@ public class WineController {
         Page<Wine> paging = this.wineService.getList(searchType, kw, page);
         model.addAttribute("searchType", searchType);
         model.addAttribute("paging", paging);
+
         return "wineArticle_list";
     }
 
@@ -115,7 +116,7 @@ public class WineController {
         boolean isLiked = this.memberService.toggleHeart(id, principal.getName());
         Map<String, Boolean> response = new HashMap<>();
         response.put("isLiked", isLiked);
-
+        model.addAttribute("isLiked", isLiked);
         return ResponseEntity.ok(response);
     }
 

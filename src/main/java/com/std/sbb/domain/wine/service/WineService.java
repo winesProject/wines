@@ -56,10 +56,14 @@ public class WineService {
     public Page<Wine> getList(SearchType searchType, String kw, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 1, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         Specification<Wine> spec = _search(searchType, kw);
         return this.wineRepository.findAll(spec, pageable);
     }
+    public List<Wine> getList() {
+        return this.wineRepository.findAll();
+    }
+
 
     public Wine getWine(Long id) {
         Optional<Wine> wineOptional = this.wineRepository.findById(id);

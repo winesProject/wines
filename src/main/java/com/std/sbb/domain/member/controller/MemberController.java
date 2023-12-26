@@ -3,9 +3,13 @@ package com.std.sbb.domain.member.controller;
 import com.std.sbb.domain.email.service.EmailService;
 import com.std.sbb.domain.member.form.MemberForm;
 import com.std.sbb.domain.member.service.MemberService;
+import com.std.sbb.domain.wine.entity.Wine;
+import com.std.sbb.domain.wine.searchType.SearchType;
+import com.std.sbb.domain.wine.service.WineService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Comparator;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/member")
@@ -21,6 +29,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final EmailService emailService;
+    private final WineService wineService;
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
@@ -65,8 +74,10 @@ public class MemberController {
     }
 
     @GetMapping("/detail")
-    public String detail() {
+    public String favorites(Model model) {
+        List<Wine> paging = this.wineService.getList();
+        paging.sort(Comparator.comparing(Wine::getCreateDate).reversed());
+        model.addAttribute("paging", paging);
         return "member_detail";
     }
-
 }

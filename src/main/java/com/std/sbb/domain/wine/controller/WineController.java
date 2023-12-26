@@ -42,7 +42,10 @@ public class WineController {
     private final TasteService tasteService;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+    public String list(Model model,
+                       @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Wine> paging = this.wineService.getList(searchType, kw, page);
         model.addAttribute("searchType", searchType);
         model.addAttribute("paging", paging);

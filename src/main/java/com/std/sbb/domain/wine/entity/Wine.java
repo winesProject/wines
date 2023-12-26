@@ -50,4 +50,13 @@ public class Wine extends BaseEntity {
 
     @ManyToMany
     Set<Member> member;
+
+    public boolean checkedHeartClickMember(String userName) {
+        for (Member m : member) {
+            if (userName.equals(m.getUsername())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

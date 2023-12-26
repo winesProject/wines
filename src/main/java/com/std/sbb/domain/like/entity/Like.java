@@ -15,8 +15,6 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @Data
 public class Like extends BaseEntity {
-
-
     @ManyToOne
     private Review review;
 

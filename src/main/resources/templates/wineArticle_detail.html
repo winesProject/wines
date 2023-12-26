@@ -3,11 +3,16 @@
     <div class="flex">
         <img class="h-auto max-w-lg rounded-lg" th:src="${wine.image}" alt="image description">
         <div class="inline-block ml-12 mt-3">
-            <span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '레드'" th:text="${wine.list}"></span>
-            <span class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '화이트'" th:text="${wine.list}"></span>
-            <span class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '스파클링'" th:text="${wine.list}"></span>
-            <span class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '로제'" th:text="${wine.list}"></span>
-            <span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" th:if="${wine.list} == '주정강화'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '레드'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '화이트'" th:text="${wine.list}"></span>
+            <span class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '스파클링'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '로제'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '주정강화'" th:text="${wine.list}"></span>
             <span class="ml-2" th:text="${wine.country}"></span>
 
             <div class="inline-block ml-12">
@@ -75,119 +80,56 @@
     <!--  리뷰 목록  -->
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
+        <tr class="flex justify-between">
             <th scope="col" class="px-6 py-3">
                 번호
             </th>
             <th scope="col" class="px-6 py-3">
-                제목
+                내용
             </th>
             <th scope="col" class="px-6 py-3">
-                글쓴이
+                작성자
             </th>
             <th scope="col" class="px-6 py-3">
-                작성일자
+                작성일시
+            </th>
+            <th scope="col" class="px-6 py-3">
+                평점
+            </th>
+            <th scope="col" class="px-6 py-3">
+                좋아요
             </th>
         </tr>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <td class="px-6 py-4">
-                1
+        <tr th:each="review : ${reviewList}"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td th:text="${review.id}" class="px-6 py-4">
             </td>
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple MacBook Pro 17"
-            </th>
-            <td class="px-6 py-4">
-                Silver
+            <td th:text="${review.content}" class="px-6 py-4">
             </td>
             <td class="px-6 py-4">
-                Laptop
             </td>
-        </tr>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <td class="px-6 py-4">
-                2
-            </td>
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Microsoft Surface Pro
-            </th>
-            <td class="px-6 py-4">
-                White
+            <td th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}" class="px-6 py-4">
             </td>
             <td class="px-6 py-4">
-                Laptop PC
-            </td>
-        </tr>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <td class="px-6 py-4">
-                3
-            </td>
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Magic Mouse 2
-            </th>
-            <td class="px-6 py-4">
-                Black
             </td>
             <td class="px-6 py-4">
-                Accessories
-            </td>
-        </tr>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <td class="px-6 py-4">
-                4
-            </td>
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple Watch
-            </th>
-            <td class="px-6 py-4">
-                Silver
-            </td>
-            <td class="px-6 py-4">
-                Accessories
-            </td>
-        </tr>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <td class="px-6 py-4">
-                5
-            </td>
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                iPad
-            </th>
-            <td class="px-6 py-4">
-                Gold
-            </td>
-            <td class="px-6 py-4">
-                Tablet
-            </td>
-        </tr>
-        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <td class="px-6 py-4">
-                6
-            </td>
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple iMac 27"
-            </th>
-            <td class="px-6 py-4">
-                Silver
-            </td>
-            <td class="px-6 py-4">
-                PC Desktop
             </td>
         </tr>
         </thead>
     </table>
     <!--  리뷰 목록 끝  -->
     <div class="mb-2 mt-8 border-b border-gray-200 dark:border-gray-700 flex justify-center">
-        <ul class="flex flex-wrap -mb-px text-base font-medium text-center" id="default-tab"
+        <ul class="flex flex-wrap -mb-px text-base font-medium text-center" id="default-tab2"
             data-tabs-toggle="#default-tab-content" role="tablist">
             <li class="me-2" role="presentation">
-                <a class="inline-block p-4 border-b-2 rounded-t-lg text-xl font-bold" id="my-detail"
+                <a class="inline-block p-4 border-b-2 rounded-t-lg text-xl font-bold" id="my-detail2"
                    data-tabs-target="#detail"
                    role="tab" aria-controls="detail" aria-selected="false">WRITING A REVIEW
                 </a>
             </li>
         </ul>
     </div>
-    <!--  리뷰등록  -->
+    <!--  평점등록, 리뷰등록  -->
     <form>
         <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
@@ -196,15 +138,69 @@
                           class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                           placeholder="Write a review..." required></textarea>
             </div>
-            <div class="flex items-center justify-end px-3 py-2 border-t dark:border-gray-600">
+            <div class="relative flex items-center justify-end px-3 py-2 border-t dark:border-gray-600">
+                <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover" class="mr-3 text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-blue-300
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        type="button">평점 등록하기
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownBgHover" class="absolute top-0 z-10 hidden w-48 bg-white rounded-lg shadow dark:bg-gray-700">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownBgHoverButton">
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="checkbox-item-4" type="checkbox" value=""
+                                       class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="checkbox-item-4"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">1</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input checked id="checkbox-item-5" type="checkbox" value=""
+                                       class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="checkbox-item-5"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">2</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="checkbox-item-6" type="checkbox" value=""
+                                       class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="checkbox-item-6"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">3</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="checkbox-item-7" type="checkbox" value=""
+                                       class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="checkbox-item-7"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">4</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input id="checkbox-item-8" type="checkbox" value=""
+                                       class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="checkbox-item-8"
+                                       class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">5</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <button type="submit"
-                        class="inline-flex items-center py-2.5 px-4 text-base font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                        class="inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-yellow-900 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900">
                     리뷰 등록
                 </button>
             </div>
         </div>
     </form>
-</div>
-<!--  리뷰 등록 끝  -->
+    <!--  리뷰 등록 끝  -->
 </div>
 </html>

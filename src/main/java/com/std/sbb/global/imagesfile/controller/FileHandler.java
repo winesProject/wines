@@ -40,14 +40,12 @@ public class FileHandler {
             file.mkdirs();
         }
 
-        // 파일들을 이제 만져볼 것이다
         for (MultipartFile multipartFile : multipartFiles) {
             // 파일이 비어 있지 않을 때 작업을 시작해야 오류가 나지 않는다
             if (!multipartFile.isEmpty()) {
                 // jpeg, png, gif 파일들만 받아서 처리할 예정
                 String contentType = multipartFile.getContentType();
                 String originalFileExtension;
-                // 확장자 명이 없으면 이 파일은 잘 못 된 것이다
                 if (ObjectUtils.isEmpty(contentType)) {
                     break;
                 } else {
@@ -67,12 +65,6 @@ public class FileHandler {
                 String new_file_name = System.nanoTime() + originalFileExtension;
                 // 생성 후 리스트에 추가
                 Board board = createBoardObject(multipartFile, path, new_file_name);
-//                Board board = Board.builder()
-//                        .originalFileName(multipartFile.getOriginalFilename())
-//                        .storedFileName(path + "/" + new_file_name)
-//                        .fileSize(multipartFile.getSize())
-//                        .createDate(LocalDateTime.now())
-//                        .build();
                 fileList.add(board);
 
                 // 저장된 파일로 변경하여 이를 보여주기 위함

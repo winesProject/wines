@@ -15,7 +15,7 @@ public class EmailController {
     private final EmailService emailService;
 
     @ResponseBody
-    @RequestMapping(value = "/email")
+    @RequestMapping("/email")
     public String emailSend(@RequestParam("email") String email){
         int number = emailService.sendEmail(email);
 

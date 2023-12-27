@@ -77,14 +77,13 @@ public class MemberService {
         return (member != null) ? member.getUsername() : null;
     }
 
-    public boolean memberEmailCheck(String username, String Email) {
+    public boolean memberEmailCheck(String username, String email) {
 
-        Member member = memberRepository.findByEmail(Email);
-        if (member != null && member.getName().equals(username)) {
+        Member member = memberRepository.findByUsernameAndEmail(username, email);
+        if (member != null && member.getUsername().equals(username)) {
             return true;
         } else {
             return false;
         }
     }
-
 }

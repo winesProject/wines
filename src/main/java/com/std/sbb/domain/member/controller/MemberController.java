@@ -11,7 +11,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -81,7 +79,7 @@ public class MemberController {
     }
 
     @GetMapping("/search")
-    public String findusername(MemberForm memberForm){
+    public String findusername(MemberForm memberForm) {
         return "idSearch_form";
     }
 
@@ -93,22 +91,20 @@ public class MemberController {
     }
 
     @GetMapping("/passwordSearch")
-    public String findPassword(){
+    public String findPassword(MemberForm memberForm) {
         return "passwordSearch_form";
     }
 
     @PostMapping("/passwordSearch")
     @ResponseBody
-    public ResponseEntity<String> findPassword(@RequestBody Map<String, String> requestData) {
-        String email = requestData.get("email");
-        try {
-            emailService.createMailAndChangePassword(email);
+    public ResponseEntity<String> findPassword(@Valid MemberForm memberForm, BindingResult bindingResult) {
+        boolean isEmailValid = memberService.memberEmailCheck(memberForm.getUsername(), memberForm.getEmail());
 
+        if (isEmailValid) {
+            emailService.createMailAndChangePassword(memberForm.getEmail());
             return ResponseEntity.ok("임시 비밀번호를 발급하였습니다.");
-        } catch (UsernameNotFoundException e) {
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 계정이 없습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류");
         }
     }
 }

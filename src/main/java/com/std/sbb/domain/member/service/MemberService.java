@@ -91,6 +91,7 @@ public class MemberService {
         return memberRepository.findByEmail(email);
     }
 
+
     @Transactional
     public Member whenSocialLogin(String providerTypeCode, String name, String username, String profileImgUrl) {
         Optional<Member> opMember = findByUsername(username);
@@ -107,12 +108,15 @@ public class MemberService {
 
     public Member getMember(String username) {
         Optional<Member> member = this.memberRepository.findByUsername(username);
+
         if (member.isPresent()) {
             return member.get();
         } else {
             throw new RuntimeException("회원 정보가 존재하지 않습니다.");
         }
+        return member.get();
     }
+
     public boolean toggleHeart(Long id, String username) {
         Optional<Member> memberOptional = findByUsername(username);
         Optional<Wine> wineOptional = wineRepository.findById(id);
@@ -130,5 +134,20 @@ public class MemberService {
         wineRepository.save(wine);
 
         return !isLiked;
+    }
+
+    public String getUsernameByNameAndEmail(String name, String email) {
+        Member member = memberRepository.findByNameAndEmail(name, email);
+        return (member != null) ? member.getUsername() : null;
+    }
+
+    public boolean memberEmailCheck(String username, String email) {
+
+        Member member = memberRepository.findByUsernameAndEmail(username, email);
+        if (member != null && member.getUsername().equals(username)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

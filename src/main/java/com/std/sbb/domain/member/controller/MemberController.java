@@ -18,13 +18,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.*;
 
 
 @RequiredArgsConstructor
@@ -105,6 +103,7 @@ public class MemberController {
         }
         return "member_detail";
     }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/detail")
     public String modify(HttpServletRequest request, @Valid MemberForm memberForm, BindingResult bindingResult, Model model, Principal principal) {
@@ -132,6 +131,38 @@ public class MemberController {
     @GetMapping("/answer")
     public String answer() {
         return "member_answer";
+    }
+
+
+
+    @GetMapping("/search")
+    public String findusername(MemberForm memberForm) {
+        return "idSearch_form";
+    }
+
+    @PostMapping("/search")
+    @ResponseBody
+    public ResponseEntity<String> getUsername(@Valid MemberForm memberForm) {
+        String username = memberService.getUsernameByNameAndEmail(memberForm.getName(), memberForm.getEmail());
+        return ResponseEntity.ok(username);
+    }
+
+    @GetMapping("/passwordSearch")
+    public String findPassword(MemberForm memberForm) {
+        return "passwordSearch_form";
+    }
+
+    @PostMapping("/passwordSearch")
+    @ResponseBody
+    public ResponseEntity<String> findPassword(@Valid MemberForm memberForm, BindingResult bindingResult) {
+        boolean isEmailValid = memberService.memberEmailCheck(memberForm.getUsername(), memberForm.getEmail());
+
+        if (isEmailValid) {
+            emailService.createMailAndChangePassword(memberForm.getEmail());
+            return ResponseEntity.ok("임시 비밀번호를 발급하였습니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 계정이 없습니다.");
+        }
     }
 
 }

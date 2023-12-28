@@ -2,7 +2,6 @@ package com.std.sbb.domain.member.entity;
 
 import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.domain.review.entity.Review;
-import com.std.sbb.domain.favorites.entity.Favorites;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -26,9 +25,6 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Member extends BaseEntity {
 
-    public void updatePassword(String password){
-        this.password = password;
-    }
 
     private String name;
 
@@ -68,8 +64,7 @@ public class Member extends BaseEntity {
     public boolean isAdmin() {
         return "admin".equals(username);
     }
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Favorites> favorites;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Review> review;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)

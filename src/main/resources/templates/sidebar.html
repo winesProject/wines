@@ -1,12 +1,12 @@
 <!-- drawer component -->
 <div th:fragment="sidebarFragment" id="drawer-navigation"
-     class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto w-96 h-full transition-transform -translate-x-full bg-white dark:bg-gray-800"
+     class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto w-96 h-full transition-transform -translate-x-full bg-white"
      tabindex="-1" aria-labelledby="drawer-navigation-label">
     <h5 id="drawer-navigation-label"
-        class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400 text-4xl">
+        class="text-base font-semibold text-gray-500 uppercase text-4xl">
         Wine's</h5>
     <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center">
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
              xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
@@ -20,8 +20,7 @@
             <li class="mb-5">  <!-- 종류 -->
                 <button id="mega-menu-full-cta-image-button1" data-collapse-toggle="mega-menu-full-image-dropdown1"
                         class="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-900 border-b border-gray-100
-                        md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-red-800 md:p-0 dark:text-white md:dark:hover:text-red-800
-                        dark:hover:bg-gray-700 dark:hover:text-red-900 md:dark:hover:bg-transparent dark:border-gray-700 text-xl">
+                        md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-red-800 md:p-0 text-xl">
                     종류
                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 10 6">
@@ -32,18 +31,18 @@
                 <!-- Dropdown menu -->
                 <div id="mega-menu-full-image-dropdown1"
                      class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700 w-80">
-                    <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                    <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700"
                         aria-labelledby="dropdownSearchButton">
                         <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <div class="flex items-center ps-2 rounded hover:bg-gray-100">
                                 <input id="checkbox-item-1-1" type="checkbox" value=""
-                                       class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 dark:focus:ring-red-800 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                       class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 focus:ring-2">
                                 <label for="checkbox-item-1-1"
-                                       class="w-full py-2 ms-2 text-base font-medium text-gray-900 rounded dark:text-gray-300">레드</label>
+                                       class="w-full py-2 ms-2 text-base font-medium text-gray-900 rounded">레드</label>
                             </div>
                         </li>
                         <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <div class="flex items-center ps-2 rounded hover:bg-gray-100">
                                 <input id="checkbox-item-1-2" type="checkbox" value=""
                                        class="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 rounded focus:ring-red-800 dark:focus:ring-red-800 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                 <label for="checkbox-item-1-2"

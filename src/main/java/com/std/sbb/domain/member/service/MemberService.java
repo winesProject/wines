@@ -78,18 +78,6 @@ public class MemberService {
         return pwd;
     }
 
-    public void updatePassword(String tmpPassword, String memberEmail) {
-
-        String encryptPassword = passwordEncoder.encode(tmpPassword);
-        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() ->
-                new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
-
-        member.updatePassword(encryptPassword);
-    }
-
-    private Optional<Member> findByEmail(String email) {
-        return memberRepository.findByEmail(email);
-    }
 
 
     @Transactional

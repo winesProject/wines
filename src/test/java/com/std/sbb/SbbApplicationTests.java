@@ -31,7 +31,7 @@ class SbbApplicationTests {
                 .food("소")
                 .score(3)
                 .kind("시라/쉬라즈, 마르셀란")
-                .image("https://wine21.speedgabia.com/WINE_MST/TITLE/0176000/W0176250.png\n")
+                .image("https://wine21.speedgabia.com/WINE_MST/TITLE/0176000/W0176250.png")
                 .createDate(LocalDateTime.now())
                 .taste(tasteService.create(1,3,3,4))
                 .build();

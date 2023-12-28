@@ -5,6 +5,7 @@ import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.favorites.entity.Favorites;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

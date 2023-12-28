@@ -4,11 +4,20 @@ import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.member.repository.MemberRepository;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
+import com.std.sbb.global.security.UserSecurityService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +27,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final WineRepository wineRepository;
+    private final HttpServletRequest request;
 
     public Member join(String username, String password, String name, String phoneNumber, String email, String gender, String birthDate, String profileImgUrl) {
         Member member = Member
@@ -31,6 +41,16 @@ public class MemberService {
                 .birthDate(birthDate)
                 .profileImgUrl(profileImgUrl)
                 .build();
+        return memberRepository.save(member);
+    }
+
+    public Member modify(Member member, String username, String password, String name, String phoneNumber, String email) {
+        member.setUsername(username);
+        member.setName(name);
+        member.setPassword(passwordEncoder.encode(password));
+        member.setPhoneNumber(phoneNumber);
+        member.setEmail(email);
+        member.setModifyDate(LocalDateTime.now());
         return memberRepository.save(member);
     }
 
@@ -80,6 +100,7 @@ public class MemberService {
         // 소셜 로그인를 통한 가입시 비번은 없다.
         return join(name, "", username, null, null, null, null, profileImgUrl); // 최초 로그인 시 딱 한번 실행
     }
+
     public Optional<Member> findByUsername(String username) {
         return memberRepository.findByUsername(username);
     }
@@ -87,27 +108,27 @@ public class MemberService {
     public Member getMember(String username) {
         Optional<Member> member = this.memberRepository.findByUsername(username);
         if (member.isPresent()) {
-
+            return member.get();
+        } else {
+            throw new RuntimeException("회원 정보가 존재하지 않습니다.");
         }
-
-        return member.get();
     }
     public boolean toggleHeart(Long id, String username) {
         Optional<Member> memberOptional = findByUsername(username);
         Optional<Wine> wineOptional = wineRepository.findById(id);
 
-            Member member = memberOptional.get();
-            Wine wine = wineOptional.get();
+        Member member = memberOptional.get();
+        Wine wine = wineOptional.get();
 
-            boolean isLiked = wine.getMember().contains(member);
+        boolean isLiked = wine.getMember().contains(member);
 
-            if (isLiked) {
-                wine.getMember().remove(member);
-            } else {
-                wine.getMember().add(member);
-            }
-            wineRepository.save(wine);
+        if (isLiked) {
+            wine.getMember().remove(member);
+        } else {
+            wine.getMember().add(member);
+        }
+        wineRepository.save(wine);
 
-            return !isLiked;
+        return !isLiked;
     }
 }

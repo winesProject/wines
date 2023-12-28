@@ -20,13 +20,14 @@ public class ReviewService {
         return this.reviewRepository.findAll();
     }
 
-    public void create(Wine wine, String content, Integer score) {
+    public void create(Wine wine, String content, Integer score, Member member) {
         Review review = Review
                 .builder()
                 .wine(wine)
                 .content(content)
                 .score(score)
                 .createDate(LocalDateTime.now())
+                .member(member)
                 .build();
         this.reviewRepository.save(review);
     }
@@ -39,5 +40,9 @@ public class ReviewService {
     public void like(Review review, Member member) {
         review.getLike().add(member);
         this.reviewRepository.save(review);
+    }
+
+    public void delete(Review review) {
+        this.reviewRepository.delete(review);
     }
 }

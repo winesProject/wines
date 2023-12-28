@@ -9,6 +9,7 @@ import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.service.WineService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -40,13 +42,13 @@ public class ReviewController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
     public String create(@Valid ReviewForm reviewForm, BindingResult bindingResult,
-                         @PathVariable("id") Long id) {
+                         @PathVariable("id") Long id, Principal principal) {
 //    if (bindingResult.hasErrors()) {
 //        return String.format("redirect:/article/detail/%s", id);
 //    }
         Wine wine = this.wineService.getWine(id);
-
-        this.reviewService.create(wine, reviewForm.getContent(), reviewForm.getScore());
+        Member member = this.memberService.getMember(principal.getName());
+        this.reviewService.create(wine, reviewForm.getContent(), reviewForm.getScore(), member);
         return String.format("redirect:/article/detail/%s", id);
     }
 
@@ -56,6 +58,17 @@ public class ReviewController {
         Review review = this.reviewService.getReview(id);
         Member member = this.memberService.getMember(principal.getName());
         this.reviewService.like(review, member);
+        return String.format("redirect:/article/detail/%s", review.getWine().getId());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String delete(Principal principal, @PathVariable("id") Long id) {
+        Review review = this.reviewService.getReview(id);
+        if (!review.getMember().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.reviewService.delete(review);
         return String.format("redirect:/article/detail/%s", review.getWine().getId());
     }
 }

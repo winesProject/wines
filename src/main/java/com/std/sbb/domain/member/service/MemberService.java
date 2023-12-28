@@ -4,20 +4,13 @@ import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.member.repository.MemberRepository;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
-import com.std.sbb.global.security.UserSecurityService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -102,7 +95,6 @@ public class MemberService {
         } else {
             throw new RuntimeException("회원 정보가 존재하지 않습니다.");
         }
-        return member.get();
     }
 
     public boolean toggleHeart(Long id, String username) {

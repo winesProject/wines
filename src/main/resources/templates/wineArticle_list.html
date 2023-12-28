@@ -277,8 +277,10 @@
             success: function (data) {
                 if (data.isLiked) {
                     heartIcon.textContent = "♥";
+                    alert('찜 목록에 담았습니다♥')
                 } else {
                     heartIcon.textContent = "♡";
+                    alert('찜 목록에서 해당 와인이 제거되었습니다♡')
                 }
             },
             error: function (xhr, status, error) {

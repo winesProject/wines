@@ -12,3 +12,4 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //        .addResourceLocations("file:///Users/dev/Desktop/java/wines/src/main/resources/static/images/");
     }
 }
+//    file:///C:/java_work/wines/src/main/resources/static/images/

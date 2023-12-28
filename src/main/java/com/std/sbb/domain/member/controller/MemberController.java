@@ -2,7 +2,10 @@ package com.std.sbb.domain.member.controller;
 
 import com.std.sbb.domain.email.service.EmailService;
 import com.std.sbb.domain.member.entity.Member;
+import com.std.sbb.domain.member.form.MemberConfirmForm;
+import com.std.sbb.domain.member.form.MemberDetailForm;
 import com.std.sbb.domain.member.form.MemberForm;
+import com.std.sbb.domain.member.form.MemberPwForm;
 import com.std.sbb.domain.member.service.MemberService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.service.WineService;
@@ -15,14 +18,18 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -32,6 +39,7 @@ public class MemberController {
     private final MemberService memberService;
     private final EmailService emailService;
     private final WineService wineService;
+    private final PasswordEncoder passwordEncoder;
     private UserSecurityService userSecurityService;
 
     @PreAuthorize("isAnonymous()")
@@ -77,53 +85,94 @@ public class MemberController {
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/favorites")
-    public String favorites(Model model) {
+    public String favorites(Model model, Principal principal) {
+        Member member = this.memberService.getMember(principal.getName());
         List<Wine> paging = this.wineService.getList();
-        paging.sort(Comparator.comparing(Wine::getCreateDate).reversed());
         model.addAttribute("paging", paging);
         return "member_favorites";
     }
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("/detail")
-    public String modify(HttpServletRequest request, MemberForm memberForm, Model model, Principal principal) {
+    @PreAuthorize("isAuthenticated()")
+    public String detail(Model model, Principal principal) {
+        Member member = this.memberService.getMember(principal.getName());
+        model.addAttribute("member", member);
+        return "member_detail";
+    }
+    @GetMapping("/confirm")
+    public String memberConfirmPage(MemberConfirmForm memberConfirmForm) {
+        return "member_confirm";
+    }
+    @PostMapping("/confirm")
+    public String memberConfirm(@Valid MemberConfirmForm memberConfirmForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "member_confirm";
+        }
+        Member member = this.memberService.getMember(principal.getName());
+        if (!memberConfirmForm.getUsername().equals(member.getUsername())) {
+            bindingResult.rejectValue("username", "usernameInCorrect",
+                    "유저이름이 일치하지 않습니다.");
+            return "member_confirm";
+        }
+        return "redirect:/member/detail";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/detail/modifyPw")
+    public String modifyPassword(MemberPwForm memberPwForm) {
+        return "modify_pw";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/detail/modifyPw")
+    public String modifyPassword(@Valid MemberPwForm memberPwForm, BindingResult bindingResult, Principal principal) {
+            Member member = this.memberService.getMember(principal.getName());
+            if (bindingResult.hasErrors()) {
+                return "modify_pw";
+            }
+            if (!passwordEncoder.matches(memberPwForm.getPassword(), member.getPassword())) {
+                bindingResult.rejectValue("password", "passwordNotMatch", "기존 비밀번호가 일치하지 않습니다.");
+                return "modify_pw";
+            }
+            if (!memberPwForm.getNewPassword().equals(memberPwForm.getPasswordConfirm())) {
+                bindingResult.rejectValue("passwordConfirm", "passwordInCorrect",
+                        "2개의 비밀번호가 일치하지 않습니다.");
+                return "modify_pw";
+            }
+            this.memberService.modifyPw(member, memberPwForm.getPasswordConfirm());
+
+        return "redirect:/member/detail";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/detail/modifyDetail")
+    public String modifyDetail(HttpServletRequest request, MemberDetailForm memberDetailForm, Model model, Principal principal) {
         HttpSession session = request.getSession();
         Member modifiedMember = (Member) session.getAttribute("modifiedMember");
         if (modifiedMember != null) {
             Member modifymember = this.memberService.getMember(modifiedMember.getUsername());
-            memberForm.setUsername(modifymember.getUsername());
-            memberForm.setName(modifymember.getName());
-            memberForm.setEmail(modifymember.getEmail());
-            memberForm.setPhoneNumber(modifymember.getPhoneNumber());
+            memberDetailForm.setName(modifymember.getName());
+            memberDetailForm.setEmail(modifymember.getEmail());
+            memberDetailForm.setPhoneNumber(modifymember.getPhoneNumber());
         } else {
             Member member = this.memberService.getMember(principal.getName());
-            memberForm.setUsername(member.getUsername());
-            memberForm.setName(member.getName());
-            memberForm.setEmail(member.getEmail());
-            memberForm.setPhoneNumber(member.getPhoneNumber());
+            memberDetailForm.setName(member.getName());
+            memberDetailForm.setEmail(member.getEmail());
+            memberDetailForm.setPhoneNumber(member.getPhoneNumber());
         }
-        return "member_detail";
+        return "member_modify";
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/detail")
-    public String modify(HttpServletRequest request, @Valid MemberForm memberForm, BindingResult bindingResult, Model model, Principal principal) {
+    @PostMapping("/detail/modifyDetail")
+    public String modifyDetail(HttpServletRequest request, @Valid MemberDetailForm memberDetailForm, BindingResult bindingResult, Model model, Principal principal) {
         try {
             Member member = this.memberService.getMember(principal.getName());
             if (bindingResult.hasErrors()) {
-                return "member_detail";
+                return "member_modify";
             }
-            if (!memberForm.getPassword1().equals(memberForm.getPassword2())) {
-                bindingResult.rejectValue("repeat-password", "passwordInCorrect",
-                        "2개의 패스워드가 일치하지 않습니다.");
-                model.addAttribute("passwordError", "2개의 패스워드가 일치하지 않습니다.");
-                return "member_detail";
-            }
-            Member modifiedMember = this.memberService.modify(member, memberForm.getUsername(),
-                    memberForm.getPassword1(), memberForm.getName(), memberForm.getPhoneNumber(), memberForm.getEmail());
+            Member modifiedMember = this.memberService.modify(member, memberDetailForm.getName(), memberDetailForm.getPhoneNumber(), memberDetailForm.getEmail());
             HttpSession session = request.getSession();
             session.setAttribute("modifiedMember", modifiedMember);
         } catch (RuntimeException e) {
-            return "member_detail";
+            return "member_modify";
         }
         return "redirect:/member/detail";
     }
@@ -132,8 +181,6 @@ public class MemberController {
     public String answer() {
         return "member_answer";
     }
-
-
 
     @GetMapping("/search")
     public String findusername(MemberForm memberForm) {

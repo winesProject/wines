@@ -28,13 +28,17 @@ public class Wine extends BaseEntity {
     private String wineNameE;
     @Column(length = 100)
     private String country;
+    //국가
     @Column(length = 100)
     private String list;
     private Integer price;
+    //가격
     @Column(length = 200)
     private String kind;
+    //종류
     private Integer score;
     private String food;
+    //음식
     private String image;
 
     @OneToOne

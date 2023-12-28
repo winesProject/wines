@@ -119,6 +119,4 @@ public class WineService {
     public void delete(Wine wine) {
         this.wineRepository.delete(wine);
     }
-
-
 }

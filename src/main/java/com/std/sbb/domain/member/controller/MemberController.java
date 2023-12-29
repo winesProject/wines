@@ -2,10 +2,7 @@ package com.std.sbb.domain.member.controller;
 
 import com.std.sbb.domain.email.service.EmailService;
 import com.std.sbb.domain.member.entity.Member;
-import com.std.sbb.domain.member.form.MemberConfirmForm;
-import com.std.sbb.domain.member.form.MemberDetailForm;
-import com.std.sbb.domain.member.form.MemberForm;
-import com.std.sbb.domain.member.form.MemberPwForm;
+import com.std.sbb.domain.member.form.*;
 import com.std.sbb.domain.member.service.MemberService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.service.WineService;
@@ -55,9 +52,10 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid MemberForm memberForm, BindingResult bindingResult) {
+    public String signup(@Valid MemberForm memberForm, BindingResult bindingResult, Model model) {
         if (!memberForm.getPassword1().equals(memberForm.getPassword2())) {
-            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+            model.addAttribute("errorMessagePw", "비밀번호가 일치하지 않습니다");
+            return "signup_form";
         }
 
         try {
@@ -73,10 +71,12 @@ public class MemberController {
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+            model.addAttribute("errorMessage", "이미 사용중인 ID입니다");
             return "signup_form";
         } catch (Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
+            model.addAttribute("signupFail", "회원가입에 실패하였습니다");
             return "signup_form";
         }
 
@@ -183,14 +183,14 @@ public class MemberController {
     }
 
     @GetMapping("/search")
-    public String findusername(MemberForm memberForm) {
+    public String findusername(IdSearchForm idSearchForm) {
         return "idSearch_form";
     }
 
     @PostMapping("/search")
     @ResponseBody
-    public ResponseEntity<String> getUsername(@Valid MemberForm memberForm) {
-        String username = memberService.getUsernameByNameAndEmail(memberForm.getName(), memberForm.getEmail());
+    public ResponseEntity<String> getUsername(@Valid IdSearchForm idSearchForm) {
+        String username = memberService.getUsernameByNameAndEmail(idSearchForm.getName(), idSearchForm.getEmail());
         return ResponseEntity.ok(username);
     }
 

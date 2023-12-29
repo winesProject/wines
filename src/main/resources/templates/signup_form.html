@@ -8,8 +8,8 @@
         <div  class="p-4 mb-4 text-2xl text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" th:text="${errorMessagePw}">
         </div>
     </div>
-    <div th:if="${signupFail}" class="error-message text-center">
-        <div  class="p-4 mb-4 text-2xl text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" th:text="${signupFail}">
+    <div th:if="${errorNotMatchEmailConfirmNumber}" class="error-message text-center">
+        <div  class="p-4 mb-4 text-2xl text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" th:text="${errorNotMatchEmailConfirmNumber}">
         </div>
     </div>
     <div class="text-center">
@@ -62,16 +62,17 @@
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900">이메일
             </label>
             <input type="email" id="email" name="email" th:field="*{email}"
-                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                   class="absolute shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="example@mail.com"
                    required>
             <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()" class="absolute top-8 right-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
                 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
                 인증 요청
             </button>
             <div id="email_number" name="email_number" class="mt-8">
-                <input type="number" name="number" id="number" placeholder="인증번호 입력"
-                       class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" class="absolute bottom-0.5 right-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                <input type="text" name="number" id="number" placeholder="인증번호 입력" th:field="*{confirmEmail}"
+                       class="absolute shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" class="relative left-full text-white top-0.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+
                 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">이메일 인증
                 </button>
             </div>
@@ -129,7 +130,7 @@
         </div>
         <div class="flex items-start my-3">
             <div class="flex items-center h-5">
-                <input id="terms" type="checkbox" value=""
+                <input id="terms2" type="checkbox" value=""
                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                        required>
             </div>
@@ -137,9 +138,9 @@
         </div>
         <div class="flex items-start my-3">
             <div class="flex items-center h-5">
-                <input id="terms" type="checkbox" value=""
+                <input id="terms3" type="checkbox" value=""
                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                       required>
+                       >
             </div>
             <label for="terms" class="ms-2 text-sm font-medium text-gray-900">(선택) 프로모션 혜택을 받겠습니다.</label>
         </div>

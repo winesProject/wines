@@ -41,25 +41,14 @@ public class WineController {
 
     private final TasteService tasteService;
 
-    @PostMapping("/list")
-    public ResponseEntity<String> getWineList(@RequestBody WineForm wineForm) {
-        wineService.getListCategory(wineForm.getList());
-        return ResponseEntity.ok("굿");
-    }
     @GetMapping("/list")
     public String list(Model model,
                        @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType,
                        @RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "kw", defaultValue = "") String kw,
-                       WineForm wineForm) {
-        if (wineForm.getList() != null) {
-            Page<Wine> paging = this.wineService.getList(searchType, kw, page, wineForm.getList());
-            model.addAttribute("paging", paging);
-        } else {
-            Page<Wine> paging = this.wineService.getList(searchType, kw, page, null);
-            model.addAttribute("paging", paging);
-        }
+                       @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Wine> paging = this.wineService.getList(searchType, kw, page);
         model.addAttribute("searchType", searchType);
+        model.addAttribute("paging", paging);
 
         return "wineArticle_list";
     }

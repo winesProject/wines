@@ -95,7 +95,7 @@
             <th scope="col" class="px-6 py-3">
                 평점
             </th>
-            <th scope="col" class="px-4 py-3">
+            <th scope="col" class="pr-8 py-3">
                 좋아요
             </th>
         </tr>
@@ -118,7 +118,7 @@
             </td>
             <td th:text="${#temporals.format(review.createDate, 'yy-MM-dd')}" class="px-6 py-4">
             </td>
-            <td class="px-6 py-4 flex">
+            <td class="px-6 py-4 flex justify-center">
                 <div th:class="${review.score >= 1} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
                      th:id="${review.score}" th:value="1" th:name="${review.score}">
                     <svg th:if="${review.score >= 1}" class="w-10 h-10 text-yellow-300 ms-1"

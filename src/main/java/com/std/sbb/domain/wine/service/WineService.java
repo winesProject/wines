@@ -75,8 +75,6 @@ public class WineService {
         return this.wineRepository.findAll();
     }
 
-
-
     public Wine getWine(Long id) {
         Optional<Wine> wineOptional = this.wineRepository.findById(id);
         if (wineOptional.isPresent()) {

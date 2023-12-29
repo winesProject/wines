@@ -56,8 +56,12 @@ public class MemberController {
             model.addAttribute("errorMessagePw", "비밀번호가 일치하지 않습니다");
             return "signup_form";
         }
-
         try {
+            if (memberForm.getGender().equals("true")) {
+                memberForm.setGender("men");
+            } else {
+                memberForm.setGender("women");
+            }
             this.memberService.join(
                     memberForm.getUsername(),
                     memberForm.getPassword1(),
@@ -82,6 +86,7 @@ public class MemberController {
         emailService.send(memberForm.getEmail(), "서비스 가입을 환영합니다!", "회원가입 환영 메일");
         return "redirect:/";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/favorites")
     public String favorites(Model model, Principal principal) {
@@ -90,6 +95,7 @@ public class MemberController {
         model.addAttribute("paging", paging);
         return "member_favorites";
     }
+
     @GetMapping("/detail")
     @PreAuthorize("isAuthenticated()")
     public String detail(Model model, Principal principal) {
@@ -97,10 +103,12 @@ public class MemberController {
         model.addAttribute("member", member);
         return "member_detail";
     }
+
     @GetMapping("/confirm")
     public String memberConfirmPage(MemberConfirmForm memberConfirmForm) {
         return "member_confirm";
     }
+
     @PostMapping("/confirm")
     public String memberConfirm(@Valid MemberConfirmForm memberConfirmForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
@@ -114,6 +122,7 @@ public class MemberController {
         }
         return "redirect:/member/detail";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/detail/modifyPw")
     public String modifyPassword(MemberPwForm memberPwForm) {
@@ -123,23 +132,24 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/detail/modifyPw")
     public String modifyPassword(@Valid MemberPwForm memberPwForm, BindingResult bindingResult, Principal principal) {
-            Member member = this.memberService.getMember(principal.getName());
-            if (bindingResult.hasErrors()) {
-                return "modify_pw";
-            }
-            if (!passwordEncoder.matches(memberPwForm.getPassword(), member.getPassword())) {
-                bindingResult.rejectValue("password", "passwordNotMatch", "기존 비밀번호가 일치하지 않습니다.");
-                return "modify_pw";
-            }
-            if (!memberPwForm.getNewPassword().equals(memberPwForm.getPasswordConfirm())) {
-                bindingResult.rejectValue("passwordConfirm", "passwordInCorrect",
-                        "2개의 비밀번호가 일치하지 않습니다.");
-                return "modify_pw";
-            }
-            this.memberService.modifyPw(member, memberPwForm.getPasswordConfirm());
+        Member member = this.memberService.getMember(principal.getName());
+        if (bindingResult.hasErrors()) {
+            return "modify_pw";
+        }
+        if (!passwordEncoder.matches(memberPwForm.getPassword(), member.getPassword())) {
+            bindingResult.rejectValue("password", "passwordNotMatch", "기존 비밀번호가 일치하지 않습니다.");
+            return "modify_pw";
+        }
+        if (!memberPwForm.getNewPassword().equals(memberPwForm.getPasswordConfirm())) {
+            bindingResult.rejectValue("passwordConfirm", "passwordInCorrect",
+                    "2개의 비밀번호가 일치하지 않습니다.");
+            return "modify_pw";
+        }
+        this.memberService.modifyPw(member, memberPwForm.getPasswordConfirm());
 
         return "redirect:/member/detail";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/detail/modifyDetail")
     public String modifyDetail(HttpServletRequest request, MemberDetailForm memberDetailForm, Model model, Principal principal) {
@@ -175,11 +185,6 @@ public class MemberController {
         }
         return "redirect:/member/detail";
     }
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/answer")
-    public String answer() {
-        return "member_answer";
-    }
 
     @GetMapping("/search")
     public String findusername(IdSearchForm idSearchForm) {
@@ -209,6 +214,12 @@ public class MemberController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 계정이 없습니다.");
         }
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/answer")
+    public String answer() {
+        return "member_answer";
     }
 
 }

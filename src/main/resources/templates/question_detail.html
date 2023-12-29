@@ -19,7 +19,7 @@
         </div>
         <div class="flex">
             <div class="ms-3 text-sm font-normal">
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <div class="flex items-center p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <span class="text-base text-yellow-900" th:if="${question.member != null}" th:text="${question.member.username}"></span>
                     <span class="text-base text-gray-900 dark:text-white">님의 문의입니다.
                     </span>
@@ -50,7 +50,7 @@
             <div class="p-4 md:p-5 space-y-4" th:each="answer : ${question.answerList}">
                 <div th:text="${answer.content}"></div>
                 <div class="flex justify-end">
-                    <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                    <div th:text="${#temporals.format(question.createDate, 'yy-MM-dd')}"></div>
                 </div>
             </div>
         </div>

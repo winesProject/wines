@@ -57,8 +57,12 @@ public class MemberController {
             model.addAttribute("errorMessagePw", "비밀번호가 일치하지 않습니다");
             return "signup_form";
         }
-
         try {
+            if (memberForm.getGender().equals("true")) {
+                memberForm.setGender("men");
+            } else {
+                memberForm.setGender("women");
+            }
             this.memberService.join(
                     memberForm.getUsername(),
                     memberForm.getPassword1(),
@@ -211,5 +215,4 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 계정이 없습니다.");
         }
     }
-
 }

@@ -5,6 +5,7 @@ import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.validation.constraints.Email;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,9 @@ public class MemberForm {
     @NotEmpty(message = "이메일을 입력하세요.")
     @Email(message = "올바른 이메일 주소를 입력하세요.")
     private String email;
+    @NotNull(message = "인증번호를 입력하세요")
+    private Integer confirmEmail;
     private String gender;
     private String birthDate;
+
 }

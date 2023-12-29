@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -20,7 +19,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@ToString
 public class Wine extends BaseEntity {
     @Column(unique = true)
     private String wineName;
@@ -63,4 +61,5 @@ public class Wine extends BaseEntity {
         }
         return false;
     }
+
 }

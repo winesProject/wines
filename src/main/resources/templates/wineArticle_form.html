@@ -85,28 +85,3 @@
     </form>
 </div>
 </html>
-<!-- 사진 업로드 및 게시글 등록 동시에 하기 위한 스크립트 -->
-<!--<script>-->
-<!--    function submitForms() {-->
-<!--        // 두 폼의 데이터를 합치기-->
-<!--        var formData = new FormData();-->
-<!--        var fileInput = document.getElementById('files');-->
-<!--        var textForm = document.getElementById('secondForm'); // 두 번째 폼의 ID 사용-->
-<!--        var file = fileInput.files[0];-->
-<!--        formData.append('files', file);-->
-<!--        // 다른 필드들도 추가-->
-
-<!--        // 합쳐진 데이터를 서버로 전송-->
-<!--        var xhr = new XMLHttpRequest();-->
-<!--        xhr.open('POST', 'http://localhost:8080/article/create', true);-->
-<!--        xhr.onload = function () {-->
-<!--            if (xhr.status === 200) {-->
-<!--                // 성공적으로 전송된 경우의 처리-->
-<!--            } else {-->
-<!--                // 전송 실패 시의 처리-->
-<!--            }-->
-<!--        };-->
-<!--        xhr.send(formData);-->
-<!--    }-->
-<!--</script>-->
-<!-- 사진 업로드 및 게시글 등록 동시에 하기 위한 스크립트 끝 -->

@@ -1,5 +1,17 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container mt-50 mx-auto">
+    <div th:if="${errorMessage}" class="error-message text-center">
+        <div  class="p-4 mb-4 text-2xl text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" th:text="${errorMessage}">
+        </div>
+    </div>
+    <div th:if="${errorMessagePw}" class="error-message text-center">
+        <div  class="p-4 mb-4 text-2xl text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" th:text="${errorMessagePw}">
+        </div>
+    </div>
+    <div th:if="${signupFail}" class="error-message text-center">
+        <div  class="p-4 mb-4 text-2xl text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" th:text="${signupFail}">
+        </div>
+    </div>
     <div class="text-center">
         <h4 class="m-5 text-4xl">회원가입</h4>
     </div>

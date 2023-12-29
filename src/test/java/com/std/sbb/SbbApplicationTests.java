@@ -578,7 +578,6 @@ class SbbApplicationTests {
             this.wineRepository.save(w);
         }
     }
-    // score값 위에 것들 추가해줘야함 ㅇㅇ
     @Test
     void testJpa() {
         for (int i = 1; i <= 100; i++) {
@@ -587,10 +586,4 @@ class SbbApplicationTests {
             this.questionService.create(subject, content, null);
         }
     }
-//    @Autowired
-//    private EmailService emailService;
-//    @Test
-//    void testJpa1(){
-//        this.emailService.send("gusrudchl12@gmail.com", "회원가입이 완료되었습니다.", "축하드립니다.");
-//    }
 }

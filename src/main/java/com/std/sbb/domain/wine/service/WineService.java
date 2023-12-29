@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,13 +46,31 @@ public class WineService {
 
     }
 
-    public Page<Wine> getList(SearchType searchType, String kw, int page) {
+    public Page<Wine> getList(SearchType searchType, String kw, int page, String list) {
+        List<Wine> getList = getListCategory(list);
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         Specification<Wine> spec = _search(searchType, kw);
+
+        if (!getList.isEmpty()) {
+            List<Specification<Wine>> idSpecs = getList.stream()
+                    .map(wine -> (Specification<Wine>) (root, query, criteriaBuilder) ->
+                            criteriaBuilder.equal(root.get("id"), wine.getId()))
+                    .collect(Collectors.toList());
+
+            Specification<Wine> combinedSpec = idSpecs.stream().reduce(Specification::or).orElse(spec);
+            return wineRepository.findAll(combinedSpec, pageable);
+        }
+
         return this.wineRepository.findAll(spec, pageable);
     }
+
+    public List<Wine> getListCategory(String list) {
+        List<Wine> wines = wineRepository.findByList(list);
+        return wines;
+    }
+
     public List<Wine> getList() {
         return this.wineRepository.findAll();
     }
@@ -118,4 +137,5 @@ public class WineService {
     public void delete(Wine wine) {
         this.wineRepository.delete(wine);
     }
+
 }

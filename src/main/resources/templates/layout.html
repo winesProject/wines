@@ -95,7 +95,6 @@
 </div>
 <footer th:replace="~{footer :: footerFragment}"></footer>
 </body>
-</html>
 <!--이메일 인증 및 비밀번호 찾기-->
 <script>
     const header = $("meta[name='_csrf_header']").attr('content');
@@ -192,3 +191,53 @@
     });
 </script>
 <!--별점 클릭 후 유지 끝-->
+<!-- 사이드바 스크립트 -->
+<script type='text/javascript'>
+    function findList() {
+        console.log('버튼이 클릭되었습니다!');
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+
+        // 서버로 전송할 데이터 설정
+        var data = {
+            "list": ""
+        };
+
+        if ($("#red").is(":checked")) {
+            data.list += "레드 ";
+        }
+        if ($("#white").is(":checked")) {
+            data.list += "화이트 ";
+        }
+        if ($("#rose").is(":checked")) {
+            data.list += "로제 ";
+        }
+        if ($("#sparkling").is(":checked")) {
+            data.list += "스파클링 ";
+        }
+        if ($("#fortified").is(":checked")) {
+            data.list += "주정강화 ";
+        }
+
+        // 마지막에 공백 제거
+        data.list = data.list.trim();
+
+        $.ajax({
+            type: 'POST',
+            url: "/article/list",
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            data: JSON.stringify(data), // 데이터를 JSON 문자열로 변환하여 전송
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (xhr, status, error) {
+                console.log('오류 발생:' + error);
+            }
+        });
+    }
+</script>
+<!-- 사이드바 스크립트 끝 -->
+</html>

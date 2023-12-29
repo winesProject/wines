@@ -15,7 +15,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Answer extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;

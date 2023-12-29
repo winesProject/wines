@@ -2,10 +2,7 @@ package com.std.sbb.domain.member.controller;
 
 import com.std.sbb.domain.email.service.EmailService;
 import com.std.sbb.domain.member.entity.Member;
-import com.std.sbb.domain.member.form.MemberConfirmForm;
-import com.std.sbb.domain.member.form.MemberDetailForm;
-import com.std.sbb.domain.member.form.MemberForm;
-import com.std.sbb.domain.member.form.MemberPwForm;
+import com.std.sbb.domain.member.form.*;
 import com.std.sbb.domain.member.service.MemberService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.service.WineService;
@@ -83,6 +80,7 @@ public class MemberController {
         emailService.send(memberForm.getEmail(), "서비스 가입을 환영합니다!", "회원가입 환영 메일");
         return "redirect:/";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/favorites")
     public String favorites(Model model, Principal principal) {
@@ -91,6 +89,7 @@ public class MemberController {
         model.addAttribute("paging", paging);
         return "member_favorites";
     }
+
     @GetMapping("/detail")
     @PreAuthorize("isAuthenticated()")
     public String detail(Model model, Principal principal) {
@@ -98,10 +97,12 @@ public class MemberController {
         model.addAttribute("member", member);
         return "member_detail";
     }
+
     @GetMapping("/confirm")
     public String memberConfirmPage(MemberConfirmForm memberConfirmForm) {
         return "member_confirm";
     }
+
     @PostMapping("/confirm")
     public String memberConfirm(@Valid MemberConfirmForm memberConfirmForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
@@ -115,6 +116,7 @@ public class MemberController {
         }
         return "redirect:/member/detail";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/detail/modifyPw")
     public String modifyPassword(MemberPwForm memberPwForm) {
@@ -124,23 +126,24 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/detail/modifyPw")
     public String modifyPassword(@Valid MemberPwForm memberPwForm, BindingResult bindingResult, Principal principal) {
-            Member member = this.memberService.getMember(principal.getName());
-            if (bindingResult.hasErrors()) {
-                return "modify_pw";
-            }
-            if (!passwordEncoder.matches(memberPwForm.getPassword(), member.getPassword())) {
-                bindingResult.rejectValue("password", "passwordNotMatch", "기존 비밀번호가 일치하지 않습니다.");
-                return "modify_pw";
-            }
-            if (!memberPwForm.getNewPassword().equals(memberPwForm.getPasswordConfirm())) {
-                bindingResult.rejectValue("passwordConfirm", "passwordInCorrect",
-                        "2개의 비밀번호가 일치하지 않습니다.");
-                return "modify_pw";
-            }
-            this.memberService.modifyPw(member, memberPwForm.getPasswordConfirm());
+        Member member = this.memberService.getMember(principal.getName());
+        if (bindingResult.hasErrors()) {
+            return "modify_pw";
+        }
+        if (!passwordEncoder.matches(memberPwForm.getPassword(), member.getPassword())) {
+            bindingResult.rejectValue("password", "passwordNotMatch", "기존 비밀번호가 일치하지 않습니다.");
+            return "modify_pw";
+        }
+        if (!memberPwForm.getNewPassword().equals(memberPwForm.getPasswordConfirm())) {
+            bindingResult.rejectValue("passwordConfirm", "passwordInCorrect",
+                    "2개의 비밀번호가 일치하지 않습니다.");
+            return "modify_pw";
+        }
+        this.memberService.modifyPw(member, memberPwForm.getPasswordConfirm());
 
         return "redirect:/member/detail";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/detail/modifyDetail")
     public String modifyDetail(HttpServletRequest request, MemberDetailForm memberDetailForm, Model model, Principal principal) {
@@ -176,21 +179,16 @@ public class MemberController {
         }
         return "redirect:/member/detail";
     }
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/answer")
-    public String answer() {
-        return "member_answer";
-    }
 
     @GetMapping("/search")
-    public String findusername(MemberForm memberForm) {
+    public String findusername(IdSearchForm idSearchForm) {
         return "idSearch_form";
     }
 
     @PostMapping("/search")
     @ResponseBody
-    public ResponseEntity<String> getUsername(@Valid MemberForm memberForm) {
-        String username = memberService.getUsernameByNameAndEmail(memberForm.getName(), memberForm.getEmail());
+    public ResponseEntity<String> getUsername(@Valid IdSearchForm idSearchForm) {
+        String username = memberService.getUsernameByNameAndEmail(idSearchForm.getName(), idSearchForm.getEmail());
         return ResponseEntity.ok(username);
     }
 
@@ -212,4 +210,9 @@ public class MemberController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/answer")
+    public String answer() {
+        return "member_answer";
+    }
 }

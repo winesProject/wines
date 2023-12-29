@@ -26,7 +26,8 @@ public class NotProd {
     @Bean
     public ApplicationRunner init(MemberService memberService) {
         return args -> {
-//            memberService.join("admin", "1234", "관리자", null , null, null, "admin@test.com", null);
+//            memberService.join("admin", "1234", "관리자", null , "admin@test.com", null,null, null);
+//            memberService.join("test1", "1234", "테스트1", null, "test1@test.com", null , null, null );
 //            memberService.join("ckh", "1234", "경현", null, null, "남자" , null, null );
 //            IntStream.rangeClosed(1, 3).forEach(i -> {
 //                memberService.join("user" + i, "1234", "nickname" + i, null , null, null , "user" + i + "@test.com", "");

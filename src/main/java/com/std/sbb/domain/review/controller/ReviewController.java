@@ -14,13 +14,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,12 +28,18 @@ public class ReviewController {
     private final WineService wineService;
     private final MemberService memberService;
 
+    @GetMapping("/list")
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+        List<Review> paging = this.reviewService.getList(page);
+        model.addAttribute("paging", paging);
+        return "wineArticle_detail";
+    }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/create/{id}")
-    public String list(Model model, @PathVariable("id") long id) {
+    public String create(Model model, @PathVariable("id") long id) {
         Wine wine = this.wineService.getWine(id);
         model.addAttribute("wine", wine);
-
         return "wineArticle_detail";
     }
 

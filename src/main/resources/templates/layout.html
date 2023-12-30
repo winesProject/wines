@@ -201,7 +201,8 @@
         // 서버로 전송할 데이터 설정
         var data = {
             "list": "",
-            "country": ""
+            "country": "",
+            "price": ""
         };
 
         // 와인 종류
@@ -253,9 +254,48 @@
             data.country += "아르헨티나 ";
         }
 
+        var winePrice = parseInt(data.price, 10);
+
+        function checkPriceRange(start, end, value) {
+            return !isNaN(value) && value >= start && value <= end;
+        }
+
+// 가격
+        if ($("#0").is(":checked") || checkPriceRange(0, 20000, winePrice)) {
+            data.price += "0~20000 ";
+        }
+        if ($("#20000").is(":checked") || checkPriceRange(20001, 30000, winePrice)) {
+            data.price += "20001~30000 ";
+        }
+        if ($("#30000").is(":checked") || checkPriceRange(30001, 40000, winePrice)) {
+            data.price += "30001~40000 ";
+        }
+        if ($("#40000").is(":checked") || checkPriceRange(40001, 50000, winePrice)) {
+            data.price += "40001~50000 ";
+        }
+        if ($("#50000").is(":checked") || checkPriceRange(50001, 60000, winePrice)) {
+            data.price += "50001~60000 ";
+        }
+        if ($("#60000").is(":checked") || checkPriceRange(60001, 70000, winePrice)) {
+            data.price += "60001~70000 ";
+        }
+        if ($("#70000").is(":checked") || checkPriceRange(70001, 80000, winePrice)) {
+            data.price += "70001~80000 ";
+        }
+        if ($("#80000").is(":checked") || checkPriceRange(80001, 90000, winePrice)) {
+            data.price += "80001~90000 ";
+        }
+        if ($("#90000").is(":checked") || checkPriceRange(90001, 100000, winePrice)) {
+            data.price += "90001~100000 ";
+        }
+        if ($("#100000").is(":checked") || (winePrice >= 100001)) {
+            data.price += "100001~ ";
+        }
+
         // 마지막에 공백 제거
         data.list = data.list.trim();
         data.country = data.country.trim();
+        data.price = data.price.trim();
 
         $.ajax({
             type: 'GET',
@@ -268,7 +308,7 @@
                 // 성공 시 리다이렉트 수행
                 var redirectUrl = "/article/list";
 
-                if (data.list || data.country) {
+                if (data.list || data.country || data.price) {
                     redirectUrl += "?";
                 }
 
@@ -276,12 +316,18 @@
                     redirectUrl += "list=" + encodeURIComponent(data.list);
                 }
 
-                if (data.list && data.country) {
-                    redirectUrl += "&";
+                if (data.country) {
+                    if (data.list) {
+                        redirectUrl += "&";
+                    }
+                    redirectUrl += "country=" + encodeURIComponent(data.country);
                 }
 
-                if (data.country) {
-                    redirectUrl += "country=" + encodeURIComponent(data.country);
+                if (data.price) {
+                    if (data.list || data.country) {
+                        redirectUrl += "&";
+                    }
+                    redirectUrl += "price=" + encodeURIComponent(data.price);
                 }
 
                 window.location.href = redirectUrl;

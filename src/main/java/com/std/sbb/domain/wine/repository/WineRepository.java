@@ -22,4 +22,15 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
     @Query("SELECT w FROM Wine w WHERE :country IS NULL OR :country IN (w.country) AND :list IS NULL OR :list IN (w.list)")
     Page<Wine> findByCountryAndList(@Param("country") String country, @Param("list") String list, Pageable pageable);
 
+    @Query("SELECT w FROM Wine w WHERE (:country IS NULL OR :country IN (w.country)) AND (:list IS NULL OR :list IN (w.list)) AND (:priceStart = 0 OR (w.price >= :priceStart AND w.price <= :priceEnd))")
+    Page<Wine> findByCountryAndListAndPrice(@Param("country") String country, @Param("list") String list, @Param("priceStart") int priceStart, @Param("priceEnd") int priceEnd, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE :list IS NULL OR :list IN (w.list) AND (:priceStart = 0 OR (w.price >= :priceStart AND w.price <= :priceEnd))")
+    Page<Wine> findByListAndPrice(@Param("list") String list, @Param("priceStart") int priceStart, @Param("priceEnd") int priceEnd, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE w.price >= :start AND w.price <= :end")
+    Page<Wine> findByPrice(@Param("start") int start, @Param("end") int end, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:country IS NULL OR :country IN (w.country)) AND (:start = 0 OR w.price >= :start) AND (:end = 0 OR w.price <= :end)")
+    Page<Wine> findByCountryAndPrice(@Param("country") String country, @Param("start") int start, @Param("end") int end, Pageable pageable);
 }

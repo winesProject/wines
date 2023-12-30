@@ -16,12 +16,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,30 +46,29 @@ public class WineService {
 
     }
 
-    public Page<Wine> getList(SearchType searchType, String kw, int page, String list) {
-        List<Wine> getList = getListCategory(list);
+    public Page<Wine> getList(String list, SearchType searchType, String kw, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
-        Specification<Wine> spec = _search(searchType, kw);
+        Specification<Wine> spec = _search(list, searchType, kw);
 
-        if (!getList.isEmpty()) {
-            List<Specification<Wine>> idSpecs = getList.stream()
-                    .map(wine -> (Specification<Wine>) (root, query, criteriaBuilder) ->
-                            criteriaBuilder.equal(root.get("id"), wine.getId()))
-                    .collect(Collectors.toList());
-
-            Specification<Wine> combinedSpec = idSpecs.stream().reduce(Specification::or).orElse(spec);
-            return wineRepository.findAll(combinedSpec, pageable);
+        if (StringUtils.isNotBlank(list)) {
+            // list 값이 비어있지 않다면 해당 list를 찾음
+            return this.wineRepository.findByList(list, pageable);
+        } else {
+            // list 값이 비어있다면 모든 Wine을 찾음
+            return this.wineRepository.findAll(spec, pageable);
         }
-
-        return this.wineRepository.findAll(spec, pageable);
     }
 
-    public List<Wine> getListCategory(String list) {
-        List<Wine> wines = wineRepository.findByList(list);
-        return wines;
-    }
+//    public List<Wine> getListCategory(String list) {
+//        List<Wine> wines = wineRepository.findByList(list);
+//        if (list.equals("")){
+//            List<Wine> wineList = wineRepository.findAll();
+//            return wineList;
+//        }
+//        return wines;
+//    }
 
     public List<Wine> getList() {
         return this.wineRepository.findAll();
@@ -85,13 +84,15 @@ public class WineService {
     }
 
 
-    private Specification<Wine> _search(SearchType searchType, String kw) {
+    private Specification<Wine> _search(String list, SearchType searchType, String kw) {
         return new Specification<>() {
             private static final long serialVersionUID = 1L;
 
             @Override
             public Predicate toPredicate(Root<Wine> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 query.distinct(true);
+                Predicate predicate = cb.conjunction();
+
                 if (searchType == SearchType.TITLE) {
                     return cb.or(
                             cb.like(q.get("wineName"), "%" + kw + "%"),
@@ -114,6 +115,17 @@ public class WineService {
                             cb.like(q.get("food"), "%" + kw + "%")
                     );
                 }
+                // list 값에 따른 동적 검색 조건 추가
+                if (StringUtils.isNotBlank(list)) {
+                    String[] listValues = list.split(" ");
+                    for (String listValue : listValues) {
+                        predicate = cb.or(
+                                predicate,
+                                cb.like(q.get("list"), "%" + listValue + "%")
+                        );
+                    }
+                }
+
                 return cb.conjunction();
             }
         };

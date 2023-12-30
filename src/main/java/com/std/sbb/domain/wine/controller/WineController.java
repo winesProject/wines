@@ -7,6 +7,7 @@ import com.std.sbb.domain.taste.form.TasteForm;
 import com.std.sbb.domain.taste.service.TasteService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.form.WineForm;
+import com.std.sbb.domain.wine.searchType.PriceRange;
 import com.std.sbb.domain.wine.searchType.SearchType;
 import com.std.sbb.domain.wine.service.WineService;
 import com.std.sbb.global.imagesfile.entity.Board;
@@ -47,10 +48,12 @@ public class WineController {
                        @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw,
                        @RequestParam(value = "list", defaultValue = "") String list,
-                       @RequestParam(value = "country", defaultValue = "") String country) {
+                       @RequestParam(value = "country", defaultValue = "") String country,
+                       @RequestParam(value = "price", defaultValue = "0") String priceStr) {
 
+        List<PriceRange> priceRanges = wineService.parsePriceRanges(priceStr);
 
-        Page<Wine> paging = this.wineService.getList(country, list, searchType, kw, page);
+        Page<Wine> paging = this.wineService.getList(priceRanges, country, list, searchType, kw, page);
         model.addAttribute("paging", paging);
         model.addAttribute("searchType", searchType);
 

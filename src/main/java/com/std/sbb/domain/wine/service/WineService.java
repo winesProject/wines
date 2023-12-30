@@ -46,29 +46,27 @@ public class WineService {
 
     }
 
-    public Page<Wine> getList(String list, SearchType searchType, String kw, int page) {
+    public Page<Wine> getList(String country, String list, SearchType searchType, String kw, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
-        Specification<Wine> spec = _search(list, searchType, kw);
+        Specification<Wine> spec = _search(country, list, searchType, kw);
 
-        if (StringUtils.isNotBlank(list)) {
-            // list 값이 비어있지 않다면 해당 list를 찾음
+        if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list)) {
+            // country와 list 값이 모두 비어있지 않다면 해당 country와 list를 찾음
+            return this.wineRepository.findByCountryAndList(country, list, pageable);
+        } else if (StringUtils.isNotBlank(country) && StringUtils.isBlank(list)) {
+            // country 값은 비어있지 않고, list 값이 비어있을 경우 해당 country를 찾음
+            return this.wineRepository.findByCountry(country, pageable);
+        } else if (StringUtils.isNotBlank(list)) {
+            // country 값은 비어있고, list 값이 비어있지 않다면 해당 list를 찾음
             return this.wineRepository.findByList(list, pageable);
         } else {
-            // list 값이 비어있다면 모든 Wine을 찾음
+            // country와 list 값이 모두 비어있거나 country 값이 비어있다면 모든 Wine을 찾음
             return this.wineRepository.findAll(spec, pageable);
         }
     }
 
-//    public List<Wine> getListCategory(String list) {
-//        List<Wine> wines = wineRepository.findByList(list);
-//        if (list.equals("")){
-//            List<Wine> wineList = wineRepository.findAll();
-//            return wineList;
-//        }
-//        return wines;
-//    }
 
     public List<Wine> getList() {
         return this.wineRepository.findAll();
@@ -84,7 +82,7 @@ public class WineService {
     }
 
 
-    private Specification<Wine> _search(String list, SearchType searchType, String kw) {
+    private Specification<Wine> _search(String country, String list, SearchType searchType, String kw) {
         return new Specification<>() {
             private static final long serialVersionUID = 1L;
 
@@ -122,6 +120,16 @@ public class WineService {
                         predicate = cb.or(
                                 predicate,
                                 cb.like(q.get("list"), "%" + listValue + "%")
+                        );
+                    }
+                }
+                // country 값에 따른 동적 검색 조건 추가
+                if (StringUtils.isNotBlank(country)) {
+                    String[] countryValues = country.split(" ");
+                    for (String countryValue : countryValues) {
+                        predicate = cb.or(
+                                predicate,
+                                cb.like(q.get("country"), "%" + countryValue + "%")
                         );
                     }
                 }

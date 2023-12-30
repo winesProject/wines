@@ -200,9 +200,11 @@
 
         // 서버로 전송할 데이터 설정
         var data = {
-            "list": ""
+            "list": "",
+            "country": ""
         };
 
+        // 와인 종류
         if ($("#red").is(":checked")) {
             data.list += "레드 ";
         }
@@ -219,8 +221,41 @@
             data.list += "주정강화 ";
         }
 
+        // 나라
+        if ($("#france").is(":checked")) {
+            data.country += "프랑스 ";
+        }
+        if ($("#italy").is(":checked")) {
+            data.country += "이탈리아 ";
+        }
+        if ($("#spain").is(":checked")) {
+            data.country += "스페인 ";
+        }
+        if ($("#portugal").is(":checked")) {
+            data.country += "포르투갈 ";
+        }
+        if ($("#germany").is(":checked")) {
+            data.country += "독일 ";
+        }
+        if ($("#usa").is(":checked")) {
+            data.country += "미국 ";
+        }
+        if ($("#new-zealand").is(":checked")) {
+            data.country += "뉴질랜드 ";
+        }
+        if ($("#australia").is(":checked")) {
+            data.country += "호주 ";
+        }
+        if ($("#chile").is(":checked")) {
+            data.country += "칠레 ";
+        }
+        if ($("#argentina").is(":checked")) {
+            data.country += "아르헨티나 ";
+        }
+
         // 마지막에 공백 제거
         data.list = data.list.trim();
+        data.country = data.country.trim();
 
         $.ajax({
             type: 'GET',
@@ -231,7 +266,25 @@
             data: data,
             success: function (response) {
                 // 성공 시 리다이렉트 수행
-                window.location.href = "/article/list?list=" + encodeURIComponent(data.list);
+                var redirectUrl = "/article/list";
+
+                if (data.list || data.country) {
+                    redirectUrl += "?";
+                }
+
+                if (data.list) {
+                    redirectUrl += "list=" + encodeURIComponent(data.list);
+                }
+
+                if (data.list && data.country) {
+                    redirectUrl += "&";
+                }
+
+                if (data.country) {
+                    redirectUrl += "country=" + encodeURIComponent(data.country);
+                }
+
+                window.location.href = redirectUrl;
             },
             error: function (xhr, status, error) {
                 console.log('오류 발생:' + error);

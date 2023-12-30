@@ -15,4 +15,11 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
 
     @Query("SELECT w FROM Wine w WHERE :list IS NULL OR :list IN (w.list)")
     Page<Wine> findByList(@Param("list") String list, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE :country IS NULL OR :country IN (w.country)")
+    Page<Wine> findByCountry(@Param("country") String country, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE :country IS NULL OR :country IN (w.country) AND :list IS NULL OR :list IN (w.list)")
+    Page<Wine> findByCountryAndList(@Param("country") String country, @Param("list") String list, Pageable pageable);
+
 }

@@ -41,21 +41,16 @@ public class WineController {
 
     private final TasteService tasteService;
 
-//    @PostMapping("/list")
-//    public ResponseEntity<String> getWineList(@RequestBody WineForm wineForm) {
-//        List<Wine> wines = wineService.getListCategory(wineForm.getList());
-//        System.out.println(wines);
-//        return ResponseEntity.ok("굿");
-//    }
     @GetMapping("/list")
     public String list(Model model,
                        @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType,
                        @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw,
-                       @RequestParam(value = "list", defaultValue = "") String list) {
+                       @RequestParam(value = "list", defaultValue = "") String list,
+                       @RequestParam(value = "country", defaultValue = "") String country) {
 
 
-        Page<Wine> paging = this.wineService.getList(list, searchType, kw, page);
+        Page<Wine> paging = this.wineService.getList(country, list, searchType, kw, page);
         model.addAttribute("paging", paging);
         model.addAttribute("searchType", searchType);
 

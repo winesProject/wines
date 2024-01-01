@@ -49,11 +49,12 @@ public class WineController {
                        @RequestParam(value = "kw", defaultValue = "") String kw,
                        @RequestParam(value = "list", defaultValue = "") String list,
                        @RequestParam(value = "country", defaultValue = "") String country,
-                       @RequestParam(value = "price", defaultValue = "0") String priceStr) {
+                       @RequestParam(value = "price", defaultValue = "0") String priceStr,
+                       @RequestParam(value = "food", defaultValue = "") String food) {
 
         List<PriceRange> priceRanges = wineService.parsePriceRanges(priceStr);
 
-        Page<Wine> paging = this.wineService.getList(priceRanges, country, list, searchType, kw, page);
+        Page<Wine> paging = this.wineService.getList(food, priceRanges, country, list, searchType, kw, page);
         model.addAttribute("paging", paging);
         model.addAttribute("searchType", searchType);
 

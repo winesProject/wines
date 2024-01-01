@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <!--  css  -->
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-<!--  csrf 토큰  -->
+    <!--  csrf 토큰  -->
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Wine's</title>
@@ -51,7 +51,8 @@
                     class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full
                 border border-gray-200 dark:border-gray-600 dark:hover:text-white shadow-sm dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700
                 dark:hover:bg-gray-600 focus:ring-4 focus:ring-red-800 focus:outline-none dark:focus:ring-red-400">
-                <svg class="w-7 h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                <svg class="w-7 h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                     viewBox="0 0 20 16">
                     <path d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z"/>
                 </svg>
                 <span class="sr-only">나의 리뷰</span>
@@ -100,14 +101,14 @@
     const header = $("meta[name='_csrf_header']").attr('content');
     const token = $("meta[name='_csrf']").attr('content');
 
-    $('#checkEmail').on('click', function(){
+    $('#checkEmail').on('click', function () {
         checkEmail();
     });
 
-    function checkEmail(){
+    function checkEmail() {
         const memberEmail = $('#memberEmail').val();
 
-        if(!memberEmail || memberEmail.trim() === ""){
+        if (!memberEmail || memberEmail.trim() === "") {
             alert("이메일을 입력하세요.");
         } else {
             $.ajax({
@@ -120,34 +121,34 @@
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader(header, token);
                 }
-            }).done(function(result){
+            }).done(function (result) {
                 console.log("result :" + result);
                 if (result == "true") {
                     sendEmail();
                     alert('임시비밀번호를 전송 했습니다.');
-                    window.location.href="/auth/login";
+                    window.location.href = "/auth/login";
                 } else if (result == "false") {
                     alert('가입되지 않은 이메일입니다.');
                 }
-            }).fail(function(error){
+            }).fail(function (error) {
                 alert(JSON.stringify(error));
             })
         }
     }
 
-    function sendEmail(){
+    function sendEmail() {
         const memberEmail = $('#memberEmail').val();
 
         $.ajax({
             type: 'POST',
             url: '/member/sendPwd',
             data: {
-                'memberEmail' : memberEmail
+                'memberEmail': memberEmail
             },
-            beforeSend: function(xhr){
+            beforeSend: function (xhr) {
                 xhr.setRequestHeader(header, token);
             },
-            error: function(error){
+            error: function (error) {
                 alert(JSON.stringify(error));
             }
         })
@@ -202,7 +203,8 @@
         var data = {
             "list": "",
             "country": "",
-            "price": ""
+            "price": "",
+            "food": ""
         };
 
         // 와인 종류
@@ -260,7 +262,7 @@
             return !isNaN(value) && value >= start && value <= end;
         }
 
-// 가격
+        // 가격
         if ($("#0").is(":checked") || checkPriceRange(0, 20000, winePrice)) {
             data.price += "0~20000 ";
         }
@@ -292,10 +294,40 @@
             data.price += "100001~ ";
         }
 
+        // 음식
+        if ($("#cow").is(":checked")) {
+            data.food += "소 ";
+        }
+        if ($("#pork").is(":checked")) {
+            data.food += "돼지 ";
+        }
+        if ($("#chicken").is(":checked")) {
+            data.food += "닭 ";
+        }
+        if ($("#fish").is(":checked")) {
+            data.food += "생선 ";
+        }
+        if ($("#seafood").is(":checked")) {
+            data.food += "해산물 ";
+        }
+        if ($("#salad").is(":checked")) {
+            data.food += "샐러드 ";
+        }
+        if ($("#fruit").is(":checked")) {
+            data.food += "과일 ";
+        }
+        if ($("#cheese").is(":checked")) {
+            data.food += "치즈 ";
+        }
+        if ($("#dessert").is(":checked")) {
+            data.food += "디저트 ";
+        }
+
         // 마지막에 공백 제거
         data.list = data.list.trim();
         data.country = data.country.trim();
         data.price = data.price.trim();
+        data.food = data.food.trim();
 
         $.ajax({
             type: 'GET',
@@ -308,7 +340,7 @@
                 // 성공 시 리다이렉트 수행
                 var redirectUrl = "/article/list";
 
-                if (data.list || data.country || data.price) {
+                if (data.list || data.country || data.price || data.food) {
                     redirectUrl += "?";
                 }
 
@@ -328,6 +360,13 @@
                         redirectUrl += "&";
                     }
                     redirectUrl += "price=" + encodeURIComponent(data.price);
+                }
+
+                if (data.food) {
+                    if (data.list || data.country || data.price) {
+                        redirectUrl += "&";
+                    }
+                    redirectUrl += "food=" + encodeURIComponent(data.food);
                 }
 
                 window.location.href = redirectUrl;

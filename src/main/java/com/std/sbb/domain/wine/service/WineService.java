@@ -72,44 +72,54 @@ public class WineService {
         return priceRanges;
     }
 
-    public Page<Wine> getList(List<PriceRange> priceRanges, String country, String list, SearchType searchType, String kw, int page) {
+    public Page<Wine> getList(String food, List<PriceRange> priceRanges, String country, String list, SearchType searchType, String kw, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
-        Specification<Wine> spec = _search(priceRanges, country, list, searchType, kw);
+        Specification<Wine> spec = _search(food, priceRanges, country, list, searchType, kw);
 
-        if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && !priceRanges.isEmpty()) {
-            // 1. country와 list, price 값이 모두 비어있지 않다면 해당 country, list, price를 찾음
+        if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(food)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByCountryAndListAndPrice(country, list, price, priceRanges.get(0).getEnd(), pageable);
-        } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty()) {
-            // 2. country와 price 값이 모두 비어있지 않다면 해당 country, price를 찾음
+        } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(food) && StringUtils.isBlank(list)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByCountryAndPrice(country, price, priceRanges.get(0).getEnd(), pageable);
-        } else if (StringUtils.isNotBlank(list) && !priceRanges.isEmpty()) {
-            // 3. list와 price 값이 모두 비어있지 않다면 해당 list, price 값을 찾음
+        } else if (StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByListAndPrice(list, price, priceRanges.get(0).getEnd(), pageable);
-        } else if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list)) {
-            // 4. country와 list 값이 모두 비어있지 않다면 해당 country와 list를 찾음
+        } else if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && StringUtils.isBlank(food)) {
             return this.wineRepository.findByCountryAndList(country, list, pageable);
-        } else if (StringUtils.isNotBlank(country)) {
-            // 5. country 값은 비어있지 않고, 해당 country를 찾음
+        } else if (StringUtils.isNotBlank(food) && StringUtils.isBlank(list) && StringUtils.isBlank(country)) {
+            return this.wineRepository.findByFood(food, pageable);
+        } else if (StringUtils.isNotBlank(list) && StringUtils.isNotBlank(food) && StringUtils.isBlank(country)) {
+            return this.wineRepository.findByListAndFood(list, food, pageable);
+        } else if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(food) && StringUtils.isBlank(list)) {
+            return this.wineRepository.findByCountryAndFood(country, food, pageable);
+        } else if (!priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(list) && StringUtils.isBlank(country)) {
+            int price = priceRanges.get(0).getStart();
+            return this.wineRepository.findByPriceAndFood(price, priceRanges.get(0).getEnd(), food, pageable);
+        } else if (StringUtils.isNotBlank(list) && StringUtils.isNotBlank(country) && StringUtils.isNotBlank(food)) {
+            return this.wineRepository.findByListAndCountryAndFood(list, country, food, pageable);
+        } else if (StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(country)) {
+            int price = priceRanges.get(0).getStart();
+            return this.wineRepository.findByListAndPriceAndFood(list, price, priceRanges.get(0).getEnd(), food, pageable);
+        } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(list)) {
+            int price = priceRanges.get(0).getStart();
+            return this.wineRepository.findByCountryAndPriceAndFood(country, price, priceRanges.get(0).getEnd(), food, pageable);
+        } else if (StringUtils.isNotBlank(list) && StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0) {
+            int price = priceRanges.get(0).getStart();
+            return this.wineRepository.findByListAndCountryAndPriceAndFood(list, country, price, priceRanges.get(0).getEnd(), food, pageable);
+        } else if (StringUtils.isNotBlank(country) && StringUtils.isBlank(list) && StringUtils.isBlank(food)) {
             return this.wineRepository.findByCountry(country, pageable);
-        } else if (!priceRanges.isEmpty()) {
-            // 6. price 값이 비어있지 않을 경우 해당 price를 찾음
+        } else if (!priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(list) && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByPrice(price, priceRanges.get(0).getEnd(), pageable);
-        } else if (StringUtils.isNotBlank(list)) {
-            // 7. country 값은 비어있고, list 값이 비어있지 않다면 해당 list를 찾음
+        } else if (StringUtils.isNotBlank(list) && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {
             return this.wineRepository.findByList(list, pageable);
         } else {
-            // 8. country와 list 값이 모두 비어있거나 country 값이 비어있다면 모든 Wine을 찾음
             return this.wineRepository.findAll(spec, pageable);
         }
     }
-
-
     public List<Wine> getList() {
         return this.wineRepository.findAll();
     }
@@ -124,7 +134,7 @@ public class WineService {
     }
 
 
-    private Specification<Wine> _search(List<PriceRange> priceRanges, String country, String list, SearchType searchType, String kw) {
+    private Specification<Wine> _search(String food, List<PriceRange> priceRanges, String country, String list, SearchType searchType, String kw) {
         return new Specification<>() {
             private static final long serialVersionUID = 1L;
 
@@ -155,37 +165,46 @@ public class WineService {
                             cb.like(q.get("food"), "%" + kw + "%")
                     );
                 }
-                // list 값에 따른 동적 검색 조건 추가
-                if (StringUtils.isNotBlank(list)) {
-                    String[] listValues = list.split(" ");
-                    for (String listValue : listValues) {
-                        predicate = cb.or(
-                                predicate,
-                                cb.like(q.get("list"), "%" + listValue + "%")
-                        );
-                    }
-                }
-                // country 값에 따른 동적 검색 조건 추가
-                if (StringUtils.isNotBlank(country)) {
-                    String[] countryValues = country.split(" ");
-                    for (String countryValue : countryValues) {
-                        predicate = cb.or(
-                                predicate,
-                                cb.like(q.get("country"), "%" + countryValue + "%")
-                        );
-                    }
-                }
-                // price 값에 따른 동적 검색 조건 추가
-                if (!priceRanges.isEmpty()) {
-                    List<Predicate> pricePredicates = new ArrayList<>();
-                    for (PriceRange priceRange : priceRanges) {
-                        pricePredicates.add(
-                                cb.between(q.get("price"), priceRange.getStart(), priceRange.getEnd())
-                        );
-                    }
-                    predicate = cb.and(predicate, cb.or(pricePredicates.toArray(new Predicate[0])));
-                }
-
+//                // list 값에 따른 동적 검색 조건 추가
+//                if (StringUtils.isNotBlank(list)) {
+//                    String[] listValues = list.split(" ");
+//                    for (String listValue : listValues) {
+//                        predicate = cb.or(
+//                                predicate,
+//                                cb.like(q.get("list"), "%" + listValue + "%")
+//                        );
+//                    }
+//                }
+//                // country 값에 따른 동적 검색 조건 추가
+//                if (StringUtils.isNotBlank(country)) {
+//                    String[] countryValues = country.split(" ");
+//                    for (String countryValue : countryValues) {
+//                        predicate = cb.or(
+//                                predicate,
+//                                cb.like(q.get("country"), "%" + countryValue + "%")
+//                        );
+//                    }
+//                }
+//                // price 값에 따른 동적 검색 조건 추가
+//                if (!priceRanges.isEmpty()) {
+//                    List<Predicate> pricePredicates = new ArrayList<>();
+//                    for (PriceRange priceRange : priceRanges) {
+//                        pricePredicates.add(
+//                                cb.between(q.get("price"), priceRange.getStart(), priceRange.getEnd())
+//                        );
+//                    }
+//                    predicate = cb.and(predicate, cb.or(pricePredicates.toArray(new Predicate[0])));
+//                }
+//                // food 값에 따른 동적 검색 조건 추가
+//                if (StringUtils.isNotBlank(food)) {
+//                    String[] foodValues = food.split("[,\\s]+");
+//                    for (String foodValue : foodValues) {
+//                        predicate = cb.or(
+//                                predicate,
+//                                cb.like(q.get("food"), "%" + foodValue + "%")
+//                        );
+//                    }
+//                }
                 return cb.conjunction();
             }
         };

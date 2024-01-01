@@ -33,4 +33,28 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
 
     @Query("SELECT w FROM Wine w WHERE (:country IS NULL OR :country IN (w.country)) AND (:start = 0 OR w.price >= :start) AND (:end = 0 OR w.price <= :end)")
     Page<Wine> findByCountryAndPrice(@Param("country") String country, @Param("start") int start, @Param("end") int end, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByFood(@Param("food") String food, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:list IS NULL OR :list IN (w.list)) AND (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByListAndFood(@Param("list") String list, @Param("food") String food, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:country IS NULL OR :country IN (w.country)) AND (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByCountryAndFood(@Param("country") String country, @Param("food") String food, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:start = 0 OR w.price >= :start) AND (:end = 0 OR w.price <= :end) AND (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByPriceAndFood(@Param("start") int start, @Param("end") int end, @Param("food") String food, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:list IS NULL OR :list IN (w.list)) AND (:country IS NULL OR :country IN (w.country)) AND (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByListAndCountryAndFood(@Param("list") String list, @Param("country") String country, @Param("food") String food, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:list IS NULL OR :list IN (w.list)) AND (:start = 0 OR w.price >= :start) AND (:end = 0 OR w.price <= :end) AND (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByListAndPriceAndFood(@Param("list") String list, @Param("start") int start, @Param("end") int end, @Param("food") String food, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:country IS NULL OR :country IN (w.country)) AND (:start = 0 OR w.price >= :start) AND (:end = 0 OR w.price <= :end) AND (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByCountryAndPriceAndFood(@Param("country") String country, @Param("start") int start, @Param("end") int end, @Param("food") String food, Pageable pageable);
+
+    @Query("SELECT w FROM Wine w WHERE (:list IS NULL OR :list IN (w.list)) AND (:country IS NULL OR :country IN (w.country)) AND (:start = 0 OR w.price >= :start) AND (:end = 0 OR w.price <= :end) AND (:food IS NULL OR w.food LIKE CONCAT('%', :food, '%'))")
+    Page<Wine> findByListAndCountryAndPriceAndFood(@Param("list") String list, @Param("country") String country, @Param("start") int start, @Param("end") int end, @Param("food") String food, Pageable pageable);
 }

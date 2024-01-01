@@ -56,7 +56,9 @@ public class WineController {
 
         Page<Wine> paging = this.wineService.getList(food, priceRanges, country, list, searchType, kw, page);
         model.addAttribute("paging", paging);
+
         model.addAttribute("searchType", searchType);
+        model.addAttribute("paging", paging);
 
 
         return "wineArticle_list";
@@ -106,24 +108,31 @@ public class WineController {
     public String wineModify(WineForm wineForm, @PathVariable("id") Long id, Principal principal) {
 
         Wine wine = this.wineService.getWine(id);
-        wineForm.setWineName(wineForm.getWineName());
-        wineForm.setWineNameE(wineForm.getWineNameE());
-        wineForm.setKind(wineForm.getKind());
-        wineForm.setFood(wineForm.getFood());
-        wineForm.setCountry(wineForm.getCountry());
-        wineForm.setList(wineForm.getList());
-        wineForm.setPrice(wineForm.getPrice());
+        wineForm.setWineName(wine.getWineName());
+        wineForm.setWineNameE(wine.getWineNameE());
+        wineForm.setKind(wine.getKind());
+        wineForm.setFood(wine.getFood());
+        wineForm.setCountry(wine.getCountry());
+        wineForm.setList(wine.getList());
+        wineForm.setPrice(wine.getPrice());
 
         return "wineArticle_form";
     }
 
     @PostMapping("/modify/{id}")
-    public String wineModify(@Valid WineForm wineForm, BindingResult bindingResult, @PathVariable("id") Long id, Principal principal) {
-
+    public String wineModify(@Validated @RequestParam("files") List<MultipartFile> files, @Valid WineForm wineForm, BindingResult bindingResult, @Valid TasteForm tasteForm, BindingResult tasteBindingResult,@PathVariable("id") Long id, Principal principal) throws Exception {
+        if (bindingResult.hasErrors()) {
+            return "wineArticle_form";
+        }
         Wine wine = this.wineService.getWine(id);
-        this.wineService.modify(wine, wineForm.getWineName(), wineForm.getWineNameE(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), null, wineForm.getTaste());
+        Taste taste = this.tasteService.getTaste(wine.getId());
+        Taste modifyTaste = tasteService.modify(taste, tasteForm.getSweet(), tasteForm.getBody(), tasteForm.getAcidity(), tasteForm.getTannin());
+        List<Board> boards =  boardService.addBoard(files);
 
-        return String.format("redirect:/Article/detail/%s", id);
+        for (Board board : boards) {
+            this.wineService.modify(wine, wineForm.getWineName(), wineForm.getWineNameE(), wineForm.getCountry(), wineForm.getList(), wineForm.getPrice(), wineForm.getKind(), wineForm.getFood(), wineForm.getScore(), board, modifyTaste);
+        }
+        return String.format("redirect:/article/detail/%s", wine.getId());
     }
 
     @GetMapping("/delete/{id}")

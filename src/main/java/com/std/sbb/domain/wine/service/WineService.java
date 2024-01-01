@@ -208,20 +208,19 @@ public class WineService {
         };
     }
 
-    public void modify(Wine wine, String wineName, String wineNameE, String country, String list, Integer price, String kind, String food, Board board, Taste taste) {
-        Wine
-                .builder()
-                .wineName(wineName)
-                .wineNameE(wineNameE)
-                .country(country)
-                .list(list)
-                .price(price)
-                .kind(kind)
-                .food(food)
-                .board(board)
-                .taste(taste)
-                .build();
-        this.wineRepository.save(wine);
+    public void modify(Wine wine, String wineName, String wineNameE, String country, String list, Integer price, String kind, String food, Integer score, Board board, Taste taste) {
+            wine.setWineName(wineName);
+            wine.setWineNameE(wineNameE);
+            wine.setCountry(country);
+            wine.setList(list);
+            wine.setPrice(price);
+            wine.setKind(kind);
+            wine.setFood(food);
+            wine.setScore(score);
+            wine.setBoard(board);
+            wine.setTaste(taste);
+
+            this.wineRepository.save(wine);
     }
 
     public void delete(Wine wine) {

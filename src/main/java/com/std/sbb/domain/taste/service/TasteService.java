@@ -31,4 +31,12 @@ public class TasteService {
             throw new RuntimeException("맛이 존재하지 않습니다");
         }
     }
+
+    public Taste modify(Taste taste, Integer sweet, Integer body, Integer acidity, Integer tannin) {
+        taste.setSweet(sweet);
+        taste.setBody(body);
+        taste.setAcidity(acidity);
+        taste.setTannin(tannin);
+        return this.tasteRepository.save(taste);
+    }
 }

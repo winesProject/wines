@@ -47,6 +47,7 @@ public class WineService {
 
     }
 
+
     public List<PriceRange> parsePriceRanges(String price) {
         List<PriceRange> priceRanges = new ArrayList<>();
 
@@ -118,6 +119,7 @@ public class WineService {
             return this.wineRepository.findAll(spec, pageable);
         }
     }
+
     public List<Wine> getList() {
         return this.wineRepository.findAll();
     }
@@ -163,46 +165,6 @@ public class WineService {
                             cb.like(q.get("food"), "%" + kw + "%")
                     );
                 }
-//                // list 값에 따른 동적 검색 조건 추가
-//                if (StringUtils.isNotBlank(list)) {
-//                    String[] listValues = list.split(" ");
-//                    for (String listValue : listValues) {
-//                        predicate = cb.or(
-//                                predicate,
-//                                cb.like(q.get("list"), "%" + listValue + "%")
-//                        );
-//                    }
-//                }
-//                // country 값에 따른 동적 검색 조건 추가
-//                if (StringUtils.isNotBlank(country)) {
-//                    String[] countryValues = country.split(" ");
-//                    for (String countryValue : countryValues) {
-//                        predicate = cb.or(
-//                                predicate,
-//                                cb.like(q.get("country"), "%" + countryValue + "%")
-//                        );
-//                    }
-//                }
-//                // price 값에 따른 동적 검색 조건 추가
-//                if (!priceRanges.isEmpty()) {
-//                    List<Predicate> pricePredicates = new ArrayList<>();
-//                    for (PriceRange priceRange : priceRanges) {
-//                        pricePredicates.add(
-//                                cb.between(q.get("price"), priceRange.getStart(), priceRange.getEnd())
-//                        );
-//                    }
-//                    predicate = cb.and(predicate, cb.or(pricePredicates.toArray(new Predicate[0])));
-//                }
-//                // food 값에 따른 동적 검색 조건 추가
-//                if (StringUtils.isNotBlank(food)) {
-//                    String[] foodValues = food.split("[,\\s]+");
-//                    for (String foodValue : foodValues) {
-//                        predicate = cb.or(
-//                                predicate,
-//                                cb.like(q.get("food"), "%" + foodValue + "%")
-//                        );
-//                    }
-//                }
                 return cb.conjunction();
             }
         };

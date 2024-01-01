@@ -56,7 +56,9 @@ public class WineController {
 
         Page<Wine> paging = this.wineService.getList(food, priceRanges, country, list, searchType, kw, page);
         model.addAttribute("paging", paging);
+
         model.addAttribute("searchType", searchType);
+        model.addAttribute("paging", paging);
 
 
         return "wineArticle_list";

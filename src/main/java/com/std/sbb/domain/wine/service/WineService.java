@@ -78,40 +78,38 @@ public class WineService {
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         Specification<Wine> spec = _search(food, priceRanges, country, list, searchType, kw);
 
-        if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(food)) {
+        if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isBlank(food)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByCountryAndListAndPrice(country, list, price, priceRanges.get(0).getEnd(), pageable);
-        } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(food) && StringUtils.isBlank(list)) {
+        } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isBlank(food) && StringUtils.isBlank(list)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByCountryAndPrice(country, price, priceRanges.get(0).getEnd(), pageable);
-        } else if (StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {
+        } else if (StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByListAndPrice(list, price, priceRanges.get(0).getEnd(), pageable);
-        } else if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && StringUtils.isBlank(food)) {
-            return this.wineRepository.findByCountryAndList(country, list, pageable);
         } else if (StringUtils.isNotBlank(food) && StringUtils.isBlank(list) && StringUtils.isBlank(country)) {
             return this.wineRepository.findByFood(food, pageable);
         } else if (StringUtils.isNotBlank(list) && StringUtils.isNotBlank(food) && StringUtils.isBlank(country)) {
             return this.wineRepository.findByListAndFood(list, food, pageable);
         } else if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(food) && StringUtils.isBlank(list)) {
             return this.wineRepository.findByCountryAndFood(country, food, pageable);
-        } else if (!priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(list) && StringUtils.isBlank(country)) {
+        } else if (!priceRanges.isEmpty() && StringUtils.isNotBlank(food) && StringUtils.isBlank(list) && StringUtils.isBlank(country)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByPriceAndFood(price, priceRanges.get(0).getEnd(), food, pageable);
         } else if (StringUtils.isNotBlank(list) && StringUtils.isNotBlank(country) && StringUtils.isNotBlank(food)) {
             return this.wineRepository.findByListAndCountryAndFood(list, country, food, pageable);
-        } else if (StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(country)) {
+        } else if (StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && StringUtils.isBlank(country)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByListAndPriceAndFood(list, price, priceRanges.get(0).getEnd(), food, pageable);
-        } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(list)) {
+        } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && StringUtils.isBlank(list)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByCountryAndPriceAndFood(country, price, priceRanges.get(0).getEnd(), food, pageable);
-        } else if (StringUtils.isNotBlank(list) && StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food) && priceRanges.get(0).getStart() != 0) {
+        } else if (StringUtils.isNotBlank(list) && StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isNotBlank(food)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByListAndCountryAndPriceAndFood(list, country, price, priceRanges.get(0).getEnd(), food, pageable);
         } else if (StringUtils.isNotBlank(country) && StringUtils.isBlank(list) && StringUtils.isBlank(food)) {
             return this.wineRepository.findByCountry(country, pageable);
-        } else if (!priceRanges.isEmpty() && priceRanges.get(0).getStart() != 0 && StringUtils.isBlank(list) && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {
+        } else if (!priceRanges.isEmpty() && StringUtils.isBlank(list) && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByPrice(price, priceRanges.get(0).getEnd(), pageable);
         } else if (StringUtils.isNotBlank(list) && StringUtils.isBlank(food) && StringUtils.isBlank(country)) {

@@ -4,8 +4,10 @@ import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,9 +21,8 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Getter
-@Data
 @EntityListeners(AuditingEntityListener.class)
 public class Member extends BaseEntity {
 

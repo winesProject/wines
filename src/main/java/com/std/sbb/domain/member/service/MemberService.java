@@ -4,7 +4,6 @@ import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.member.repository.MemberRepository;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,40 +36,22 @@ public class MemberService {
     }
 
     public Member modify(Member member, String name, String phoneNumber, String email) {
-        member.setName(name);
-        member.setPhoneNumber(phoneNumber);
-        member.setEmail(email);
-        member.setModifyDate(LocalDateTime.now());
+        member = Member.builder()
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .email(email)
+                .modifyDate(LocalDateTime.now())
+                .build();
+
         return memberRepository.save(member);
     }
+
     public Member modifyPw(Member member, String password) {
-        member.setPassword(passwordEncoder.encode(password));
+        member = Member.builder()
+                .password(passwordEncoder.encode(password))
+                .build();
         this.memberRepository.save(member);
         return member;
-    }
-
-
-    public boolean checkEmail(String memberEmail) {
-
-        /* 이메일이 존재하면 true, 이메일이 없으면 false  */
-        return memberRepository.existsByEmail(memberEmail);
-    }
-
-    public String getTmpPassword() {
-        char[] charSet = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-                'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-
-        String pwd = "";
-
-        /* 문자 배열 길이의 값을 랜덤으로 10개를 뽑아 조합 */
-        int idx = 0;
-        for (int i = 0; i < 10; i++) {
-            idx = (int) (charSet.length * Math.random());
-            pwd += charSet[idx];
-        }
-
-        return pwd;
     }
 
     @Transactional

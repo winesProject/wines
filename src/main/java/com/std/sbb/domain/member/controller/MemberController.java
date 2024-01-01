@@ -221,8 +221,7 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/review")
     public String answer(Model model, Principal principal) {
-        Member member = memberService.getMember(principal.getName());
-        List<Review> myReviewList = reviewService.getMyReview(member);
+        List<Review> myReviewList = reviewService.getMyReview(principal.getName());
 
         model.addAttribute("myReviewList", myReviewList);
         return "member_review";

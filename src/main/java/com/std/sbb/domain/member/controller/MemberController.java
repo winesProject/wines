@@ -4,6 +4,8 @@ import com.std.sbb.domain.email.service.EmailService;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.member.form.*;
 import com.std.sbb.domain.member.service.MemberService;
+import com.std.sbb.domain.review.entity.Review;
+import com.std.sbb.domain.review.service.ReviewService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.service.WineService;
 import com.std.sbb.global.security.UserSecurityService;
@@ -36,6 +38,7 @@ public class MemberController {
     private final EmailService emailService;
     private final WineService wineService;
     private final PasswordEncoder passwordEncoder;
+    private final ReviewService reviewService;
     private UserSecurityService userSecurityService;
 
     @PreAuthorize("isAnonymous()")
@@ -215,11 +218,13 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 계정이 없습니다.");
         }
     }
-
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/answer")
-    public String answer() {
-        return "member_answer";
-    }
+    @GetMapping("/review")
+    public String answer(Model model, Principal principal) {
+        Member member = memberService.getMember(principal.getName());
+        List<Review> myReviewList = reviewService.getMyReview(member);
 
+        model.addAttribute("myReviewList", myReviewList);
+        return "member_review";
+    }
 }

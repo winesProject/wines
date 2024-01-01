@@ -52,4 +52,9 @@ public class ReviewService {
     public void delete(Review review) {
         this.reviewRepository.delete(review);
     }
+
+    public List<Review> getMyReview(Member member){
+        List<Review> myReview = reviewRepository.findByUsername(member);
+        return myReview;
+    }
 }

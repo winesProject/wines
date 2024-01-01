@@ -8,12 +8,12 @@
                 </a>
             </li>
             <li class="mx-7">
-                <a class="inline-block p-4 border-b-2 rounded-t-lg text-red-800 font-extrabold hover:text-red-700 hover:border-gray-300 dark:hover:text-gray-300"
-                   th:href="@{/member/answer}">나의 리뷰
+                <a class="inline-block p-4 border-b-2 rounded-t-lg text-red-800 font-extrabold hover:text-red-700 hover:border-gray-300"
+                   th:href="@{/member/review}">나의 리뷰
                 </a>
             </li>
             <li class="me-2">
-                <a class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                <a class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300"
                    th:href="@{/member/favorites}" >찜 목록
                 </a>
             </li>
@@ -44,7 +44,7 @@
                         번호
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        제목
+                        내용
                     </th>
                     <th scope="col" class="px-6 py-3">
                         작성일자
@@ -52,7 +52,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="review : ${}"
+                <tr th:each="review : ${myReviewList}"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td class="px-6 py-4" th:text="${review.content}">
                     </td>
@@ -64,27 +64,27 @@
         </div>
     </div>
     <!--  페이징  -->
-    <nav th:if="${!paging.isEmpty()}" th:with="kwBase = '?kw=' + ${param.kw != null ? param.kw : ''}">
-        <ul class="pagination flex -space-x-px text-base h-10 justify-center my-12">
-            <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                <a th:unless="${!paging.hasPrevious()}"
-                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                   th:href="@{|${kwBase}&page=${paging.number - 1}|}">이전</a>
-            </li>
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:classappend="${page == paging.number} ? 'active'"
-                class="page-item">
-                <a th:text="${page + 1}"
-                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                   th:href="@{|${kwBase}&page=${page}|}"></a>
-            </li>
-            <li th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a th:unless="${!paging.hasNext()}"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                   th:href="@{|${kwBase}&page=${paging.number + 1}|}">다음</a>
-            </li>
-        </ul>
-    </nav>
+<!--    <nav th:if="${!paging.isEmpty()}" th:with="kwBase = '?kw=' + ${param.kw != null ? param.kw : ''}">-->
+<!--        <ul class="pagination flex -space-x-px text-base h-10 justify-center my-12">-->
+<!--            <li th:classappend="${!paging.hasPrevious} ? 'disabled'">-->
+<!--                <a th:unless="${!paging.hasPrevious()}"-->
+<!--                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"-->
+<!--                   th:href="@{|${kwBase}&page=${paging.number - 1}|}">이전</a>-->
+<!--            </li>-->
+<!--            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"-->
+<!--                th:if="${page >= paging.number-5 and page <= paging.number+5}"-->
+<!--                th:classappend="${page == paging.number} ? 'active'"-->
+<!--                class="page-item">-->
+<!--                <a th:text="${page + 1}"-->
+<!--                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"-->
+<!--                   th:href="@{|${kwBase}&page=${page}|}"></a>-->
+<!--            </li>-->
+<!--            <li th:classappend="${!paging.hasNext} ? 'disabled'">-->
+<!--                <a th:unless="${!paging.hasNext()}"-->
+<!--                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"-->
+<!--                   th:href="@{|${kwBase}&page=${paging.number + 1}|}">다음</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
 </div>
 </html>

@@ -64,7 +64,7 @@ public class WineService {
             if (values.length == 2) {
                 end = Integer.parseInt(values[1]);
                 priceRanges.add(new PriceRange(start, end));
-            } else if (values.length == 1) {
+            } else if (start == 100001) {
                 // 상한 값이 무한대인 경우를 처리합니다
                 end = Integer.MAX_VALUE;
                 priceRanges.add(new PriceRange(start, end));
@@ -82,6 +82,8 @@ public class WineService {
         if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isBlank(food)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByCountryAndListAndPrice(country, list, price, priceRanges.get(0).getEnd(), pageable);
+        } else if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list)) {
+            return this.wineRepository.findByCountryAndList(country, list, pageable);
         } else if (StringUtils.isNotBlank(country) && !priceRanges.isEmpty() && StringUtils.isBlank(food) && StringUtils.isBlank(list)) {
             int price = priceRanges.get(0).getStart();
             return this.wineRepository.findByCountryAndPrice(country, price, priceRanges.get(0).getEnd(), pageable);

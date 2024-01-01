@@ -53,8 +53,15 @@ public class ReviewService {
         this.reviewRepository.delete(review);
     }
 
-    public List<Review> getMyReview(Member member){
-        List<Review> myReview = reviewRepository.findByUsername(member);
-        return myReview;
+    public List<Review> getMyReview(String username){
+        List<Review> reviewList = reviewRepository.findAll();
+
+        ArrayList<Review> reviews = new ArrayList<>();
+        for (Review r : reviewList){
+            if (r.getMember().getUsername().equals(username)){
+                reviews.add(r);
+            }
+        }
+        return reviews;
     }
 }

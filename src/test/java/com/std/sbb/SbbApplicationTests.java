@@ -84,7 +84,6 @@ class SbbApplicationTests {
         }
     }
 
-
     @Test
     void testJpa() {
         for (int i = 1; i <= 100; i++) {

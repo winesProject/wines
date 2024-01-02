@@ -47,9 +47,7 @@ public class MemberService {
     }
 
     public Member modifyPw(Member member, String password) {
-        member = Member.builder()
-                .password(passwordEncoder.encode(password))
-                .build();
+        member.setPassword(passwordEncoder.encode(password));
         this.memberRepository.save(member);
         return member;
     }
@@ -75,6 +73,9 @@ public class MemberService {
         } else {
             throw new RuntimeException("회원 정보가 존재하지 않습니다.");
         }
+    }
+    public Optional<Member> getMemberByEmail(String email) {
+        return Optional.ofNullable(this.memberRepository.findByEmail(email));
     }
 
     public boolean toggleHeart(Long id, String username) {

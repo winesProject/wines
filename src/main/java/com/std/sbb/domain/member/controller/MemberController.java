@@ -8,7 +8,6 @@ import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.review.service.ReviewService;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.service.WineService;
-import com.std.sbb.global.security.UserSecurityService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -21,13 +20,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @RequiredArgsConstructor
@@ -39,7 +38,6 @@ public class MemberController {
     private final WineService wineService;
     private final PasswordEncoder passwordEncoder;
     private final ReviewService reviewService;
-    private UserSecurityService userSecurityService;
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
@@ -55,8 +53,23 @@ public class MemberController {
 
     @PostMapping("/signup")
     public String signup(@Valid MemberForm memberForm, BindingResult bindingResult, Model model) {
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*\\W).{8,16}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(memberForm.getPassword1());
+        if (!matcher.matches()) {
+            bindingResult.rejectValue("password1", "passwordPatternError", "영문 소문자, 숫자, 특수문자를 사용하세요.");
+            model.addAttribute("errorMessagePatternPw", "비밀번호는 8~16자 영문 소문자, 숫자, 특수문자를 사용하세요.");
+            return "signup_form";
+        }
         if (!memberForm.getPassword1().equals(memberForm.getPassword2())) {
+            bindingResult.rejectValue("password2", "passwordInCorrect", "비밀번호 일치하지 않습니다");
             model.addAttribute("errorMessagePw", "비밀번호가 일치하지 않습니다");
+            return "signup_form";
+        }
+        Optional<Member> optionalMember = memberService.getMemberByEmail(memberForm.getEmail());
+        if (optionalMember.isPresent()) {
+            bindingResult.rejectValue("email", "emailExistError", "해당 이메일은 이미 사용중입니다");
+            model.addAttribute("existEmailError", "해당 이메일은 이미 사용중입니다");
             return "signup_form";
         }
         try {
@@ -76,8 +89,8 @@ public class MemberController {
                     null);
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
-            model.addAttribute("errorMessage", "이미 사용중인 ID입니다");
+            bindingResult.reject("signupFailed", "이미 등록된 ID입니다.");
+            model.addAttribute("errorIDMessage", "이미 사용중인 ID입니다");
             return "signup_form";
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +102,6 @@ public class MemberController {
         emailService.send(memberForm.getEmail(), "서비스 가입을 환영합니다!", "회원가입 환영 메일");
         return "redirect:/";
     }
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/favorites")
     public String favorites(Model model, Principal principal) {
@@ -134,18 +146,27 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/detail/modifyPw")
-    public String modifyPassword(@Valid MemberPwForm memberPwForm, BindingResult bindingResult, Principal principal) {
+    public String modifyPassword(@Valid MemberPwForm memberPwForm, BindingResult bindingResult, Principal principal, Model model) {
         Member member = this.memberService.getMember(principal.getName());
         if (bindingResult.hasErrors()) {
             return "modify_pw";
         }
         if (!passwordEncoder.matches(memberPwForm.getPassword(), member.getPassword())) {
             bindingResult.rejectValue("password", "passwordNotMatch", "기존 비밀번호가 일치하지 않습니다.");
+            model.addAttribute("passwordNotMatchError", "기존 비밀번호가 일치하지 않습니다.");
+            return "modify_pw";
+        }
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*\\W).{8,16}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(memberPwForm.getNewPassword());
+        if (!matcher.matches()) {
+            bindingResult.rejectValue("newPassword", "passwordPatternError", "영문 소문자, 숫자, 특수문자를 사용하세요.");
+            model.addAttribute("errorMessagePatternPw", "비밀번호는 8~16자 영문 소문자, 숫자, 특수문자를 사용하세요.");
             return "modify_pw";
         }
         if (!memberPwForm.getNewPassword().equals(memberPwForm.getPasswordConfirm())) {
-            bindingResult.rejectValue("passwordConfirm", "passwordInCorrect",
-                    "2개의 비밀번호가 일치하지 않습니다.");
+            bindingResult.rejectValue("passwordConfirm", "passwordInCorrect", "비밀번호 일치하지 않습니다");
+            model.addAttribute("errorMessagePw", "비밀번호가 일치하지 않습니다");
             return "modify_pw";
         }
         this.memberService.modifyPw(member, memberPwForm.getPasswordConfirm());
@@ -218,6 +239,7 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 계정이 없습니다.");
         }
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/review")
     public String answer(Model model, Principal principal) {
@@ -225,5 +247,17 @@ public class MemberController {
 
         model.addAttribute("myReviewList", myReviewList);
         return "member_review";
+    }
+//    @PostMapping("/confirmEmail")
+//    public ResponseEntity<String> handleConfirmation(@RequestParam("confirmed") boolean confirmed) {
+//        if (confirmed) {
+//            return ResponseEntity.ok("인증되었습니다.");
+//        } else {
+//            return ResponseEntity.badRequest().body("인증에 실패했습니다.");
+//        }
+//    }
+    @GetMapping("/tos")
+    public String termsOfService() {
+        return "terms_of_service";
     }
 }

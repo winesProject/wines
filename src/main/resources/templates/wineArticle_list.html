@@ -168,24 +168,24 @@
         </div>
     </div>
     <!--  페이징  -->
-    <nav th:if="${!paging.isEmpty()}" th:with="kwBase = '?kw=' + ${param.kw != null ? param.kw : ''}">
+    <nav th:if="${!paging.isEmpty()}" th:with="kwBase = '?kw=' + ${param.kw != null ? param.kw : ''} + '&list=' + ${param.list != null ? param.list : ''} + '&country=' + ${param.country != null ? param.country : ''} + '&price=' + ${param.price != null ? param.price : ''} + '&food=' + ${param.food != null ? param.food : ''}">
         <ul class="pagination flex -space-x-px text-base h-10 justify-center my-12">
             <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
                 <a th:unless="${!paging.hasPrevious()}"
-                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700"
                    th:href="@{|${kwBase}&page=${paging.number - 1}&searchType=${searchType}|}">이전</a>
             </li>
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:classappend="${page == paging.number} ? 'active'"
+            <li th:each="pageNumber: ${#numbers.sequence(paging.number - 5, paging.number + 5)}"
+                th:if="${pageNumber >= 0 and pageNumber < paging.totalPages}"
+                th:classappend="${pageNumber == paging.number} ? 'active'"
                 class="page-item">
-                <a th:text="${page + 1}"
-                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                   th:href="@{|${kwBase}&page=${page}&searchType=${searchType}|}"></a>
+                <a th:text="${pageNumber + 1}"
+                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                   th:href="@{|${kwBase}&page=${pageNumber}&searchType=${searchType}|}"></a>
             </li>
             <li th:classappend="${!paging.hasNext} ? 'disabled'">
                 <a th:unless="${!paging.hasNext()}"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700"
                    th:href="@{|${kwBase}&page=${paging.number + 1}&searchType=${searchType}|}">다음</a>
             </li>
         </ul>

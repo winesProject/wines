@@ -1,9 +1,6 @@
 package com.std.sbb.domain.member.form;
 
-import com.std.sbb.global.jpa.BaseEntity;
-
 import jakarta.validation.constraints.Email;
-
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -31,5 +28,4 @@ public class MemberForm {
     private Integer confirmEmail;
     private String gender;
     private String birthDate;
-
 }

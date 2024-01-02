@@ -1,6 +1,5 @@
 package com.std.sbb.domain.wine.entity;
 
-import com.std.sbb.domain.category.entity.Category;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.review.entity.Review;
 import com.std.sbb.domain.taste.entity.Taste;
@@ -40,12 +39,9 @@ public class Wine extends BaseEntity {
     private Integer score;
     private String food;
     //음식
-    private String image;
 
     @OneToOne
     private Board board;
-
-    private Boolean favorites;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Taste taste;
@@ -55,9 +51,6 @@ public class Wine extends BaseEntity {
 
     @ManyToMany
     Set<Member> member;
-
-    @ManyToMany
-    private List<Category> categories;
 
     public boolean checkedHeartClickMember(String userName) {
         for (Member m : member) {

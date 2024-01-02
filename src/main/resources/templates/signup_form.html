@@ -64,9 +64,13 @@
             <div id="email_number" name="email_number" class="mt-8">
                 <input type="number" name="number" id="number" placeholder="인증번호 입력"
                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" class="absolute bottom-0.5 right-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                <button type="button" data-tooltip-target="tooltip-default" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" class="absolute bottom-0.5 right-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
                 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">이메일 인증
                 </button>
+                <div id="tooltip-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    인증요청을 보내세요
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </div>
         </div>
         <!--      성별 선택      -->
@@ -138,10 +142,14 @@
         </div>
         <!--    체크박스 끝    -->
         <div class="flex justify-end">
-            <button th:href="@{/member/signup}" type="submit" name="signupBtn" id="signupBtn"
+            <button th:href="@{/member/signup}" data-tooltip-target="tooltip-default2" type="submit" name="signupBtn" id="signupBtn"
                     class="text-white bg-indigo-800 w-28 mb-4 hover:bg-indigo-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 가입하기
             </button>
+            <div id="tooltip-default2" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                회원가입에 필요한 정보를 모두 기입 후 제출해주세요
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
         </div>
     </form>
 </div>
@@ -152,6 +160,15 @@
 <script type="text/javascript">
     document.getElementById("confirmBtn").disabled = true;
     document.getElementById("signupBtn").disabled = true;
+
+    function hideTooltip() {
+    var tooltip = document.getElementById('tooltip-default');
+    tooltip.style.display = 'none';
+    }
+    function hideTooltip2() {
+    var tooltip2 = document.getElementById('tooltip-default2');
+    tooltip2.style.display = 'none';
+    }
 
     function sendNumber() {
         var token = $("meta[name='_csrf']").attr("content");
@@ -172,6 +189,7 @@
                 alert("인증번호 발송");
                 document.getElementById("confirmBtn").disabled = false;
                 $("#number").attr("data-confirm", data);
+                hideTooltip();
             },
             error: function (xhr, status, error) {
                 console.log('error:' + error);
@@ -185,6 +203,7 @@
         if (number1 == number2) {
             alert("인증되었습니다.");
             $('#signupBtn').prop('disabled', false);
+            hideTooltip2();
         } else {
             alert("번호가 다릅니다.");
         }

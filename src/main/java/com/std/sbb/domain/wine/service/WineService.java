@@ -76,7 +76,7 @@ public class WineService {
     public Page<Wine> getList(String food, List<PriceRange> priceRanges, String country, String list, SearchType searchType, String kw, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         Specification<Wine> spec = _search(food, priceRanges, country, list, searchType, kw);
 
         if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isBlank(food)) {

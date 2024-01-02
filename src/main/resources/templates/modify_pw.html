@@ -21,13 +21,13 @@
     </div>
     <form class="max-w-sm mx-auto my-8" th:object="${memberPwForm}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <div class="mb-4">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">기존 비밀번호
             </label>
             <input type="password" id="password" th:field="*{password}"
                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                    required>
+            <span id="passwordNotMatchError" class="error text-red-600" th:if="${passwordNotMatchError}" th:text="${passwordNotMatchError}"></span>
             <div class="text-sm text-right mt-2 font-medium text-gray-500 dark:text-gray-300">
                 비밀번호가 기억안나시나요? <a th:href="@{/member/passwordSearch}" class="text-blue-700 hover:underline dark:text-blue-500">
                 비밀번호 찾기</a>
@@ -39,6 +39,7 @@
             <input type="password" id="newPassword" th:field="*{newPassword}"
                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                    required>
+            <span id="errorPatternPw" class="error text-red-600" th:if="${errorMessagePatternPw}" th:text="${errorMessagePatternPw}"></span>
         </div>
         <div class="relative mb-5">
             <label for="passwordConfirm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호 확인
@@ -46,6 +47,7 @@
             <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}"
                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                    required>
+            <span id="passwordMatchError" class="error text-red-600" th:if="${errorMessagePw}" th:text="${errorMessagePw}"></span>
         </div>
         <div class="flex justify-end">
             <button type="submit"

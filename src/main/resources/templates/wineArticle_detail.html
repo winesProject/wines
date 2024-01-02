@@ -244,7 +244,7 @@
                     <label for="value1"
                            class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
                 </div>
-                <button type="submit"
+                <button sec:authorize="isAuthenticated()" type="submit"
                         class="inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-yellow-900 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900">
                     리뷰 등록
                 </button>

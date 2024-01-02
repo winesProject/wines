@@ -47,9 +47,9 @@ public class ReviewController {
     @PostMapping("/create/{id}")
     public String create(@Valid ReviewForm reviewForm, BindingResult bindingResult,
                          @PathVariable("id") Long id, Principal principal) {
-//    if (bindingResult.hasErrors()) {
-//        return String.format("redirect:/article/detail/%s", id);
-//    }
+    if (bindingResult.hasErrors()) {
+        return String.format("redirect:/article/detail/%s", id);
+    }
         Wine wine = this.wineService.getWine(id);
         Member member = this.memberService.getMember(principal.getName());
         this.reviewService.create(wine, reviewForm.getContent(), reviewForm.getScore(), member);

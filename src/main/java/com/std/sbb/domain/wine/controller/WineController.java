@@ -155,7 +155,6 @@ public class WineController {
     @PostMapping("/csrf/ajax")
     @ResponseBody
     public CsrfVO csrfAJAXSubmit(@RequestBody CsrfVO csrfVO) {
-
         return csrfVO;
     }
 }

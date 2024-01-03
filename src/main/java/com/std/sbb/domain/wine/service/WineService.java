@@ -1,5 +1,6 @@
 package com.std.sbb.domain.wine.service;
 
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
@@ -11,7 +12,6 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -76,7 +76,7 @@ public class WineService {
     public Page<Wine> getList(String food, List<PriceRange> priceRanges, String country, String list, SearchType searchType, String kw, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         Specification<Wine> spec = _search(food, priceRanges, country, list, searchType, kw);
 
         if (StringUtils.isNotBlank(country) && StringUtils.isNotBlank(list) && !priceRanges.isEmpty() && StringUtils.isBlank(food)) {

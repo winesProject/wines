@@ -10,6 +10,7 @@ import com.std.sbb.domain.wine.service.WineService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class ReviewController {
     private final MemberService memberService;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
         List<Review> paging = this.reviewService.getList(page);
         model.addAttribute("paging", paging);
         return "wineArticle_detail";
@@ -53,16 +54,18 @@ public class ReviewController {
         Wine wine = this.wineService.getWine(id);
         Member member = this.memberService.getMember(principal.getName());
         this.reviewService.create(wine, reviewForm.getContent(), reviewForm.getScore(), member);
-        return String.format("redirect:/article/detail/%s", id);
+        return String.format("redirect:/article/detail/%s#review_%s", id, reviewForm.getId());
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/like/{id}")
-    public String like(Principal principal, @PathVariable("id") Long id) {
+    @ResponseBody
+    public ResponseEntity<String> like(Principal principal, @PathVariable("id") Long id) {
         Review review = this.reviewService.getReview(id);
         Member member = this.memberService.getMember(principal.getName());
         this.reviewService.like(review, member);
-        return String.format("redirect:/article/detail/%s", review.getWine().getId());
+
+        return ResponseEntity.ok("success");
     }
 
     @PreAuthorize("isAuthenticated()")

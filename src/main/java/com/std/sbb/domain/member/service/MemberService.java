@@ -36,12 +36,10 @@ public class MemberService {
     }
 
     public Member modify(Member member, String name, String phoneNumber, String email) {
-        member = Member.builder()
-                .name(name)
-                .phoneNumber(phoneNumber)
-                .email(email)
-                .modifyDate(LocalDateTime.now())
-                .build();
+        member.setName(name);
+        member.setPhoneNumber(phoneNumber);
+        member.setEmail(email);
+        member.setModifyDate(LocalDateTime.now());
 
         return memberRepository.save(member);
     }

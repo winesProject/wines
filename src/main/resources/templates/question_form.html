@@ -12,14 +12,15 @@
         </ul>
     </div>
     <form th:action="@{/question/create}" th:object="${questionForm}" method="post" class="max-w-3xl mx-auto my-8">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <div>
             <label for="article" class="block mb-2 text-base font-medium text-gray-900 dark:text-dark">제목</label>
-            <input type="text" name="article" id="article"
+            <input type="text" th:field="*{article}"
                    class="block w-full p-2 py-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         </div>
         <div class="my-5">
             <label for="content" class="block mb-2 text-base font-medium text-gray-900 dark:text-dark">내용</label>
-            <textarea id="content" name="content" low="15"
+            <textarea th:field="*{content}" low="15"
                       class="block h-72 w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
         </div>
         <div class="flex justify-end">

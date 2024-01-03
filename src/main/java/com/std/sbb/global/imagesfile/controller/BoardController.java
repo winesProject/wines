@@ -14,13 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
 
     private final BoardService boardService;
-//
-//    @PostMapping("/board")
-//    public ResponseEntity<?> createBoard(@Validated @RequestParam("files") List<MultipartFile> files) throws Exception {
-//
-//            boardService.addBoard(files);
-//        return ResponseEntity.ok().build();
-//    }
 
     @GetMapping("/board")
     public String getBoard(@RequestParam long id) {

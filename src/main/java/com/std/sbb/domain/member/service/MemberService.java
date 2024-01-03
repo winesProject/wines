@@ -72,6 +72,7 @@ public class MemberService {
             throw new RuntimeException("회원 정보가 존재하지 않습니다.");
         }
     }
+
     public Optional<Member> getMemberByEmail(String email) {
         return Optional.ofNullable(this.memberRepository.findByEmail(email));
     }
@@ -108,5 +109,17 @@ public class MemberService {
         } else {
             return false;
         }
+    }
+
+    public boolean getMemberByUsernameAndPassword(String username, String password) {
+        Optional<Member> om = this.memberRepository.findByUsername(username);
+        if (om.isPresent()) {
+            Member member = om.get();
+            String encodedPasswordFromDB = member.getPassword();
+            boolean isPasswordMatch = passwordEncoder.matches(password, encodedPasswordFromDB);
+
+            return isPasswordMatch;
+        }
+        return false;
     }
 }

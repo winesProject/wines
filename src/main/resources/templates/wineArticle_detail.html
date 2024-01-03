@@ -101,7 +101,6 @@
         </tr>
         <tr th:each="review : ${wine.reviewList}"
             class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <a th:id="|review_${review.id}|"></a>
             <td class="px-3">
                 <div th:if="${#authorization.expression('isAuthenticated()') and review.member != null and #authentication.getPrincipal().getUsername() == review.member.username}"
                      onclick="return confirm('정말 삭제 하시겠습니까?');">

@@ -30,7 +30,7 @@ public class ReviewController {
     private final MemberService memberService;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
         List<Review> paging = this.reviewService.getList(page);
         model.addAttribute("paging", paging);
         return "wineArticle_detail";
@@ -54,7 +54,7 @@ public class ReviewController {
         Wine wine = this.wineService.getWine(id);
         Member member = this.memberService.getMember(principal.getName());
         this.reviewService.create(wine, reviewForm.getContent(), reviewForm.getScore(), member);
-        return String.format("redirect:/article/detail/%s#review_%s", id, reviewForm.getId());
+        return String.format("redirect:/article/detail/%s", id);
     }
 
     @PreAuthorize("isAuthenticated()")

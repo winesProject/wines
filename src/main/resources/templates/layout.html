@@ -220,7 +220,10 @@
                 xhr.setRequestHeader(header, token);
             },
             success: function (data) {
-                _this.find(".recommend_review_count").text(res);
+                var likeCountSpan = _this.find(".recommend_review_count");
+                var currentCount = parseInt(likeCountSpan.text());
+                var newCount = currentCount + 1;
+                likeCountSpan.text(newCount);
             },
             error: function (xhr, status, error) {
                 console.log('error:' + error);

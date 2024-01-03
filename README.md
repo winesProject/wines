@@ -1,5 +1,5 @@
 # 🍷 wine's
-- Wine's는 와인을 좋아하고 관심있는 사람들이 모여 공유할 수 있는 웹사이트입니다.
+- Wine's는 와인을 좋아하고 관심있는 사람들이 모여 정보를 공유할 수 있는 웹사이트입니다.
 <p align="center"><img width="700" src="https://github.com/winesProject/wines/assets/133175842/38a04926-d61b-4ceb-893c-c65b0d799f79"></p>
 
 ## 1. 프로젝트 소개
@@ -8,7 +8,80 @@
 > 와인을 쉽게 접하며 즐길수 있도록 하면 어떨까? 라는 생각이 들어 프로젝트를 기획하게되었습니다.
 </br>
 
-## 2. 개발환경
+## 2. 프로젝트 구조
+```
+   src
+    ├── main
+    │   ├── generated
+    │   ├── java
+    │   │   └── com
+    │   │       └── std
+    │   │           └── sbb
+    │   │               ├── domain
+    │   │               │   ├── answer
+    │   │               │   │   ├── controller
+    │   │               │   │   ├── entity
+    │   │               │   │   ├── form
+    │   │               │   │   ├── repository
+    │   │               │   │   └── service
+    │   │               │   ├── email
+    │   │               │   │   ├── controller
+    │   │               │   │   └── service
+    │   │               │   ├── member
+    │   │               │   │   ├── controller
+    │   │               │   │   ├── entity
+    │   │               │   │   ├── form
+    │   │               │   │   ├── repository
+    │   │               │   │   └── service
+    │   │               │   ├── question
+    │   │               │   │   ├── controller
+    │   │               │   │   ├── entity
+    │   │               │   │   ├── form
+    │   │               │   │   ├── repository
+    │   │               │   │   └── service
+    │   │               │   ├── review
+    │   │               │   │   ├── controller
+    │   │               │   │   ├── entity
+    │   │               │   │   ├── form
+    │   │               │   │   ├── repository
+    │   │               │   │   └── service
+    │   │               │   ├── taste
+    │   │               │   │   ├── entity
+    │   │               │   │   ├── form
+    │   │               │   │   ├── repository
+    │   │               │   │   └── service
+    │   │               │   └── wine
+    │   │               │       ├── controller
+    │   │               │       ├── entity
+    │   │               │       ├── form
+    │   │               │       ├── repository
+    │   │               │       ├── searchType
+    │   │               │       └── service
+    │   │               └── global
+    │   │                   ├── imagesfile
+    │   │                   │   ├── config
+    │   │                   │   ├── controller
+    │   │                   │   ├── entity
+    │   │                   │   ├── repository
+    │   │                   │   └── service
+    │   │                   ├── initDate
+    │   │                   ├── jpa
+    │   │                   ├── rq
+    │   │                   ├── security
+    │   │                   └── standard
+    │   │                       └── utill
+    │   └── resources
+    │       ├── static
+    │       │   └── images
+    │       └── templates
+    └── test
+        └── java
+            └── com
+                └── std
+                    └── sbb
+
+```
+## 3. 개발환경
 <div align="center">
 <p style="font-size:20px;">💻 Tech Stack 💻</p>
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"/>
@@ -29,9 +102,24 @@
 <img src="https://img.shields.io/badge/dbeaver-382923?style=flat&logo=dbeaver&logoColor=white">
 </div>
 
-## 3. ERD 설계
+## 4. ERD 설계
 <p align="center"><img width="900" src="https://github.com/winesProject/wines/assets/133175842/34e4b2cd-c5a7-4591-9a34-5d633dfe5956"></p>
 
-## 4. 시연 영상
+## 5. 시연 영상
 
-## 5. 트러블 슈팅
+## 6. 트러블 슈팅
+<details>
+<summary>💥 최경현 </summary>
+  내용
+<br/>
+</details>
+<details>
+<summary>💥 서정헌 </summary>
+  내용
+<br/>
+</details>
+<details>
+<summary>💥 박유진 </summary>
+  내용
+<br/>
+</details>

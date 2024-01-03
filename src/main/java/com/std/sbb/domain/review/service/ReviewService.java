@@ -27,7 +27,7 @@ public class ReviewService {
         return this.reviewRepository.findAll();
     }
 
-    public void create(Wine wine, String content, Integer score, Member member) {
+    public Review create(Wine wine, String content, Integer score, Member member) {
         Review review = Review
                 .builder()
                 .wine(wine)
@@ -37,6 +37,7 @@ public class ReviewService {
                 .member(member)
                 .build();
         this.reviewRepository.save(review);
+        return review;
     }
 
     public Review getReview(Long id) {

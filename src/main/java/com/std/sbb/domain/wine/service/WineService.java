@@ -1,5 +1,6 @@
 package com.std.sbb.domain.wine.service;
 
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.std.sbb.domain.taste.entity.Taste;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
@@ -11,7 +12,6 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

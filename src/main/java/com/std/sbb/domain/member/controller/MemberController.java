@@ -41,8 +41,20 @@ public class MemberController {
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
-    public String login() {
+    public String login(LogInForm logInForm) {
         return "login_form";
+    }
+
+    @PostMapping("/userCheck")
+    @ResponseBody
+    public ResponseEntity<String> login(@Valid LogInForm logInForm, BindingResult bindingResult) {
+        boolean isAuthenticated = memberService.getMemberByUsernameAndPassword(logInForm.getUsername(), logInForm.getPassword());
+
+        if (!isAuthenticated) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": true}");
+        } else {
+            return ResponseEntity.ok("로그인 성공!");
+        }
     }
 
     @GetMapping("/signup")

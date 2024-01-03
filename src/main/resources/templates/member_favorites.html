@@ -20,10 +20,13 @@
         </ul>
     </div>
     <div class="flex justify-center">
-        <div class="w-3/4">
+        <div class="w-3/4" id="favoritesContainer" name="favoritesContainer">
             <div class="mt-8 border-4 p-4"
                  th:if="${wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername())}"
                  th:each="wine : ${paging}">
+                <div class="text-center" th:if="${#lists.isEmpty(wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername()))}">
+                    <h1 class="text-3xl my-16 font-extrabold dark:text-dark">찜한 와인이 존재하지 않습니다.</h1>
+                </div>
                 <div role="status"
                      class="space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                     <div class="flex items-center justify-center w-full h-48 rounded sm:w-96">
@@ -167,10 +170,12 @@
             success: function (data) {
                 if (data.isLiked) {
                     heartIcon.textContent = "♥";
-                    alert('찜 목록에 담았습니다♥')
+                    alert('찜 목록에 담았습니다♥');
+                    updateList();
                 } else {
                     heartIcon.textContent = "♡";
-                    alert('찜 목록에서 해당 와인이 제거되었습니다♡')
+                    alert('찜 목록에서 해당 와인이 제거되었습니다♡');
+                    updateList();
                 }
             },
             error: function (xhr, status, error) {

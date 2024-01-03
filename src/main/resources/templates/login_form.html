@@ -3,7 +3,7 @@
     <div class="text-center">
         <h1 class="m-5 text-4xl">로그인</h1>
     </div>
-    <form th:action="@{/member/login}" th:object="${logInForm}" method="post" class="max-w-sm mx-auto my-16">
+    <form th:object="${logInForm}" method="post" class="max-w-sm mx-auto my-16">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <div class="mb-5">
@@ -39,7 +39,7 @@
                     <span>아이디 찾기</span>
                 </a>
                 <span class="mx-1">|</span>
-                <a th:href="@{/member/search}" class="px-2">
+                <a th:href="@{/member/passwordSearch}" class="px-2">
                     <span>비밀번호 찾기</span>
                 </a>
             </div>

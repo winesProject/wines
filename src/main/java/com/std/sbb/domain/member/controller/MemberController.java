@@ -260,14 +260,25 @@ public class MemberController {
         model.addAttribute("myReviewList", myReviewList);
         return "member_review";
     }
-//    @PostMapping("/confirmEmail")
-//    public ResponseEntity<String> handleConfirmation(@RequestParam("confirmed") boolean confirmed) {
-//        if (confirmed) {
-//            return ResponseEntity.ok("인증되었습니다.");
-//        } else {
-//            return ResponseEntity.badRequest().body("인증에 실패했습니다.");
-//        }
-//    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/quit")
+    public String quit(LogInForm logInForm, Model model, Principal principal) {
+        Member member = this.memberService.getMember(principal.getName());
+        model.addAttribute("member", member);
+        return "member_quit";
+    }
+    @PostMapping("/quitUser")
+    @ResponseBody
+    public ResponseEntity<String> quitUser(Principal principal) {
+        Member member = this.memberService.getMember(principal.getName());
+        if (member != null) {
+            this.memberService.quit(member);
+            return ResponseEntity.ok("회원탈퇴가 완료되었습니다");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\": true}");
+        }
+    }
     @GetMapping("/tos")
     public String termsOfService() {
         return "terms_of_service";

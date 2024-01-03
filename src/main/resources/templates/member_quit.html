@@ -99,14 +99,6 @@
 </html>
 
 <script type="text/javascript">
-    document.getElementById("confirmBtn").disabled = false;
-    document.getElementById("quitBtn").disabled = true;
-
-    function hideTooltip() {
-    var tooltip = document.getElementById('tooltip-default');
-    tooltip.style.display = 'none';
-    }
-
     function validateCheckbox() {
     var checkBox = document.getElementById("terms");
 
@@ -116,6 +108,29 @@
         return false;
         }
     }
+
+    var confirmBtn = document.getElementById("confirmBtn");
+    var quitBtn = document.getElementById("quitBtn");
+
+    confirmBtn.disabled = true; // 페이지 로드 시 confirmBtn은 비활성화되어 있음
+    quitBtn.disabled = true; // 페이지 로드 시 quitBtn은 비활성화되어 있음
+
+    document.getElementById("terms").addEventListener("change", function() {
+    if (validateCheckbox()) {
+        confirmBtn.disabled = false; // 체크박스가 선택되면 confirmBtn 활성화
+        quitBtn.disabled = true; // 체크박스가 선택되면 quitBtn 비활성화
+    } else {
+        confirmBtn.disabled = true; // 체크박스가 선택되지 않으면 confirmBtn 비활성화
+        quitBtn.disabled = true; // 체크박스가 선택되지 않으면 quitBtn 비활성화
+    }
+});
+
+    function hideTooltip() {
+    var tooltip = document.getElementById('tooltip-default');
+    tooltip.style.display = 'none';
+    }
+
+
 
     function checkUserPw() {
         var token = $("meta[name='_csrf']").attr("content");

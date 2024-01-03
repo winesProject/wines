@@ -1599,28 +1599,596 @@ class SbbApplicationTests {
         }
     }
     @Test
-    @DisplayName("와인 데이터 호주 화이투")
+    @DisplayName("와인 데이터 호주 화이트")
     void test59() throws Exception {
-        String filePath1 = "/static/images/AUR 펜폴즈, 그랜지.png"; // 클래스패스 상의 경로
+        String filePath1 = "/static/images/AUW 가트, 리슬링.jpg"; // 클래스패스 상의 경로
         // 파일 경로에서 InputStream 생성
         InputStream inputStream = getClass().getResourceAsStream(filePath1);
         byte[] content = inputStream.readAllBytes();
-        MultipartFile multipartFile = new MockMultipartFile("file", "AUR 펜폴즈, 그랜지.png", "image/png", content);
+        MultipartFile multipartFile = new MockMultipartFile("file", "AUW 가트, 리슬링.jpg", "image/jpeg", content);
         List<Board> boards = boardService.addBoard(List.of(multipartFile));
 
         for (Board board : boards) {
             Wine w = Wine.builder()
-                    .wineName("펜폴즈, 그랜지")
-                    .wineNameE("Penfolds, Grange")
+                    .wineName("가트, 리슬링")
+                    .wineNameE("Gatt, Riesling")
                     .country("호주")
-                    .list("레드")
-                    .price(1500000)
-                    .food("샐러드,치즈")
-                    .score(5)
-                    .kind("시라/쉬라즈 98%, 카베르네 소비뇽 2%")
+                    .list("화이트")
+                    .price(110000)
+                    .food("샐러드,치즈,해산물")
+                    .score(4)
+                    .kind("리슬링 100%")
                     .board(board)
                     .createDate(LocalDateTime.now())
-                    .taste(tasteService.create(1, 5, 4, 5))
+                    .taste(tasteService.create(2, 3, 4, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 호주 화이트")
+    void test60() throws Exception {
+        String filePath1 = "/static/images/AUW 펜폴즈, 야타나 샤도네이.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "AUW 펜폴즈, 야타나 샤도네이.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("펜폴즈, 야타나 샤도네이")
+                    .wineNameE("Penfolds, Yattarna Chardonnay")
+                    .country("호주")
+                    .list("화이트")
+                    .price(550000)
+                    .food("해산물")
+                    .score(4)
+                    .kind("샤르도네 100%")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 4, 4, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 호주 스파클링")
+    void test61() throws Exception {
+        String filePath1 = "/static/images/AUS 글리터 어스.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "AUS 글리터 어스.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("글리터 어스")
+                    .wineNameE("Glitter Us")
+                    .country("호주")
+                    .list("스파클링")
+                    .price(120000)
+                    .food("해산물,과일,치즈,샐러드,디저트")
+                    .score(3)
+                    .kind("베르멘티노, 리슬링")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 2, 4, 2))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 호주 스파클링")
+    void test62() throws Exception {
+        String filePath1 = "/static/images/AUS 낫 데디.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "AUS 낫 데디.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("낫 데디")
+                    .wineNameE("Nat Daddy")
+                    .country("호주")
+                    .list("스파클링")
+                    .price(120000)
+                    .food("해산물,과일,치즈,샐러드,디저트")
+                    .score(3)
+                    .kind("소비뇽 블랑, 시라/쉬라즈")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 2, 3, 2))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 호주 로제")
+    void test63() throws Exception {
+        String filePath1 = "/static/images/AURo 그랜트 버지, 모스카토 로사.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "AURo 그랜트 버지, 모스카토 로사.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("그랜트 버지, 모스카토 로사")
+                    .wineNameE("Grant Burge, Moscato Rosa")
+                    .country("호주")
+                    .list("로제")
+                    .price(45000)
+                    .food("치즈")
+                    .score(3)
+                    .kind("모스카토 로사")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(4, 2, 2, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 호주 로제")
+    void test64() throws Exception {
+        String filePath1 = "/static/images/AURo 제이콥스 크릭, 르 쁘띠 로제.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "AURo 제이콥스 크릭, 르 쁘띠 로제.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("제이콥스 크릭, 르 쁘띠 로제")
+                    .wineNameE("Jacob's Creek, Le Petit Rose")
+                    .country("호주")
+                    .list("로제")
+                    .price(35000)
+                    .food("해산물,샐러드")
+                    .score(4)
+                    .kind("그르나슈 , 피노 누아 , 모나스트렐")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(2, 3, 2, 2))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 호주 주정강화")
+    void test65() throws Exception {
+        String filePath1 = "/static/images/AUJ 하셀그로브, 디 올드넛 토니 포트.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "AUJ 하셀그로브, 디 올드넛 토니 포트.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("하셀그로브, 디 올드넛 토니 포트")
+                    .wineNameE("Haselgrove, The Old Nut Tawny Port")
+                    .country("호주")
+                    .list("주정강화")
+                    .price(101000)
+                    .food("디저트")
+                    .score(5)
+                    .kind("시라/쉬라즈 , 그르나슈 , 샤르도네")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(5, 2, 5, 2))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 호주 주정강화")
+    void test66() throws Exception {
+        String filePath1 = "/static/images/AUJ 앙고브, 그랜드 토니 10년.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "AUJ 앙고브, 그랜드 토니 10년.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("앙고브, 그랜드 토니 10년")
+                    .wineNameE("Angove, Grand Tawny 10years")
+                    .country("호주")
+                    .list("주정강화")
+                    .price(75000)
+                    .food("디저트,치즈")
+                    .score(5)
+                    .kind("블렌드")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(5, 2, 5, 2))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+
+    @Test
+    @DisplayName("와인 데이터 칠레 레드")
+    void test67() throws Exception {
+        String filePath1 = "/static/images/CR 7 컬러즈, '그랑 리제르바' 카베르네 소비뇽 뮈스카.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CR 7 컬러즈, '그랑 리제르바' 카베르네 소비뇽 뮈스카.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("7 컬러즈, '그랑 리제르바' 카베르네 소비뇽 뮈스카")
+                    .wineNameE("7 Colores, 'Gran Rseserva' Cabernet Sauvignon Muscat")
+                    .country("칠레")
+                    .list("레드")
+                    .price(36000)
+                    .food("소")
+                    .score(4)
+                    .kind("카베르네 소비뇽 , 뮈스까")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 3, 3, 3))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 칠레 레드")
+    void test68() throws Exception {
+        String filePath1 = "/static/images/CR 미션 드 렝고, 뀌베 카베르네 소비뇽.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CR 미션 드 렝고, 뀌베 카베르네 소비뇽.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("미션 드 렝고, 뀌베 카베르네 소비뇽")
+                    .wineNameE("Misiones de Rengo, Cuvee Cabernet Sauvignon")
+                    .country("칠레")
+                    .list("레드")
+                    .price(55000)
+                    .food("소,닭,해산물,치즈")
+                    .score(5)
+                    .kind("카베르네 소비뇽 , 시라/쉬라즈 , 카르메네르")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 3, 4, 4))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 칠레 화이트")
+    void test69() throws Exception {
+        String filePath1 = "/static/images/CW 루이스 펠리페 에드워즈 시그니처 샤도네이.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CW 루이스 펠리페 에드워즈 시그니처 샤도네이.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("루이스 펠리페 에드워즈 시그니처 샤도네이")
+                    .wineNameE("Luis Felipe Edwards Signature Series Chardonnay")
+                    .country("칠레")
+                    .list("화이트")
+                    .price(25000)
+                    .food("샐러드,해산물")
+                    .score(3)
+                    .kind("샤르도네")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 3, 3, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 칠레 화이트")
+    void test70() throws Exception {
+        String filePath1 = "/static/images/CW 콘차이 토로, 디아블로 소비뇽 블랑.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CW 콘차이 토로, 디아블로 소비뇽 블랑.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("콘차이 토로, 디아블로 소비뇽 블랑")
+                    .wineNameE("Concha y Toro, Casillero del Diablo Sauvignon Blanc")
+                    .country("칠레")
+                    .list("화이트")
+                    .price(12800)
+                    .food("샐러드,해산물,닭")
+                    .score(3)
+                    .kind("소비뇽 블랑")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 4, 2, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 칠레 스파클링")
+    void test71() throws Exception {
+        String filePath1 = "/static/images/CS 7 컬러즈, 브륏 샤르마.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CS 7 컬러즈, 브륏 샤르마.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("7 컬러즈, 브륏 샤르마")
+                    .wineNameE("7 Colores, Brut Charmat")
+                    .country("칠레")
+                    .list("스파클링")
+                    .price(36000)
+                    .food("돼지,치즈")
+                    .score(2)
+                    .kind("샤르도네")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 4, 1, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 칠레 스파클링")
+    void test72() throws Exception {
+        String filePath1 = "/static/images/CS  코노 수르, 센티넬라 브뤼.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CS  코노 수르, 센티넬라 브뤼.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("코노 수르, 센티넬라 브뤼")
+                    .wineNameE("Cono Sur, Centinela Brut")
+                    .country("칠레")
+                    .list("스파클링")
+                    .price(28000)
+                    .food("일식,해산물")
+                    .score(4)
+                    .kind("샤르도네")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 4, 3, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 칠레 로제")
+    void test73() throws Exception {
+        String filePath1 = "/static/images/CRo 모란데, 피오네로 로제.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CRo 모란데, 피오네로 로제.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("모란데, 피오네로 로제")
+                    .wineNameE("Morande, Pionero Rose")
+                    .country("칠레")
+                    .list("로제")
+                    .price(25000)
+                    .food("디저트,돼지,소")
+                    .score(3)
+                    .kind("카베르네 소비뇽 , 시라/쉬라즈")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(2, 3, 3, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 칠레 로제")
+    void test74() throws Exception {
+        String filePath1 = "/static/images/CRo 몬테스, 슈럽.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "CRo 몬테스, 슈럽.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("몬테스, 슈럽")
+                    .wineNameE("Montes, Cherub")
+                    .country("칠레")
+                    .list("로제")
+                    .price(37000)
+                    .food("해산물")
+                    .score(2)
+                    .kind("시라/쉬라즈 , 그르나슈")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 3, 2, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 아르헨티나 레드")
+    void test75() throws Exception {
+        String filePath1 = "/static/images/ArR 카네타 자파타, 안젤리카 자파타 말벡.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "ArR 카네타 자파타, 안젤리카 자파타 말벡.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("카네타 자파타, 안젤리카 자파타 말벡")
+                    .wineNameE("Catena Zapata, Angelica Zapata Malbec")
+                    .country("아르헨티나")
+                    .list("레드")
+                    .price(88700)
+                    .food("소,양,치즈")
+                    .score(5)
+                    .kind("말벡")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 4, 4, 5))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 아르헨티나 레드")
+    void test76() throws Exception {
+        String filePath1 = "/static/images/ArR 트라피체, 이스까이 시라 비오니에.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "ArR 트라피체, 이스까이 시라 비오니에.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("트라피체, 이스까이 시라 비오니에")
+                    .wineNameE("Trapiche, Iscay Syrah Viognier")
+                    .country("아르헨티나")
+                    .list("레드")
+                    .price(140000)
+                    .food("치즈")
+                    .score(5)
+                    .kind("시라/쉬라즈 , 비오니에")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 3, 5, 4))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 아르헨티나 화이트")
+    void test77() throws Exception {
+        String filePath1 = "/static/images/ArW 카테나 자파타, 안젤리카 자파타 샤도네이.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "ArW 카테나 자파타, 안젤리카 자파타 샤도네이.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("카테나 자파타, 안젤리카 자파타 샤도네이")
+                    .wineNameE("Catena Zapata, Angelica Zapata Chardonnay")
+                    .country("아르헨티나")
+                    .list("화이트")
+                    .price(83300)
+                    .food("닭,해산물,샐러드")
+                    .score(3)
+                    .kind("샤르도네")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 3, 1, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 아르헨티나 화이트")
+    void test78() throws Exception {
+        String filePath1 = "/static/images/ArW 로렌조 데 아그렐로, 마르티르 샤도네이.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "ArW 로렌조 데 아그렐로, 마르티르 샤도네이.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("로렌조 데 아그렐로, 마르티르 샤도네이")
+                    .wineNameE("Lorenzo de Agrelo, Martir Chardonnay")
+                    .country("아르헨티나")
+                    .list("화이트")
+                    .price(95000)
+                    .food("치즈,샐러드")
+                    .score(3)
+                    .kind("샤르도네")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 3, 1, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 아르헨티나 스파클링")
+    void test79() throws Exception {
+        String filePath1 = "/static/images/ArS 알타 비스타, 비베 스위트 스파클링.png"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "ArS 알타 비스타, 비베 스위트 스파클링.png", "image/png", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("알타 비스타, 비베 스위트 스파클링")
+                    .wineNameE("Alta Vista, Vive Sweet Sparkling")
+                    .country("아르헨티나")
+                    .list("스파클링")
+                    .price(30000)
+                    .food("치즈,과일,디저트")
+                    .score(4)
+                    .kind("토론테스")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(2, 4, 1, 1))
+                    .build();
+            this.wineRepository.save(w);
+        }
+    }
+    @Test
+    @DisplayName("와인 데이터 아르헨티나 스파클링")
+    void test80() throws Exception {
+        String filePath1 = "/static/images/ArS 나바로 꼬레아스, 엑스트라 브뤼.jpg"; // 클래스패스 상의 경로
+        // 파일 경로에서 InputStream 생성
+        InputStream inputStream = getClass().getResourceAsStream(filePath1);
+        byte[] content = inputStream.readAllBytes();
+        MultipartFile multipartFile = new MockMultipartFile("file", "ArS 나바로 꼬레아스, 엑스트라 브뤼.jpg", "image/jpeg", content);
+        List<Board> boards = boardService.addBoard(List.of(multipartFile));
+
+        for (Board board : boards) {
+            Wine w = Wine.builder()
+                    .wineName("나바로 꼬레아스, 엑스트라 브뤼")
+                    .wineNameE("Navarro Correas, Extra Brut")
+                    .country("아르헨티나")
+                    .list("스파클링")
+                    .price(64000)
+                    .food("디저트")
+                    .score(4)
+                    .kind("샤르도네 , 피노 누아")
+                    .board(board)
+                    .createDate(LocalDateTime.now())
+                    .taste(tasteService.create(1, 4, 2, 1))
                     .build();
             this.wineRepository.save(w);
         }

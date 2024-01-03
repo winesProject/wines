@@ -29,7 +29,6 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Member extends BaseEntity {
 
-
     private String name;
 
     private String password;

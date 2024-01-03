@@ -110,7 +110,6 @@ public class MemberService {
             return false;
         }
     }
-
     public boolean getMemberByUsernameAndPassword(String username, String password) {
         Optional<Member> om = this.memberRepository.findByUsername(username);
         if (om.isPresent()) {
@@ -121,5 +120,19 @@ public class MemberService {
             return isPasswordMatch;
         }
         return false;
+    }
+    public boolean checkMemberByPassword (String username, String password) {
+        Optional<Member> om = this.memberRepository.findByUsername(username);
+        if (om.isPresent()) {
+            Member member = om.get();
+            String encodedPasswordFromDB = member.getPassword();
+            boolean isPasswordMatch = passwordEncoder.matches(password, encodedPasswordFromDB);
+
+            return isPasswordMatch;
+        }
+        return false;
+    }
+    public void quit(Member member) {
+        this.memberRepository.delete(member);
     }
 }

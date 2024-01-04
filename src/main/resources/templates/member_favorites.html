@@ -159,24 +159,25 @@
         $.ajax({
             type: 'POST',
             contentType: "application/json",
-            url: "/article/toggleHeart/" + wineId,
+            url: "/article/toggleHeart2/" + wineId,
             data: JSON.stringify(jsonData), // String -> json 형태로 변환
             beforeSend: function (xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
                 xhr.setRequestHeader(header, token);
             },
-            dataType: 'json', // success 시 받아올 데이터 형
+            // dataType: 'json', // success 시 받아올 데이터 형
             async: true, //동기, 비동기 여부
             cache: false, // 캐시 여부
             success: function (data) {
-                if (data.isLiked) {
-                    heartIcon.textContent = "♥";
-                    alert('찜 목록에 담았습니다♥');
-                    updateList();
-                } else {
-                    heartIcon.textContent = "♡";
-                    alert('찜 목록에서 해당 와인이 제거되었습니다♡');
-                    updateList();
-                }
+                // if (data.isLike) {
+                    // heartIcon.textContent = "♥";
+                    // alert('찜 목록에 담았습니다♥');
+                // } else {
+                    // heartIcon.textContent = "♡";
+                    // alert('찜 목록에서 해당 와인이 제거되었습니다♡');
+                // }
+                alert('찜 목록에서 해당 와인이 제거되었습니다♡');
+                $("#favoritesContainer").replaceWith(data);
+
             },
             error: function (xhr, status, error) {
                 console.log('error:' + error);
@@ -184,9 +185,3 @@
         });
     }
 </script>
-
-
-
-
-
-

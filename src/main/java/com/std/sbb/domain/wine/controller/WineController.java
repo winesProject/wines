@@ -157,5 +157,27 @@ public class WineController {
     public CsrfVO csrfAJAXSubmit(@RequestBody CsrfVO csrfVO) {
         return csrfVO;
     }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/toggleHeart2/{id}")
+    public String toggleHeart(Model model, Principal principal, @PathVariable("id") Long id,
+                              @RequestParam(value = "searchType", defaultValue = "TITLE") SearchType searchType,
+                              @RequestParam(value = "page", defaultValue = "0") int page,
+                              @RequestParam(value = "kw", defaultValue = "") String kw,
+                              @RequestParam(value = "list", defaultValue = "") String list,
+                              @RequestParam(value = "country", defaultValue = "") String country,
+                              @RequestParam(value = "price", defaultValue = "0") String priceStr,
+                              @RequestParam(value = "food", defaultValue = "") String food
+    ) {
+        this.memberService.toggleHeart(id, principal.getName());
+
+        List<PriceRange> priceRanges = wineService.parsePriceRanges(priceStr);
+
+        Page<Wine> paging = this.wineService.getList(food, priceRanges, country, list, searchType, kw, page);
+
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("paging", paging);
+
+        return "member_favorites::#favoritesContainer";
+    }
 }
 

@@ -102,9 +102,7 @@ public class EmailService {
             // 새로운 비밀번호를 암호화
             String encodedPassword = passwordEncoder.encode(str);
 
-            member = Member.builder()
-                    .password(encodedPassword)
-                    .build();
+            member.setPassword(encodedPassword);
             // 암호화된 비밀번호와 사용자 ID를 사용하여 업데이트
             memberRepository.save(member);
         }

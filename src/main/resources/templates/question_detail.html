@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}" class="relative top-40">
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
     <div id="toast-message-cta"
-         class="mx-auto w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400"
+         class="mx-80 p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400"
          role="alert">
         <div class="flex justify-end">
             <a th:href="@{/question/list}">
@@ -17,24 +17,24 @@
                 </button>
             </a>
         </div>
-        <div class="flex">
+        <div class="flex mx-20">
             <div class="ms-3 text-sm font-normal">
                 <div class="flex items-center p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <span class="text-base text-yellow-900" th:if="${question.member != null}" th:text="${question.member.username}"></span>
+                    <span class="text-xl font-bold text-yellow-900" th:if="${question.member != null}" th:text="${question.member.username}"></span>
                     <span class="text-base text-gray-900 dark:text-white">님의 문의입니다.
                     </span>
                 </div>
                 <div class="p-4 md:p-5 space-y-4">
-                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">제목
+                    <p class="text-base font-bold leading-relaxed text-gray-500 dark:text-gray-400">제목
                     </p>
-                    <p th:text="${question.article}" class="mb-2 text-2xl text-black font-normal"></p>
-                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">내용
+                    <p th:text="${question.article}" class="mb-2 text-base text-black font-normal"></p>
+                    <p class="text-base font-bold leading-relaxed text-gray-500 dark:text-gray-400">내용
                     </p>
-                    <p th:text="${question.content}" class="mb-2 text-xl text-black font-normal"></p>
+                    <p th:text="${question.content}" class="mb-2 text-base text-black font-normal"></p>
                 </div>
             </div>
         </div>
-        <div class="flex justify-end mr-3">
+        <div class="flex justify-end mr-10">
             <a onclick="return confirm('정말 삭제하시겠습니까?')" th:href="@{|/question/delete/${question.id}|}"
                class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" type="button"
                th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}"

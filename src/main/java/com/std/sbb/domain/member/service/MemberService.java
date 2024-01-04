@@ -4,6 +4,9 @@ import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.member.repository.MemberRepository;
 import com.std.sbb.domain.wine.entity.Wine;
 import com.std.sbb.domain.wine.repository.WineRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +22,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final WineRepository wineRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public Member join(String username, String password, String name, String phoneNumber, String email, String gender, String birthDate, String profileImgUrl) {
         Member member = Member
@@ -120,6 +125,15 @@ public class MemberService {
             return isPasswordMatch;
         }
         return false;
+    }
+
+
+    @Transactional
+    public void deleteMemberWineByMemberId(Long memberId) {
+        String nativeQuery = "DELETE FROM wine_Member WHERE member_id = :memberId";
+        Query query = entityManager.createNativeQuery(nativeQuery);
+        query.setParameter("memberId", memberId);
+        query.executeUpdate();
     }
     public void quit(Member member) {
         this.memberRepository.delete(member);

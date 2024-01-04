@@ -273,6 +273,7 @@ public class MemberController {
     public ResponseEntity<String> quitUser(Principal principal) {
         Member member = this.memberService.getMember(principal.getName());
         if (member != null) {
+            this.memberService.deleteMemberWineByMemberId(member.getId());
             this.memberService.quit(member);
             return ResponseEntity.ok("회원탈퇴가 완료되었습니다");
         } else {

@@ -166,20 +166,18 @@
 ```문제``` 로그인하고 리뷰를 작성하면 DB에 작성자가 담기지 않았고 그래서 화면에도 뜨지 않았다.
  </br>
    
-```해결``` MEMBER 이름 변수명을 nickname에서 username으로 변경해주었다.
+```해결``` MEMBER entity의 이름 변수명을 nickname에서 username으로
+전부 변경해주고 원래 form에 builder를 사용했었는데 Getter와
+Setter만 남기고 </br>다 삭제했다. 또 review entity에 있는 wine과
+member를 manytoone으로 관계설정을 했는데 여기서 (fetch = FetchType.LAZY)를 넣어줌으로 필요할때만 가지고 와서 쓸 수 있도록 설정해주었다.
+
   </br>
   
   #### <2> </br>
 ```문제``` 윈도우와 맥의 이미지 폴더 경로가 달라서 이미지 업로드가 되지 않았다. 
 </br>
 
-```해결``` File Handler에서 절대 경로를 재설정해주고 윈도우와 맥의 이미지 경로를 다르게 각각 작성했다.
+```해결``` File Handler에서 절대 경로를 재설정해주고 윈도우와 맥의 이미지 경로를 각각 작성했다.
 <br/>
 
-#### <3> </br>
-```문제```  
-</br>
-
-```해결``` 
-<br/>
 </details>

@@ -127,7 +127,6 @@ public class MemberService {
         return false;
     }
 
-
     @Transactional
     public void deleteMemberWineByMemberId(Long memberId) {
         String nativeQuery = "DELETE FROM wine_Member WHERE member_id = :memberId";

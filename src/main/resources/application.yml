@@ -17,4 +17,6 @@ spring:
           starttls:
             enable: true
 myapp:
-  image-path: file:///Users/dev/Desktop/java/wines/src/main/resources/static/images/
+  image-path: classpath:/static/images/
+#    /docker_projects/sbb/wines/src/main/resources/static/images
+#  file:///Users/dev/Desktop/java/wines/src/main/resources/static/images/

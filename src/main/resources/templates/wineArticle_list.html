@@ -55,7 +55,7 @@
                      class="space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                     <div class="flex items-center justify-center w-full h-48 rounded sm:w-96">
                         <img class=" h-48 max-w-lg rounded-lg"
-                             th:src="@{/images/{filename}(filename=${wine.board.storedFileName})}"
+                             th:src="@{'/images/' + ${wine.board.storedFileName}}"
                              alt="image description">
                     </div>
                     <div class="w-full">

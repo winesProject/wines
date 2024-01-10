@@ -16,3 +16,5 @@ spring:
           auth: true
           starttls:
             enable: true
+myapp:
+  image-path: file:///Users/dev/Desktop/java/wines/src/main/resources/static/images/

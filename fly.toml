@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for winesckh on 2024-01-11T12:21:35+09:00
+# fly.toml app configuration file generated for wines-deloy on 2024-01-12T11:45:27+09:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "winesckh"
+app = "wines-deloy"
 primary_region = "nrt"
 
 [build]

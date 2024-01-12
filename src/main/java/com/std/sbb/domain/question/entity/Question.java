@@ -15,7 +15,6 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Question extends BaseEntity {
     private String username;
 

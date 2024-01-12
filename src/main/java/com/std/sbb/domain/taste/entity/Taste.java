@@ -12,10 +12,10 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Taste extends BaseEntity {
     @Min(value = 1)
     @Max(value = 5)

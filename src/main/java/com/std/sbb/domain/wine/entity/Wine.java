@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -17,10 +17,10 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@ToString
 public class Wine extends BaseEntity {
     @Column(unique = true)
     private String wineName;
@@ -28,19 +28,19 @@ public class Wine extends BaseEntity {
     private String wineNameE;
     @Column(length = 100)
     private String country;
+    //국가
     @Column(length = 100)
     private String list;
     private Integer price;
+    //가격
     @Column(length = 200)
     private String kind;
+    //종류
     private Integer score;
     private String food;
-    private String image;
-
+    //음식
     @OneToOne
     private Board board;
-
-    private Boolean favorites;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Taste taste;
@@ -59,4 +59,5 @@ public class Wine extends BaseEntity {
         }
         return false;
     }
+
 }

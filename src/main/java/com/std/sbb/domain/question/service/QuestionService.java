@@ -1,11 +1,12 @@
 package com.std.sbb.domain.question.service;
 
-import com.std.sbb.domain.answer.entity.Answer;
 import com.std.sbb.domain.member.entity.Member;
 import com.std.sbb.domain.question.entity.Question;
 import com.std.sbb.domain.question.repository.QuestionRepository;
-import com.std.sbb.domain.wine.entity.Wine;
-import jakarta.persistence.criteria.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,7 +48,6 @@ public class QuestionService {
                 .build();
         this.questionRepository.save(question);
     }
-
     public void delete(Question question) {
         this.questionRepository.delete(question);
     }

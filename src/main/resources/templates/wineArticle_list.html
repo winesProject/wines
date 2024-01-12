@@ -2,65 +2,29 @@
 <div layout:fragment="content" class="container w-100 my-3 mx-auto">
     <link rel="stylesheet" href="style.css">
     <!--  검색 기능  -->
-    <form class="relative">
+    <form>
         <div class="flex justify-center">
             <form id="searchForm">
-                <select id="searchType" name="searchType">
-                    <option value="TITLE">제목</option>
+                <select id="searchType" name="searchType" class="text-center bg-white divide-y divide-gray-100 rounded-lg">
+                    <option value="TITLE" class="inline-flex w-full px-4 py-2">제목</option>
                     <option value="CONTENT">내용</option>
                     <option value="TITLEANDCONTENT">제목 + 내용</option>
                 </select>
-                <input type="search" id="searchInput" name="kw" placeholder="검색어를 입력하세요">
-                <button type="submit">검색</button>
+                <div class="relative">
+                    <input type="search" id="searchInput" name="kw"
+                            class="block w-96 p-2.5 z-20 text-base text-gray-900 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300"
+                            placeholder="검색어를 입력하세요">
+                    <button type="submit"
+                            class="absolute top-0 right-0 bottom-0 p-2.5 text-sm font-medium text-white bg-red-700 rounded-e-lg border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </div>
             </form>
-            <!--            <label for="search-dropdown" class="mb-2 text-base font-medium text-gray-900 sr-only dark:text-white">Your-->
-            <!--                Email</label>-->
-            <!--            <button id="dropdown-button" data-dropdown-toggle="dropdown"-->
-            <!--                    class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-base font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"-->
-            <!--                    type="button"> 검색 항목-->
-            <!--                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"-->
-            <!--                     viewBox="0 0 10 6">-->
-            <!--                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-            <!--                          d="m1 1 4 4 4-4"/>-->
-            <!--                </svg>-->
-            <!--            </button>-->
-            <!--            <div id="dropdown"-->
-            <!--                 class="top-1/2 hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">-->
-            <!--                <ul class="py-4 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">-->
-            <!--                    <li>-->
-            <!--                        <button type="button"-->
-            <!--                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-->
-            <!--                            제목-->
-            <!--                        </button>-->
-            <!--                    </li>-->
-            <!--                    <li>-->
-            <!--                        <button type="button"-->
-            <!--                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-->
-            <!--                            내용-->
-            <!--                        </button>-->
-            <!--                    </li>-->
-            <!--                    <li>-->
-            <!--                        <button type="button"-->
-            <!--                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-->
-            <!--                            제목 + 내용-->
-            <!--                        </button>-->
-            <!--                    </li>-->
-            <!--                </ul>-->
-            <!--            </div>-->
-            <!--            <div class="relative w-1/2">-->
-            <!--                <input type="search" id="search-dropdown"-->
-            <!--                       class="block p-2.5 w-full z-20 text-base text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"-->
-            <!--                       placeholder="원하는 와인을 검색해보세요!" required>-->
-            <!--                <button type="submit"-->
-            <!--                        class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-red-700 rounded-e-lg border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">-->
-            <!--                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"-->
-            <!--                         viewBox="0 0 20 20">-->
-            <!--                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-            <!--                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>-->
-            <!--                    </svg>-->
-            <!--                    <span class="sr-only">Search</span>-->
-            <!--                </button>-->
-            <!--            </div>-->
         </div>
     </form>
     <div class="mt-16 mb-4 border-b border-gray-200 dark:border-gray-700 flex justify-center my-8">
@@ -75,14 +39,14 @@
             </li>
         </ul>
     </div>
-    <div class="flex justify-end">
-        <a th:href="@{/article/create}" type="button" sec:authorize="hasAuthority('admin')"
-           class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">게시글
-            등록</a>
-    </div>
     <!--  검색 기능 끝  -->
     <div class="flex justify-center">
         <div class="w-3/4">
+            <div class="flex justify-end">
+                <a th:href="@{/article/create}" type="button" sec:authorize="hasAuthority('admin')"
+                   class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">게시글
+                    등록</a>
+            </div>
             <div class="text-center" th:if="${paging.empty}">
                 <h1 class="text-3xl my-16 font-extrabold dark:text-dark">검색한 와인정보가 존재하지 않습니다.</h1>
             </div>
@@ -90,17 +54,12 @@
                 <div role="status"
                      class="space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                     <div class="flex items-center justify-center w-full h-48 rounded sm:w-96">
-                        <img class=" h-48 max-w-lg rounded-lg" th:src="@{/images/{filename}(filename=${wine.board.storedFileName})}" alt="image description">
+                        <img class=" h-48 max-w-lg rounded-lg"
+                             th:src="@{/images/{filename}(filename=${wine.board.storedFileName})}"
+                             alt="image description">
                     </div>
                     <div class="w-full">
-                        <a th:href="@{|/article/detail/${wine.id}|}"
-                           class="block w-auto">
-                            <h1 class="text-3xl mt-8 font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
-                            <h3 class="text-2xl font-weight my-1 tracking-tight dark:text-gray-500"
-                                th:text="${wine.wineNameE}"></h3>
-                        </a>
-                        <a th:href="@{|/article/detail/${wine.id}|}" class="w-1/2 my-2 py-2 pb-24" th:text="${wine.country}"></a>
-                        <div class="flex items-center py-4">
+                        <div class="pt-5 mb-10">
                             <span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                                   th:if="${wine.list} == '레드'" th:text="${wine.list}"></span>
                             <span class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -111,58 +70,97 @@
                                   th:if="${wine.list} == '로제'" th:text="${wine.list}"></span>
                             <span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                                   th:if="${wine.list} == '주정강화'" th:text="${wine.list}"></span>
-                            <div class="mx-3 flex items-center">
-                                <div th:class="${wine.score >= 1} ? 'w-5 h-5 mx-0.5 rounded-full' : 'w-5 h-5 mx-0.5 rounded-full'" th:id="${wine.score}" th:value="1" th:name="${wine.score}">
-                                    <svg th:if="${wine.score >= 1}" class="w-5 h-5 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <a th:href="@{|/article/detail/${wine.id}|}" class="w-1/2 my-2 py-2 pb-24"
+                               th:text="${wine.country}"></a>
+                        </div>
+                        <a th:href="@{|/article/detail/${wine.id}|}"
+                           class="block w-auto">
+                            <h1 class="text-3xl font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
+                            <h3 class="text-xl pt-3 font-weight my-1 tracking-tight dark:text-gray-500"
+                                th:text="${wine.wineNameE}"></h3>
+                        </a>
+                        <div class="flex py-4 relative">
+                            <div class="mt-1 flex items-center">
+                                <div th:class="${wine.score >= 1} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                                     th:id="${wine.score}" th:value="1" th:name="${wine.score}">
+                                    <svg th:if="${wine.score >= 1}" class="w-10 h-10 text-yellow-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
                                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                                     </svg>
-                                    <svg th:unless="${wine.score >= 1}" class="w-5 h-5 text-gray-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                    </svg>
-                                </div>
-                                <div th:class="${wine.score >= 2} ? 'w-5 h-5 mx-0.5 rounded-full' : 'w-5 h-5 mx-0.5 rounded-full'" th:id="${wine.score}" th:value="2" th:name="${wine.score}">
-                                    <svg th:if="${wine.score >= 2}" class="w-5 h-5 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                    </svg>
-                                    <svg th:unless="${wine.score >= 2}" class="w-5 h-5 text-gray-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                    </svg>
-                                </div>
-                                <div th:class="${wine.score >= 3} ? 'w-5 h-5 mx-0.5 rounded-full' : 'w-5 h-5 mx-0.5 rounded-full'" th:id="${wine.score}" th:value="3" th:name="${wine.score}">
-                                    <svg th:if="${wine.score >= 3}" class="w-5 h-5 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                    </svg>
-                                    <svg th:unless="${wine.score >= 3}" class="w-5 h-5 text-gray-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                    </svg>
-                                </div>
-                                <div th:class="${wine.score >= 4} ? 'w-5 h-5 mx-0.5 rounded-full' : 'w-5 h-5 mx-0.5 rounded-full'" th:id="${wine.score}" th:value="4" th:name="${wine.score}">
-                                    <svg th:if="${wine.score >= 4}" class="w-5 h-5 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                    </svg>
-                                    <svg th:unless="${wine.score >= 4}" class="w-5 h-5 text-gray-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <svg th:unless="${wine.score >= 1}" class="w-10 h-10 text-gray-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
                                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                                     </svg>
                                 </div>
-                                <div th:class="${wine.score >= 5} ? 'w-5 h-5 mx-0.5 rounded-full' : 'w-5 h-5 mx-0.5 rounded-full'" th:id="${wine.score}" th:value="5" th:name="${wine.score}">
-                                    <svg th:if="${wine.score >= 5}" class="w-5 h-5 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <div th:class="${wine.score >= 2} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                                     th:id="${wine.score}" th:value="2" th:name="${wine.score}">
+                                    <svg th:if="${wine.score >= 2}" class="w-10 h-10 text-yellow-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
                                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                                     </svg>
-                                    <svg th:unless="${wine.score >= 5}" class="w-5 h-5 text-gray-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <svg th:unless="${wine.score >= 2}" class="w-10 h-10 text-gray-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                    </svg>
+                                </div>
+                                <div th:class="${wine.score >= 3} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                                     th:id="${wine.score}" th:value="3" th:name="${wine.score}">
+                                    <svg th:if="${wine.score >= 3}" class="w-10 h-10 text-yellow-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                    </svg>
+                                    <svg th:unless="${wine.score >= 3}" class="w-10 h-10 text-gray-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                    </svg>
+                                </div>
+                                <div th:class="${wine.score >= 4} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                                     th:id="${wine.score}" th:value="4" th:name="${wine.score}">
+                                    <svg th:if="${wine.score >= 4}" class="w-10 h-10 text-yellow-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                    </svg>
+                                    <svg th:unless="${wine.score >= 4}" class="w-10 h-10 text-gray-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                    </svg>
+                                </div>
+                                <div th:class="${wine.score >= 5} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                                     th:id="${wine.score}" th:value="5" th:name="${wine.score}">
+                                    <svg th:if="${wine.score >= 5}" class="w-10 h-10 text-yellow-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                    </svg>
+                                    <svg th:unless="${wine.score >= 5}" class="w-10 h-10 text-gray-300 ms-1"
+                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                         viewBox="0 0 22 20">
                                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                                     </svg>
                                 </div>
                             </div>
-                        </div>
-                        <div class="text-end">
-                            <button type="button" onclick="toggleHeart(this)" sec:authorize="isAuthenticated()"
-                                    th:data-wine-id="${wine.id}"
-                                    class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-2xl px-4 my-4 py-2.5 me-2 mb-2">
-                                <div id="heartIcon">
-                                    <p th:inline="text" th:if="${wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername())}">♥</p>
-                                    <p th:inline="text" th:unless="${wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername())}">♡</p>
-                                </div>
-                            </button>
+                            <div class="absolute right-0 bottom-1">
+                                <button type="button" onclick="toggleHeart(this)" sec:authorize="isAuthenticated()"
+                                        th:data-wine-id="${wine.id}"
+                                        class="text-white bg-red-800 hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-2xl px-4 my-4 py-2.5 me-2 mb-2">
+                                    <div id="heartIcon">
+                                        <p th:inline="text"
+                                           th:if="${wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername())}">
+                                            ♥</p>
+                                        <p th:inline="text"
+                                           th:unless="${wine.checkedHeartClickMember(#authentication.getPrincipal().getUsername())}">
+                                            ♡</p>
+                                    </div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -170,24 +168,24 @@
         </div>
     </div>
     <!--  페이징  -->
-    <nav th:if="${!paging.isEmpty()}" th:with="kwBase = '?kw=' + ${param.kw != null ? param.kw : ''}">
+    <nav th:if="${!paging.isEmpty()}" th:with="kwBase = '?kw=' + ${param.kw != null ? param.kw : ''} + '&list=' + ${param.list != null ? param.list : ''} + '&country=' + ${param.country != null ? param.country : ''} + '&price=' + ${param.price != null ? param.price : ''} + '&food=' + ${param.food != null ? param.food : ''}">
         <ul class="pagination flex -space-x-px text-base h-10 justify-center my-12">
             <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
                 <a th:unless="${!paging.hasPrevious()}"
-                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                   class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700"
                    th:href="@{|${kwBase}&page=${paging.number - 1}&searchType=${searchType}|}">이전</a>
             </li>
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:classappend="${page == paging.number} ? 'active'"
+            <li th:each="pageNumber: ${#numbers.sequence(paging.number - 5, paging.number + 5)}"
+                th:if="${pageNumber >= 0 and pageNumber < paging.totalPages}"
+                th:classappend="${pageNumber == paging.number} ? 'active'"
                 class="page-item">
-                <a th:text="${page + 1}"
-                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                   th:href="@{|${kwBase}&page=${page}&searchType=${searchType}|}"></a>
+                <a th:text="${pageNumber + 1}"
+                   class="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                   th:href="@{|${kwBase}&page=${pageNumber}&searchType=${searchType}|}"></a>
             </li>
             <li th:classappend="${!paging.hasNext} ? 'disabled'">
                 <a th:unless="${!paging.hasNext()}"
-                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                   class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700"
                    th:href="@{|${kwBase}&page=${paging.number + 1}&searchType=${searchType}|}">다음</a>
             </li>
         </ul>
@@ -243,8 +241,10 @@
             success: function (data) {
                 if (data.isLiked) {
                     heartIcon.textContent = "♥";
+                    alert('찜 목록에 담았습니다♥')
                 } else {
                     heartIcon.textContent = "♡";
+                    alert('찜 목록에서 해당 와인이 제거되었습니다♡')
                 }
             },
             error: function (xhr, status, error) {
@@ -254,4 +254,3 @@
     }
 </script>
 <!--찜 목록 끝-->
-

@@ -23,3 +23,8 @@ logging:
     #org.hibernate.type: TRACE
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
+myapp:
+  image-path: file:///Users/dev/Desktop/java/wines/src/main/resources/static/images/
+#  classpath:/static/images/
+#    /docker_projects/sbb/wines/src/main/resources/static/images/
+#  file:///Users/dev/Desktop/java/wines/src/main/resources/static/images/

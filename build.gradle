@@ -8,7 +8,7 @@ group = 'com.std'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '19'
+	sourceCompatibility = '17'
 }
 
 configurations {
@@ -38,6 +38,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 //	메일
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	// 테스트
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 tasks.named('test') {

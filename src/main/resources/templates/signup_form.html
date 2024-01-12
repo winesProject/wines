@@ -4,17 +4,19 @@
         <h4 class="m-5 text-4xl">회원가입</h4>
     </div>
     <form th:action="@{/member/signup}" th:object="${memberForm}" method="post" class="max-w-sm mx-auto">
-        <div class="mb-5">
+        <div class="mb-5 relative">
             <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">아이디</label>
             <input type="text" id="id" th:field="*{username}"
-                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                    required>
+            <span id="usernameError" class="error text-red-600" th:if="${errorIDMessage}" th:text="${errorIDMessage}"></span>
         </div>
         <div class="mb-5">
             <label for="password1" class="block mb-2 text-sm font-medium text-gray-900">비밀번호</label>
             <input type="password" name="password1" id="password1" th:field="*{password1}"
                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
                    required>
+            <span id="passwordPatternError" class="error text-red-600" th:if="${errorMessagePatternPw}" th:text="${errorMessagePatternPw}"></span>
         </div>
         <div class="mb-5">
             <label for="password2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호 확인
@@ -22,13 +24,15 @@
             <input type="password" name="password2" id="password2" th:field="*{password2}"
                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                    required>
+            <span id="passwordMatchError" class="error text-red-600" th:if="${errorMessagePw}" th:text="${errorMessagePw}"></span>
         </div>
+        <span id="passwordError" class="error"></span>
         <div class="mb-5">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이름
             </label>
             <input type="text" id="name" th:field="*{name}"
                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                   required>
+                   >
         </div>
         <div class="mb-5">
             <label for="phoneNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">전화번호
@@ -42,26 +46,31 @@
                 </div>
                 <input type="text" id="phonenumber" aria-describedby="helper-text-explanation" th:field="*{phoneNumber}"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-xxxx-xxxx" required>
+                       pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-xxxx-xxxx" >
             </div>
         </div>
         <!--    이메일    -->
-        <div class="relative mb-5">
+        <div class="mb-5 relative">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900">이메일
             </label>
             <input type="email" id="email" name="email" th:field="*{email}"
-                   class="absolute shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                   required>
-            <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()" class="relative left-full text-white top-0.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                   class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="example@gmail.com"
+                   >
+            <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()" class="absolute top-8 right-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
                 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
                 인증 요청
             </button>
+            <span id="existEmailError" class="error text-red-600" th:if="${existEmailError}" th:text="${existEmailError}"></span>
             <div id="email_number" name="email_number" class="mt-8">
-                <input type="text" name="number" id="number" placeholder="인증번호 입력"
-                       class="absolute shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" class="relative left-full text-white top-0.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                <input type="number" name="number" id="number" placeholder="인증번호 입력"
+                       class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <button type="button" data-tooltip-target="tooltip-default" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" class="absolute bottom-0.5 right-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
                 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">이메일 인증
                 </button>
+                <div id="tooltip-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    인증요청을 보내세요
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </div>
         </div>
         <!--      성별 선택      -->
@@ -74,7 +83,7 @@
                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                             <input id="default-radio-4" type="radio" value="true" name="default-radio"
                                    th:field="*{gender}"
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" required>
                             <label th:for="default-radio-4"
                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">남성</label>
                         </div>
@@ -101,9 +110,9 @@
                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                 </svg>
             </div>
-            <input datepicker datepicker-autohide type="text" th:field="*{birthDate}"
+            <input datepicker datepicker-autohide type="text" th:field="*{birthDate}" id="birthDate" name="birthDate"
                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   placeholder="Select date">
+                   placeholder="Select date" required>
         </div>
         <!--    달력 입력 끝    -->
         <div class="flex items-start mt-5">
@@ -113,11 +122,11 @@
                        required>
             </div>
             <label for="terms" class="ms-2 text-sm font-medium text-gray-900">동의하기&nbsp<a
-                    href="#" class="text-blue-600 hover:underline">이용약관</a></label>
+                    th:href="@{/member/tos}" class="text-blue-600 hover:underline">이용약관</a></label>
         </div>
         <div class="flex items-start my-3">
             <div class="flex items-center h-5">
-                <input id="terms" type="checkbox" value=""
+                <input id="terms2" type="checkbox" name="terms2"
                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                        required>
             </div>
@@ -125,24 +134,40 @@
         </div>
         <div class="flex items-start my-3">
             <div class="flex items-center h-5">
-                <input id="terms" type="checkbox" value=""
+                <input id="terms3" type="checkbox" value=""
                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                       required>
+                       >
             </div>
             <label for="terms" class="ms-2 text-sm font-medium text-gray-900">(선택) 프로모션 혜택을 받겠습니다.</label>
         </div>
         <!--    체크박스 끝    -->
         <div class="flex justify-end">
-            <button th:href="@{/member/signup}" type="submit"
+            <button th:href="@{/member/signup}" data-tooltip-target="tooltip-default2" type="submit" name="signupBtn" id="signupBtn"
                     class="text-white bg-indigo-800 w-28 mb-4 hover:bg-indigo-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 가입하기
             </button>
+            <div id="tooltip-default2" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                회원가입에 필요한 정보를 모두 기입 후 제출해주세요
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
         </div>
     </form>
 </div>
 </html>
 <!--email 인증-->
 <script type="text/javascript">
+    document.getElementById("confirmBtn").disabled = true;
+    document.getElementById("signupBtn").disabled = true;
+
+    function hideTooltip() {
+    var tooltip = document.getElementById('tooltip-default');
+    tooltip.style.display = 'none';
+    }
+    function hideTooltip2() {
+    var tooltip2 = document.getElementById('tooltip-default2');
+    tooltip2.style.display = 'none';
+    }
+
     function sendNumber() {
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
@@ -160,7 +185,9 @@
             data: data, // JSON.stringify(data) 대신 일반 객체로 전송
             success: function (data) {
                 alert("인증번호 발송");
+                document.getElementById("confirmBtn").disabled = false;
                 $("#number").attr("data-confirm", data);
+                hideTooltip();
             },
             error: function (xhr, status, error) {
                 console.log('error:' + error);
@@ -173,6 +200,8 @@
 
         if (number1 == number2) {
             alert("인증되었습니다.");
+            $('#signupBtn').prop('disabled', false);
+            hideTooltip2();
         } else {
             alert("번호가 다릅니다.");
         }

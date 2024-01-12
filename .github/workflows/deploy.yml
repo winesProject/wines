@@ -8,7 +8,7 @@ on:
       - Dockerfile
       - .github/workflows/deploy.yml
     branches:
-      - main
+      - ckh
 jobs:
   deploy:
     name: Deploy app

@@ -1,0 +1,23 @@
+<div th:fragment="tasteFragment(taste)">
+    <div class="mx-5 flex flex-row-reverse justify-end text-4xl">
+        <label th:for="${taste}">
+            <div th:class="${taste != 1 && taste != 2 && taste != 3 && taste != 4 && taste != null && taste != ''} ? 'w-8 h-8 mx-0.5 rounded-full bg-pink-600' : 'w-8 h-8 mx-0.5 rounded-full bg-gray-300'" th:id="${taste}" th:value="5" th:name="${taste}"></div>
+        </label>
+
+        <label th:for="${taste}">
+            <div th:class="${taste != 1 && taste != 2 && taste != 3 && taste != null && taste != ''} ? 'w-8 h-8 mx-0.5 rounded-full bg-pink-500' : 'w-8 h-8 mx-0.5 rounded-full bg-gray-300'" th:id="${taste}" th:value="4" th:name="${taste}"></div>
+        </label>
+
+        <label th:for="${taste}">
+            <div th:class="${taste != 1 && taste != 2 && taste != null && taste != ''} ? 'w-8 h-8 mx-0.5 rounded-full bg-pink-400' : 'w-8 h-8 mx-0.5 rounded-full bg-gray-300'" th:id="${taste}" th:value="3" th:name="${taste}"></div>
+        </label>
+
+        <label th:for="${taste}">
+            <div th:class="${taste != 1 && taste != null && taste != ''} ? 'w-8 h-8 mx-0.5 rounded-full bg-pink-300' : 'w-8 h-8 mx-0.5 rounded-full bg-gray-300'" th:id="${taste}" th:value="2" th:name="${taste}"></div>
+        </label>
+
+        <label th:for="${taste}">
+            <div th:class="${taste != null && taste != ''} ? 'w-8 h-8 mx-0.5 rounded-full bg-pink-200' : 'w-8 h-8 mx-0.5 rounded-full bg-gray-300'" th:id="${taste}" th:value="1" th:name="${taste}"></div>
+        </label>
+    </div>
+</div>

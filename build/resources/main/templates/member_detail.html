@@ -1,0 +1,121 @@
+<html layout:decorate="~{layout}" class="relative top-40">
+<div layout:fragment="content" class="container w-100 my-3 mx-auto">
+    <div class="mb-4 border-b border-gray-200 dark:border-gray-700 flex justify-center">
+        <ul class="flex flex-wrap -mb-px text-base font-medium text-center">
+            <li class="me-2">
+                <a class="inline-block p-4 border-b-2 text-red-800 font-extrabold rounded-t-lg"
+                   th:href="@{/member/confirm}">내정보</a>
+            </li>
+            <li class="mx-7">
+                <a class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        th:href="@{/member/review}">나의 리뷰
+                </a>
+            </li>
+            <li class="me-2">
+                <a class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        th:href="@{/member/favorites}" >찜 목록
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-20">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                회원 정보
+                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">회원정보를 수정하고 관리할 수 있습니다.</p>
+            </caption>
+            <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    회원정보
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    정보
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <span class="sr-only">Edit</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    아이디
+                </th>
+                <td class="px-6 py-4" th:text="${member.username}"></td>
+                <td class="px-6 py-4 text-right">
+                    <p class="font-medium text-blue-600 dark:text-blue-500 hover:underline"></p>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    비밀번호
+                </th>
+                <td class="px-6 py-4">Edit을 통해 수정하세요
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a th:href="@{/member/detail/modifyPw}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    이름
+                </th>
+                <td class="px-6 py-4" th:text="${member.name}">
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a th:href="@{/member/detail/modifyDetail}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    전화번호
+                </th>
+                <td class="px-6 py-4" th:text="${member.phoneNumber}">
+
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a th:href="@{/member/detail/modifyDetail}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    이메일
+                </th>
+                <td class="px-6 py-4" th:text="${member.email}">
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a th:href="@{/member/detail/modifyDetail}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="relative overflow-x-auto sm:rounded-lg mt-4 mx-20 text-right">
+        <a th:href="@{/member/quit}">
+            <span>회원 탈퇴 ></span>
+        </a>
+    </div>
+</div>
+</html>
+
+<script>
+    $.ajax({
+    url: '/member/detail',
+    type: 'GET',
+    success: function(data) {
+
+        $('#username').text(data.username);
+        $('#name').text(data.name);
+        $('#email').text(data.email);
+        $('#phone_number').text(data.phoneNumber);
+    },
+    error: function(xhr, status, error) {
+        console.log("회원 정보가 존재하지 않습니다")
+    }
+});
+</script>
+
+
+
+

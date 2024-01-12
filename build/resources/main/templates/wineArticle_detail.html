@@ -1,0 +1,255 @@
+<html layout:decorate="~{layout}" class="relative top-40">
+<div layout:fragment="content" class="container w-100 my-3 mx-auto">
+    <div class="flex">
+        <img class="h-auto max-w-lg rounded-lg" th:src="@{/images/{filename}(filename=${wine.board.storedFileName})}"
+             alt="image description">
+        <div class="inline-block ml-12 mt-3">
+            <span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '레드'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '화이트'" th:text="${wine.list}"></span>
+            <span class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '스파클링'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '로제'" th:text="${wine.list}"></span>
+            <span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  th:if="${wine.list} == '주정강화'" th:text="${wine.list}"></span>
+            <span class="ml-2" th:text="${wine.country}"></span>
+            <div class="inline-block ml-12">
+                <a th:href="@{|/article/modify/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')"
+                   onclick="return confirm(`정말로 수정 하시겠습니까?`)"
+                   class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2">수정</a>
+                <a th:href="@{|/article/delete/${wine.id}|}" type="button" sec:authorize="hasAuthority('admin')"
+                   onclick="return confirm(`정말로 삭제 하시겠습니까?`)"
+                   class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2">삭제</a>
+            </div>
+
+            <h1 class="text-5xl mt-8 font-extrabold dark:text-dark" th:text="${wine.wineName}"></h1>
+            <h3 class="text-3xl font-weight my-1 tracking-tight dark:text-gray-500" th:text="${wine.wineNameE}"></h3>
+            <br>
+            <h3 class="text-3xl font-weight tracking-tight dark:text-gray-500" th:text="${wine.price} + '원'"></h3>
+            <h5 class="text-1xl font-weight my-2 tracking-tight dark:text-gray-400">※ 수입사가 제공한 가격으로 판매처별로 가격이 다를 수
+                있습니다.</h5>
+            <div class="flex mt-20 items-center">
+                <span class="flex">당도</span>
+                <div th:replace="~{taste :: tasteFragment(taste = ${taste.sweet})}"></div>
+                <span class="flex items-center">산도</span>
+                <div th:replace="~{taste :: tasteFragment(taste = ${taste.acidity})}"></div>
+                <span class="flex items-center">바디</span>
+                <div th:replace="~{taste :: tasteFragment(taste = ${taste.body})}"></div>
+                <span class="flex items-center">타닌</span>
+                <div th:replace="~{taste :: tasteFragment(taste = ${taste.tannin})}"></div>
+            </div>
+            <div class="flex mt-20 ">
+                <ul class="text-2xl mr-14 font-black">
+                    <li>
+                        <th class="text-start font-black">국가</th>
+                    </li>
+                    <li>
+                        <th class="text-start font-black">품종</th>
+                    </li>
+                    <li>
+                        <th class="text-start font-black">추천 음식</th>
+                    </li>
+                </ul>
+                <ul class="text-2xl">
+                    <li>
+                        <td class="dark:text-gray-500" th:text="${wine.country}"></td>
+                    </li>
+                    <li>
+                        <td class="dark:text-gray-500" th:text="${wine.kind}"></td>
+                    </li>
+                    <li>
+                        <td class="dark:text-gray-500" th:text="${wine.food}"></td>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4 border-b border-gray-200 dark:border-gray-700 flex justify-center my-8">
+        <ul class="flex flex-wrap -mb-px text-base font-medium text-center" id="default-tab"
+            data-tabs-toggle="#default-tab-content" role="tablist">
+            <li class="me-2" role="presentation">
+                <a class="inline-block p-4 border-b-2 rounded-t-lg text-xl font-bold" id="mye-detail"
+                   data-tabs-target="#detail"
+                   role="tab" aria-controls="detail" aria-selected="false">REVIEW
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--  리뷰 목록  -->
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr class="text-center">
+            <th scope="col" class="px-5 py-3">
+            </th>
+            <th scope="col" class="px-1 py-3">
+                내용
+            </th>
+            <th scope="col" class="px-5 py-3">
+                글쓴이
+            </th>
+            <th scope="col" class="px-20 py-3">
+                작성일자
+            </th>
+            <th scope="col" class="px-6 py-3">
+                평점
+            </th>
+            <th scope="col" class="pr-8 py-3">
+                좋아요
+            </th>
+        </tr>
+        <tr th:each="review : ${wine.reviewList}"
+            class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td class="px-3">
+                <div th:if="${#authorization.expression('isAuthenticated()') and review.member != null and #authentication.getPrincipal().getUsername() == review.member.username}"
+                     onclick="return confirm('정말 삭제 하시겠습니까?');">
+                    <a th:href="@{|/review/delete/${review.id}|}">
+                        <img class="w-5 h-5" th:src="@{/images/삭제.png}"/>
+                    </a>
+                </div>
+                <p th:unless="${#authorization.expression('isAuthenticated()') and review.member != null and #authentication.getPrincipal().getUsername() == review.member.username}">
+                    <img class="w-5 h-5" th:src="@{/images/점.png}"/>
+                </p>
+            </td>
+            <td th:text="${review.content}" class="px-6 py-4 text-start">
+            </td>
+            <td th:if="${review.member != null}" th:text="${review.member.username}" class="px-6 py-4">
+            </td>
+            <td th:text="${#temporals.format(review.createDate, 'yy-MM-dd')}" class="px-6 py-4">
+            </td>
+            <td class="px-6 py-4 flex justify-center">
+                <div th:class="${review.score >= 1} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                     th:id="${review.score}" th:value="1" th:name="${review.score}">
+                    <svg th:if="${review.score >= 1}" class="w-10 h-10 text-yellow-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg th:unless="${review.score >= 1}" class="w-10 h-10 text-gray-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                </div>
+                <div th:class="${review.score >= 2} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                     th:id="${review.score}" th:value="2" th:name="${review.score}">
+                    <svg th:if="${review.score >= 2}" class="w-10 h-10 text-yellow-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg th:unless="${review.score >= 2}" class="w-10 h-10 text-gray-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                </div>
+                <div th:class="${review.score >= 3} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                     th:id="${review.score}" th:value="3" th:name="${review.score}">
+                    <svg th:if="${review.score >= 3}" class="w-10 h-10 text-yellow-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg th:unless="${review.score >= 3}" class="w-10 h-10 text-gray-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                </div>
+                <div th:class="${review.score >= 4} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                     th:id="${review.score}" th:value="4" th:name="${review.score}">
+                    <svg th:if="${review.score >= 4}" class="w-10 h-10 text-yellow-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg th:unless="${review.score >= 4}" class="w-10 h-10 text-gray-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                </div>
+                <div th:class="${review.score >= 5} ? 'w-10 h-10 mx-0.5 rounded-full' : 'w-10 h-10 mx-0.5 rounded-full'"
+                     th:id="${review.score}" th:value="5" th:name="${review.score}">
+                    <svg th:if="${review.score >= 5}" class="w-10 h-10 text-yellow-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg th:unless="${review.score >= 5}" class="w-10 h-10 text-gray-300 ms-1"
+                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                </div>
+            </td>
+            <td class="px-6 py-4">
+                <button type="button" class="flex review_recommend recommend" onclick="reviewLike(this)">
+                    <input type="hidden" id="reviewId" name="reviewId" th:value="${review.id}">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                        <path d="M323.8 34.8c-38.2-10.9-78.1 11.2-89 49.4l-5.7 20c-3.7 13-10.4 25-19.5 35l-51.3 56.4c-8.9 9.8-8.2 25 1.6 33.9s25 8.2 33.9-1.6l51.3-56.4c14.1-15.5
+                    24.4-34 30.1-54.1l5.7-20c3.6-12.7 16.9-20.1 29.7-16.5s20.1 16.9 16.5 29.7l-5.7 20c-5.7 19.9-14.7 38.7-26.6 55.5c-5.2 7.3-5.8 16.9-1.7 24.9s12.3 13 21.3 13L448 224c8.8 0 16
+                    7.2 16 16c0 6.8-4.3 12.7-10.4 15c-7.4 2.8-13 9-14.9 16.7s.1 15.8 5.3 21.7c2.5 2.8 4 6.5 4 10.6c0 7.8-5.6 14.3-13 15.7c-8.2 1.6-15.1 7.3-18 15.2s-1.6 16.7 3.6 23.3c2.1 2.7 3.4 6.1 3.4
+                    9.9c0 6.7-4.2 12.6-10.2 14.9c-11.5 4.5-17.7 16.9-14.4 28.8c.4 1.3 .6 2.8 .6 4.3c0 8.8-7.2 16-16 16H286.5c-12.6 0-25-3.7-35.5-10.7l-61.7-41.1c-11-7.4-25.9-4.4-33.3 6.7s-4.4 25.9 6.7 33.3l61.7 41.1c18.4 12.3 40
+                    18.8 62.1 18.8H384c34.7 0 62.9-27.6 64-62c14.6-11.7 24-29.7 24-50c0-4.5-.5-8.8-1.3-13c15.4-11.7 25.3-30.2 25.3-51c0-6.5-1-12.8-2.8-18.7C504.8 273.7 512 257.7 512 240c0-35.3-28.6-64-64-64l-92.3
+                    0c4.7-10.4 8.7-21.2 11.8-32.2l5.7-20c10.9-38.2-11.2-78.1-49.4-89zM32 192c-17.7 0-32 14.3-32 32V448c0 17.7 14.3 32 32 32H96c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32H32z"/>
+                    </svg>
+                    <span th:text="${#lists.size(review.like)}" class="pl-2 recommend_review_count">
+                    </span>
+                </button>
+            </td>
+        </tr>
+        </thead>
+    </table>
+    <!--  리뷰 목록 끝  -->
+    <div class="mb-2 mt-8 border-b border-gray-200 dark:border-gray-700 flex justify-center">
+        <ul class="flex flex-wrap -mb-px text-base font-medium text-center" id="default-tab2"
+            data-tabs-toggle="#default-tab-content" role="tablist">
+            <li class="me-2" role="presentation">
+                <a class="inline-block p-4 border-b-2 rounded-t-lg text-xl font-bold" id="my-detail2"
+                   data-tabs-target="#detail"
+                   role="tab" aria-controls="detail" aria-selected="false">WRITING A REVIEW
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--  평점등록, 리뷰등록  -->
+    <form th:action="@{|/review/create/${wine.id}|}" th:object="${reviewForm}" method="post">
+        <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                <label for="content" class="sr-only">Your comment</label>
+                <textarea id="content" name="content" rows="4"
+                          class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                          placeholder="Write a review..." required></textarea>
+            </div>
+            <div class="relative flex items-center justify-end mr-3 px-3 py-2 border-t dark:border-gray-600">
+                <div class="mr-7 flex items-center flex-row-reverse justify-end text-4xl">
+                    <label for="score"></label>
+                    <input type="radio" class="peer hidden" id="value5" value="5" name="score"/>
+                    <label for="value5"
+                           class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                    <input type="radio" class="peer hidden" id="value4" value="4" name="score"/>
+                    <label for="value4"
+                           class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                    <input type="radio" class="peer hidden" id="value3" value="3" name="score"/>
+                    <label for="value3"
+                           class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                    <input type="radio" class="peer hidden" id="value2" value="2" name="score"/>
+                    <label for="value2"
+                           class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                    <input type="radio" class="peer hidden" id="value1" value="1" name="score"/>
+                    <label for="value1"
+                           class="cursor-pointer text-gray-400 peer-hover:text-yellow-400 peer-checked:text-yellow-600">★</label>
+                </div>
+                <button sec:authorize="isAuthenticated()" type="submit"
+                        class="inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-yellow-900 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900">
+                    리뷰 등록
+                </button>
+            </div>
+        </div>
+    </form>
+    <!--  리뷰 등록 끝  -->
+</div>
+</html>

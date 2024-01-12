@@ -1,0 +1,4 @@
+<div th:fragment="formErrorsFragment" class="alert alert-danger p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+     role="alert" th:if="${#fields.hasAnyErrors()}">
+    <div th:each="err : ${#fields.allErrors()}" th:text="${err}" class="font-medium text-lg" />
+</div>
